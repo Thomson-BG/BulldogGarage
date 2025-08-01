@@ -1,0 +1,17 @@
+{
+  "name": "bulldog-garage",
+  "version": "1.0.0",
+  "description": "Modern high-tech website for Bulldog Garage automotive repair class",
+  "scripts": {
+    "dev": "python3 -m http.server 8000",
+    "start": "python3 -m http.server 8000"
+  },
+  "keywords": [
+    "automotive",
+    "education",
+    "garage",
+    "static-site"
+  ],
+  "author": "Thomson innovations",
+  "license": "MIT"
+}
