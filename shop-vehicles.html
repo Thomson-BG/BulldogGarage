@@ -335,7 +335,7 @@
                     const vehicleName = lines[0];
                     const specs = lines[1] || '';
                     
-                    // Extract vehicle information
+                    // Extract vehicle information with better parsing
                     let year = '', make = '', model = '';
                     const yearMatch = vehicleName.match(/(\d{4})/);
                     if (yearMatch) {
@@ -346,15 +346,38 @@
                         model = parts.slice(1).join(' ') || '';
                     }
 
+                    // Clean up engine and transmission parsing
+                    let engine = 'Not specified';
+                    let transmission = 'Not specified';
+                    
+                    if (specs) {
+                        const specParts = specs.split(',').map(part => part.trim());
+                        engine = specParts[0] || 'Not specified';
+                        
+                        const transMatch = specs.match(/(Manual|Automatic)(?:\s+Transmission)?/i);
+                        if (transMatch) {
+                            transmission = transMatch[1] + ' Transmission';
+                        }
+                    }
+
+                    // Determine vehicle type
+                    let type = 'Sedan';
+                    const modelLower = model.toLowerCase();
+                    if (modelLower.includes('f-') || modelLower.includes('silverado') || modelLower.includes('tacoma')) {
+                        type = 'Truck';
+                    } else if (modelLower.includes('crv') || modelLower.includes('vue') || modelLower.includes('equinox') || modelLower.includes('escalade') || modelLower.includes('aviator')) {
+                        type = 'SUV';
+                    }
+
                     vehicles.push({
                         id: index,
                         name: vehicleName,
                         year: year,
                         make: make,
                         model: model,
-                        engine: specs.includes('L') ? specs.split(',')[0] : specs,
-                        transmission: specs.includes('Transmission') ? specs.split(',').slice(-1)[0].trim() : 'Not specified',
-                        type: model.includes('F-') ? 'Truck' : (model.includes('CRV') || model.includes('Vue') ? 'SUV' : 'Sedan'),
+                        engine: engine,
+                        transmission: transmission,
+                        type: type,
                         image: img ? img.src : '',
                         alt: img ? img.alt : ''
                     });
@@ -394,18 +417,22 @@
             }
 
             // Event listeners
-            modalClose.addEventListener('click', closeModal);
+            if (modalClose) {
+                modalClose.addEventListener('click', closeModal);
+            }
             
             // Close modal when clicking outside of it
-            modal.addEventListener('click', function(e) {
-                if (e.target === modal) {
-                    closeModal();
-                }
-            });
+            if (modal) {
+                modal.addEventListener('click', function(e) {
+                    if (e.target === modal) {
+                        closeModal();
+                    }
+                });
+            }
 
             // Close modal with Escape key
             document.addEventListener('keydown', function(e) {
-                if (e.key === 'Escape' && modal.style.display === 'block') {
+                if (e.key === 'Escape' && modal && modal.style.display === 'block') {
                     closeModal();
                 }
             });
