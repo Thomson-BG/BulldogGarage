@@ -308,6 +308,7 @@
     <script>
         // Vehicle Modal Functionality
         document.addEventListener('DOMContentLoaded', function() {
+            // Modal elements - Check if they exist before using
             const modal = document.getElementById('vehicleModal');
             const modalClose = document.querySelector('.modal-close');
             const modalTitle = document.getElementById('modalTitle');
@@ -321,6 +322,12 @@
             const specTransmission = document.getElementById('specTransmission');
             const specType = document.getElementById('specType');
 
+            // Only proceed if modal elements exist
+            if (!modal || !modalTitle || !modalImage || !specYear || !specMake || !specModel || !specEngine || !specTransmission || !specType) {
+                console.error('Modal elements not found');
+                return;
+            }
+
             // Parse vehicle data from HTML
             function parseVehicleData() {
                 const vehicles = [];
@@ -328,59 +335,84 @@
                 
                 vehicleTiles.forEach((tile, index) => {
                     const img = tile.querySelector('img');
-                    const desc = tile.querySelector('.vehicle-desc').textContent.trim();
+                    const descElement = tile.querySelector('.vehicle-desc');
                     
-                    // Parse the description to extract vehicle data
-                    const lines = desc.split('\n').map(line => line.trim()).filter(line => line);
-                    const vehicleName = lines[0];
-                    const specs = lines[1] || '';
+                    if (!descElement) return;
                     
-                    // Extract vehicle information with better parsing
-                    let year = '', make = '', model = '';
-                    const yearMatch = vehicleName.match(/(\d{4})/);
-                    if (yearMatch) {
-                        year = yearMatch[1];
-                        const remaining = vehicleName.replace(year, '').trim();
-                        const parts = remaining.split(' ');
-                        make = parts[0] || '';
-                        model = parts.slice(1).join(' ') || '';
-                    }
-
-                    // Clean up engine and transmission parsing
-                    let engine = 'Not specified';
-                    let transmission = 'Not specified';
-                    
-                    if (specs) {
-                        const specParts = specs.split(',').map(part => part.trim());
-                        engine = specParts[0] || 'Not specified';
-                        
-                        const transMatch = specs.match(/(Manual|Automatic)(?:\s+Transmission)?/i);
-                        if (transMatch) {
-                            transmission = transMatch[1] + ' Transmission';
+                    // Check if the tile has data-vehicle attribute
+                    const dataVehicle = tile.getAttribute('data-vehicle');
+                    if (dataVehicle) {
+                        try {
+                            const vehicleData = JSON.parse(dataVehicle);
+                            vehicles.push({
+                                id: index,
+                                name: vehicleData.name,
+                                year: vehicleData.year,
+                                make: vehicleData.make,
+                                model: vehicleData.model,
+                                engine: vehicleData.engine,
+                                transmission: vehicleData.transmission,
+                                type: vehicleData.type,
+                                image: img ? img.src : '',
+                                alt: img ? img.alt : ''
+                            });
+                        } catch (e) {
+                            console.error('Error parsing vehicle data:', e);
                         }
-                    }
+                    } else {
+                        // Fallback to text parsing
+                        const desc = descElement.textContent.trim();
+                        const lines = desc.split('\n').map(line => line.trim()).filter(line => line);
+                        const vehicleName = lines[0];
+                        const specs = lines[1] || '';
+                        
+                        // Extract vehicle information with better parsing
+                        let year = '', make = '', model = '';
+                        const yearMatch = vehicleName.match(/(\d{4})/);
+                        if (yearMatch) {
+                            year = yearMatch[1];
+                            const remaining = vehicleName.replace(year, '').trim();
+                            const parts = remaining.split(' ');
+                            make = parts[0] || '';
+                            model = parts.slice(1).join(' ') || '';
+                        }
 
-                    // Determine vehicle type
-                    let type = 'Sedan';
-                    const modelLower = model.toLowerCase();
-                    if (modelLower.includes('f-') || modelLower.includes('silverado') || modelLower.includes('tacoma')) {
-                        type = 'Truck';
-                    } else if (modelLower.includes('crv') || modelLower.includes('vue') || modelLower.includes('equinox') || modelLower.includes('escalade') || modelLower.includes('aviator')) {
-                        type = 'SUV';
-                    }
+                        // Clean up engine and transmission parsing
+                        let engine = 'Not specified';
+                        let transmission = 'Not specified';
+                        
+                        if (specs) {
+                            const specParts = specs.split(',').map(part => part.trim());
+                            engine = specParts[0] || 'Not specified';
+                            
+                            const transMatch = specs.match(/(Manual|Automatic)(?:\s+Transmission)?/i);
+                            if (transMatch) {
+                                transmission = transMatch[1] + ' Transmission';
+                            }
+                        }
 
-                    vehicles.push({
-                        id: index,
-                        name: vehicleName,
-                        year: year,
-                        make: make,
-                        model: model,
-                        engine: engine,
-                        transmission: transmission,
-                        type: type,
-                        image: img ? img.src : '',
-                        alt: img ? img.alt : ''
-                    });
+                        // Determine vehicle type
+                        let type = 'Sedan';
+                        const modelLower = model.toLowerCase();
+                        if (modelLower.includes('f-') || modelLower.includes('silverado') || modelLower.includes('tacoma')) {
+                            type = 'Truck';
+                        } else if (modelLower.includes('crv') || modelLower.includes('vue') || modelLower.includes('equinox') || modelLower.includes('escalade') || modelLower.includes('aviator')) {
+                            type = 'SUV';
+                        }
+
+                        vehicles.push({
+                            id: index,
+                            name: vehicleName,
+                            year: year,
+                            make: make,
+                            model: model,
+                            engine: engine,
+                            transmission: transmission,
+                            type: type,
+                            image: img ? img.src : '',
+                            alt: img ? img.alt : ''
+                        });
+                    }
 
                     // Make the image clickable
                     const imgHolder = tile.querySelector('.vehicle-img-holder');
@@ -395,16 +427,18 @@
 
             // Open modal with vehicle data
             function openModal(vehicle) {
+                if (!modal || !modalTitle || !modalImage) return;
+                
                 modalTitle.textContent = vehicle.name;
                 modalImage.src = vehicle.image;
                 modalImage.alt = vehicle.alt;
                 
-                specYear.textContent = vehicle.year;
-                specMake.textContent = vehicle.make;
-                specModel.textContent = vehicle.model;
-                specEngine.textContent = vehicle.engine;
-                specTransmission.textContent = vehicle.transmission;
-                specType.textContent = vehicle.type;
+                if (specYear) specYear.textContent = vehicle.year;
+                if (specMake) specMake.textContent = vehicle.make;
+                if (specModel) specModel.textContent = vehicle.model;
+                if (specEngine) specEngine.textContent = vehicle.engine;
+                if (specTransmission) specTransmission.textContent = vehicle.transmission;
+                if (specType) specType.textContent = vehicle.type;
                 
                 modal.style.display = 'block';
                 document.body.style.overflow = 'hidden'; // Prevent background scrolling
@@ -412,6 +446,7 @@
 
             // Close modal
             function closeModal() {
+                if (!modal) return;
                 modal.style.display = 'none';
                 document.body.style.overflow = 'auto'; // Restore scrolling
             }
