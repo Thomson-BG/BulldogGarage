@@ -8,178 +8,217 @@
     <link rel="icon" type="image/svg+xml" href="images/Bulldog.svg">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=SF+Pro+Display:wght@300;400;500;600;700&family=SF+Pro+Text:wght@300;400;500;600&display=swap" rel="stylesheet">
 </head>
 <body>
-    <header class="header">
-        <nav class="navbar">
-            <div class="nav-container">
-                <div class="logo">
-                    <img src="images/Bulldog.svg" alt="Bulldog Garage Logo" class="logo-img">
-                </div>
-                <ul class="nav-menu">
-                    <li class="nav-item">
-                        <a href="index.html" class="nav-link active">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="news.html" class="nav-link">News</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="club.html" class="nav-link">Club</a>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a href="curriculum.html" class="nav-link">Curriculum</a>
-                        <ul class="dropdown-menu">
-                            <li><a href="curriculum-year1.html">Year 1</a></li>
-                            <li><a href="curriculum-year2.html">Year 2</a></li>
-                            <li><a href="curriculum-year3.html">Year 3</a></li>
-                            <li><a href="curriculum-year4.html">Year 4</a></li>
-                        </ul>
-                    </li>
-                </ul>
-                <div class="hamburger">
-                    <span class="bar"></span>
-                    <span class="bar"></span>
-                    <span class="bar"></span>
-                </div>
-            </div>
-        </nav>
-    </header>
+    <nav class="globalnav">
+        <div class="globalnav-content">
+            <ul class="globalnav-list">
+                <li class="globalnav-item globalnav-item-apple">
+                    <a href="index.html" class="globalnav-link">
+                        <img src="images/Bulldog.svg" alt="Bulldog Garage" style="height: 20px; width: auto;">
+                    </a>
+                </li>
+                <li class="globalnav-item">
+                    <a href="news.html" class="globalnav-link">News</a>
+                </li>
+                <li class="globalnav-item">
+                    <a href="club.html" class="globalnav-link">Club</a>
+                </li>
+                <li class="globalnav-item">
+                    <a href="curriculum.html" class="globalnav-link">Curriculum</a>
+                </li>
+                <li class="globalnav-item">
+                    <a href="professionaltraining.html" class="globalnav-link">Training</a>
+                </li>
+                <li class="globalnav-item">
+                    <a href="ford-ace.html" class="globalnav-link">Ford ACE</a>
+                </li>
+                <li class="globalnav-item">
+                    <a href="support.html" class="globalnav-link">Support</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
 
-    <main class="main-content">
-        <section class="hero">
-            <div class="hero-overlay"></div>
-            <div class="hero-content">
-                <h1 class="hero-title">
-                    <span class="hero-subtitle">Welcome to</span>
-                    <span class="hero-main">Bulldog Garage</span>
-                </h1>
-                <p class="hero-description">
-                    Automotive Excellence Through Education<br>
-                    <span class="highlight">Career Technical Education at its finest</span>
-                </p>
-                <div class="hero-buttons">
-                    <a href="club.html" class="btn btn-primary">Join Our Club</a>
-                    <a href="curriculum.html" class="btn btn-secondary">View Curriculum</a>
+    <main>
+        <section class="section-hero" id="performance-kit">
+            <div class="section-content">
+                <div class="hero-eyebrow">Bulldog Garage</div>
+                <h1 class="hero-headline">Automotive Excellence</h1>
+                <p class="hero-copy">Career Technical Education at its finest</p>
+                <div class="hero-violator">Preparing tomorrow's automotive professionals today</div>
+                <div class="cta-links">
+                    <a href="club.html" class="cta-link">Join Our Club</a>
+                    <a href="curriculum.html" class="cta-link">View Curriculum</a>
                 </div>
-            </div>
-            <div class="hero-graphics">
-                <div class="floating-element element-1"></div>
-                <div class="floating-element element-2"></div>
-                <div class="floating-element element-3"></div>
+                <button class="button button-elevated hero-performance-btn">Get Started</button>
             </div>
         </section>
 
-        <section class="features">
-            <div class="container">
-                <h2 class="section-title">Why Choose Bulldog Garage?</h2>
-                <div class="features-grid">
-                    <div class="feature-card">
-                        <div class="feature-icon">
-                            <i class="fas fa-wrench"></i>
+        <section class="section-product-grid">
+            <div class="product-grid-container">
+                <div class="product-tile product-tile-large">
+                    <div class="product-tile-content">
+                        <div class="tile-eyebrow">Hands-On Learning</div>
+                        <h2 class="tile-headline">Real-World Experience</h2>
+                        <p class="tile-copy">State-of-the-art automotive lab with industry-standard equipment and real vehicle projects.</p>
+                        <div class="cta-links">
+                            <a href="curriculum.html" class="cta-link">Learn More</a>
+                            <a href="professionaltraining.html" class="cta-link">Training Programs</a>
                         </div>
-                        <h3>Hands-On Learning</h3>
-                        <p>Real-world automotive repair experience with industry-standard equipment and techniques.</p>
-                    </div>
-                    <div class="feature-card">
-                        <div class="feature-icon">
-                            <i class="fas fa-graduation-cap"></i>
-                        </div>
-                        <h3>4-Year Program</h3>
-                        <p>Comprehensive curriculum from basics to advanced automotive systems and technologies.</p>
-                    </div>
-                    <div class="feature-card">
-                        <div class="feature-icon">
-                            <i class="fas fa-users"></i>
-                        </div>
-                        <h3>Automotive Club</h3>
-                        <p>Join our passionate community of automotive enthusiasts and future professionals.</p>
-                    </div>
-                    <div class="feature-card">
-                        <div class="feature-icon">
-                            <i class="fas fa-trophy"></i>
-                        </div>
-                        <h3>Excellence</h3>
-                        <p>Award-winning program recognized for outstanding technical education and student success.</p>
                     </div>
                 </div>
-            </div>
-        </section>
-
-        <section class="stats">
-            <div class="container">
-                <div class="stats-grid">
-                    <div class="stat-item">
-                        <div class="stat-number" data-target="500">0</div>
-                        <div class="stat-label">Students Trained</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-number" data-target="95">0</div>
-                        <div class="stat-label">Success Rate %</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-number" data-target="15">0</div>
-                        <div class="stat-label">Years of Excellence</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-number" data-target="50">0</div>
-                        <div class="stat-label">Industry Partners</div>
+                
+                <div class="product-tile">
+                    <div class="product-tile-content">
+                        <div class="tile-eyebrow">4-Year Program</div>
+                        <h2 class="tile-headline">Comprehensive Curriculum</h2>
+                        <p class="tile-copy">From automotive basics to advanced diagnostics and repair techniques.</p>
+                        <div class="cta-links">
+                            <a href="curriculum.html" class="cta-link coilovers-link">View Curriculum</a>
+                        </div>
+                        <button class="button button-elevated product-btn">Explore</button>
                     </div>
                 </div>
-            </div>
-        </section>
-
-        <section class="cta">
-            <div class="container">
-                <div class="cta-content">
-                    <h2>Ready to Start Your Automotive Journey?</h2>
-                    <p>Join the next generation of automotive professionals at Bulldog Garage</p>
-                    <a href="club.html" class="btn btn-primary">Get Started Today</a>
+                
+                <div class="product-tile">
+                    <div class="product-tile-content">
+                        <div class="tile-eyebrow">Automotive Club</div>
+                        <h2 class="tile-headline">Join Our Community</h2>
+                        <p class="tile-copy">Connect with passionate automotive enthusiasts and future professionals.</p>
+                        <div class="cta-links">
+                            <a href="club.html" class="cta-link">Join Club</a>
+                        </div>
+                        <button class="button button-elevated product-btn product-btn-white">Learn More</button>
+                    </div>
+                </div>
+                
+                <div class="product-tile">
+                    <div class="product-tile-content">
+                        <div class="tile-eyebrow">Ford Partnership</div>
+                        <h2 class="tile-headline">Ford ACE Program</h2>
+                        <p class="tile-copy">Industry certifications and direct pathways to Ford dealership careers.</p>
+                        <div class="cta-links">
+                            <a href="ford-ace.html" class="cta-link">Learn More</a>
+                        </div>
+                        <button class="button button-elevated product-btn product-btn-white">Discover</button>
+                    </div>
+                </div>
+                
+                <div class="product-tile">
+                    <div class="product-tile-content">
+                        <div class="tile-eyebrow">Career Ready</div>
+                        <h2 class="tile-headline">Professional Training</h2>
+                        <p class="tile-copy">Graduate with industry certifications and job-ready skills for immediate employment.</p>
+                        <div class="cta-links">
+                            <a href="professionaltraining.html" class="cta-link">View Training</a>
+                        </div>
+                        <button class="button button-elevated product-btn">Get Started</button>
+                    </div>
                 </div>
             </div>
         </section>
     </main>
 
-    <footer class="footer">
-        <div class="footer-content">
-            <div class="footer-section">
-                <h3>Bulldog Garage</h3>
-                <p>Excellence in automotive education and career preparation.</p>
-            </div>
-            <div class="footer-section">
-                <h3>Quick Links</h3>
-                <ul>
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="news.html">News</a></li>
-                    <li><a href="club.html">Club</a></li>
-                    <li><a href="curriculum.html">Curriculum</a></li>
-                </ul>
-            </div>
-            <div class="footer-section">
-                <h3>Contact</h3>
-                <p>Hemet High School<br>Automotive Department</p>
-            </div>
-        </div>
-        
-        <div class="thomson-section">
-            <div class="rotating-cube">
-                <div class="cube">
-                    <div class="face front">T</div>
-                    <div class="face back">i</div>
-                    <div class="face right">T</div>
-                    <div class="face left">i</div>
-                    <div class="face top">T</div>
-                    <div class="face bottom">i</div>
+    <footer class="as-globalfooter">
+        <div class="as-globalfooter-content">
+            <div class="as-globalfooter-directory">
+                <div class="as-globalfooter-directory-column">
+                    <input class="as-globalfooter-directory-column-section-state" type="checkbox" id="as-globalfooter-directory-column-section-state-programs">
+                    <div class="as-globalfooter-directory-column-section">
+                        <label class="as-globalfooter-directory-column-section-label" for="as-globalfooter-directory-column-section-state-programs">
+                            <h3 class="as-globalfooter-directory-column-section-title">Programs</h3>
+                        </label>
+                        <div class="as-globalfooter-directory-column-section-list">
+                            <ul>
+                                <li><a href="curriculum.html">Curriculum</a></li>
+                                <li><a href="ford-ace.html">Ford ACE</a></li>
+                                <li><a href="professionaltraining.html">Professional Training</a></li>
+                                <li><a href="club.html">Automotive Club</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="as-globalfooter-directory-column">
+                    <input class="as-globalfooter-directory-column-section-state" type="checkbox" id="as-globalfooter-directory-column-section-state-resources">
+                    <div class="as-globalfooter-directory-column-section">
+                        <label class="as-globalfooter-directory-column-section-label" for="as-globalfooter-directory-column-section-state-resources">
+                            <h3 class="as-globalfooter-directory-column-section-title">Resources</h3>
+                        </label>
+                        <div class="as-globalfooter-directory-column-section-list">
+                            <ul>
+                                <li><a href="news.html">News</a></li>
+                                <li><a href="support.html">Support</a></li>
+                                <li><a href="google-classroom.html">Google Classroom</a></li>
+                                <li><a href="mitchell-ondemand.html">Mitchell OnDemand</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="as-globalfooter-directory-column">
+                    <input class="as-globalfooter-directory-column-section-state" type="checkbox" id="as-globalfooter-directory-column-section-state-about">
+                    <div class="as-globalfooter-directory-column-section">
+                        <label class="as-globalfooter-directory-column-section-label" for="as-globalfooter-directory-column-section-state-about">
+                            <h3 class="as-globalfooter-directory-column-section-title">About</h3>
+                        </label>
+                        <div class="as-globalfooter-directory-column-section-list">
+                            <ul>
+                                <li><a href="cte-program.html">CTE Program</a></li>
+                                <li><a href="fieldtrips.html">Field Trips</a></li>
+                                <li><a href="shop-vehicles.html">Shop Vehicles</a></li>
+                                <li><a href="forms.html">Forms</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="as-globalfooter-directory-column">
+                    <input class="as-globalfooter-directory-column-section-state" type="checkbox" id="as-globalfooter-directory-column-section-state-legal">
+                    <div class="as-globalfooter-directory-column-section">
+                        <label class="as-globalfooter-directory-column-section-label" for="as-globalfooter-directory-column-section-state-legal">
+                            <h3 class="as-globalfooter-directory-column-section-title">Legal</h3>
+                        </label>
+                        <div class="as-globalfooter-directory-column-section-list">
+                            <ul>
+                                <li><a href="privacypolicy.html">Privacy Policy</a></li>
+                                <li><a href="terms-of-service.html">Terms of Service</a></li>
+                                <li><a href="legal.html">Legal</a></li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="thomson-text">
-                <strong>Thomson innovations</strong>
+            
+            <div class="as-globalfooter-mini">
+                <div class="as-globalfooter-mini-shop">
+                    More ways to learn: <a href="support.html">Find Support</a> or <a href="club.html">Join Our Club</a>
+                </div>
+                
+                <div class="as-globalfooter-mini-locale">
+                    <a href="#" class="as-globalfooter-mini-locale-link">
+                        <span class="as-globalfooter-mini-locale-flag">🇺🇸</span>
+                        United States
+                    </a>
+                </div>
+                
+                <div class="as-globalfooter-mini-legal">
+                    <div class="as-globalfooter-mini-legal-copyright">
+                        Copyright © 2024 Bulldog Garage. All rights reserved.
+                    </div>
+                    <div class="as-globalfooter-mini-legal-links">
+                        <a href="privacypolicy.html">Privacy Policy</a>
+                        <a href="terms-of-service.html">Terms of Use</a>
+                        <a href="legal.html">Legal</a>
+                    </div>
+                </div>
+                
+                <div class="as-globalfooter-mini-legal-text">
+                    <p>Bulldog Garage is a Career Technical Education program at Hemet High School, providing automotive excellence through hands-on learning and industry partnerships.</p>
+                </div>
             </div>
-        </div>
-        
-        <div class="footer-bottom">
-            <p>&copy; 2024 Bulldog Garage. All rights reserved.</p>
         </div>
     </footer>
 

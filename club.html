@@ -5,291 +5,243 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Automotive Club - Bulldog Garage</title>
     <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" type="image/svg+xml" href="images/Bulldog.svg">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=SF+Pro+Display:wght@300;400;500;600;700&family=SF+Pro+Text:wght@300;400;500;600&display=swap" rel="stylesheet">
 </head>
 <body>
-    <header class="header">
-        <nav class="navbar">
-            <div class="nav-container">
-                <div class="logo">
-                    <img src="images/logo.svg" alt="Bulldog Garage Logo" class="logo-img">
-                </div>
-                <ul class="nav-menu">
-                    <li class="nav-item">
-                        <a href="index.html" class="nav-link">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="news.html" class="nav-link">News</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="club.html" class="nav-link active">Club</a>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a href="curriculum.html" class="nav-link">Curriculum</a>
-                        <ul class="dropdown-menu">
-                            <li><a href="curriculum-year1.html">Year 1</a></li>
-                            <li><a href="curriculum-year2.html">Year 2</a></li>
-                            <li><a href="curriculum-year3.html">Year 3</a></li>
-                            <li><a href="curriculum-year4.html">Year 4</a></li>
-                        </ul>
-                    </li>
-                </ul>
-                <div class="hamburger">
-                    <span class="bar"></span>
-                    <span class="bar"></span>
-                    <span class="bar"></span>
-                </div>
-            </div>
-        </nav>
-    </header>
+    <nav class="globalnav">
+        <div class="globalnav-content">
+            <ul class="globalnav-list">
+                <li class="globalnav-item globalnav-item-apple">
+                    <a href="index.html" class="globalnav-link">
+                        <img src="images/Bulldog.svg" alt="Bulldog Garage" style="height: 20px; width: auto;">
+                    </a>
+                </li>
+                <li class="globalnav-item">
+                    <a href="news.html" class="globalnav-link">News</a>
+                </li>
+                <li class="globalnav-item">
+                    <a href="club.html" class="globalnav-link">Club</a>
+                </li>
+                <li class="globalnav-item">
+                    <a href="curriculum.html" class="globalnav-link">Curriculum</a>
+                </li>
+                <li class="globalnav-item">
+                    <a href="professionaltraining.html" class="globalnav-link">Training</a>
+                </li>
+                <li class="globalnav-item">
+                    <a href="ford-ace.html" class="globalnav-link">Ford ACE</a>
+                </li>
+                <li class="globalnav-item">
+                    <a href="support.html" class="globalnav-link">Support</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
 
-    <main class="main-content">
-        <section class="club-hero">
-            <div class="container">
-                <h1 class="page-title">Bulldog Garage Automotive Club</h1>
-                <p class="page-subtitle">Join our passionate community of automotive enthusiasts and future professionals</p>
-                <div class="hero-buttons">
-                    <a href="#join" class="btn btn-primary">Join Now</a>
-                    <a href="#activities" class="btn btn-secondary">View Activities</a>
+    <main>
+        <section class="section-hero hero-turbo">
+            <div class="section-content">
+                <div class="hero-eyebrow">Automotive Club</div>
+                <h1 class="hero-headline">Join Our Community</h1>
+                <p class="hero-copy">Connect with passionate automotive enthusiasts and future professionals</p>
+                <div class="hero-violator">Building tomorrow's automotive leaders today</div>
+                <div class="cta-links">
+                    <a href="#join" class="cta-link">Join Now</a>
+                    <a href="#activities" class="cta-link">View Activities</a>
                 </div>
+                <button class="button button-elevated hero-turbo-btn">Get Started</button>
             </div>
         </section>
 
-        <section class="club-features">
-            <div class="container">
-                <h2 class="section-title">What Makes Our Club Special?</h2>
-                <div class="club-grid">
-                    <div class="club-card">
-                        <div class="club-icon">
-                            <i class="fas fa-tools"></i>
+        <section class="section-product-grid">
+            <div class="product-grid-container">
+                <div class="product-tile">
+                    <div class="product-tile-content">
+                        <div class="tile-eyebrow">Hands-On</div>
+                        <h2 class="tile-headline">Real Projects</h2>
+                        <p class="tile-copy">Work on real vehicles and cutting-edge automotive projects that challenge your skills.</p>
+                        <div class="cta-links">
+                            <a href="curriculum.html" class="cta-link">View Projects</a>
                         </div>
-                        <h3>Hands-On Projects</h3>
-                        <p>Work on real vehicles and cutting-edge automotive projects that challenge your skills and expand your knowledge.</p>
-                    </div>
-                    <div class="club-card">
-                        <div class="club-icon">
-                            <i class="fas fa-trophy"></i>
-                        </div>
-                        <h3>Competitions</h3>
-                        <p>Participate in regional and national automotive competitions, showcasing your technical expertise and teamwork.</p>
-                    </div>
-                    <div class="club-card">
-                        <div class="club-icon">
-                            <i class="fas fa-users"></i>
-                        </div>
-                        <h3>Community</h3>
-                        <p>Connect with like-minded students who share your passion for automotive technology and innovation.</p>
-                    </div>
-                    <div class="club-card">
-                        <div class="club-icon">
-                            <i class="fas fa-graduation-cap"></i>
-                        </div>
-                        <h3>Learning</h3>
-                        <p>Access to advanced training, guest speakers from the industry, and exclusive workshops beyond regular curriculum.</p>
-                    </div>
-                    <div class="club-card">
-                        <div class="club-icon">
-                            <i class="fas fa-briefcase"></i>
-                        </div>
-                        <h3>Career Prep</h3>
-                        <p>Direct connections to automotive industry professionals and exclusive internship opportunities.</p>
-                    </div>
-                    <div class="club-card">
-                        <div class="club-icon">
-                            <i class="fas fa-car"></i>
-                        </div>
-                        <h3>Vehicle Shows</h3>
-                        <p>Organize and participate in car shows, demonstrating restoration projects and custom modifications.</p>
+                        <button class="button button-elevated product-btn">Learn More</button>
                     </div>
                 </div>
-            </div>
-        </section>
-
-        <section class="activities" id="activities">
-            <div class="container">
-                <h2 class="section-title">Club Activities</h2>
-                <div class="activities-grid">
-                    <div class="activity-card">
-                        <div class="activity-header">
-                            <h3>Weekly Meetings</h3>
-                            <span class="activity-time">Fridays 3:30 PM</span>
+                
+                <div class="product-tile">
+                    <div class="product-tile-content">
+                        <div class="tile-eyebrow">Competitions</div>
+                        <h2 class="tile-headline">SkillsUSA</h2>
+                        <p class="tile-copy">Participate in regional and national automotive competitions, showcasing technical expertise.</p>
+                        <div class="cta-links">
+                            <a href="news.html" class="cta-link">Competition Results</a>
                         </div>
-                        <p>Regular club meetings to discuss projects, plan events, and share automotive knowledge and experiences.</p>
-                        <ul class="activity-features">
-                            <li>Technical discussions</li>
-                            <li>Project planning</li>
-                            <li>Guest speakers</li>
-                            <li>Industry updates</li>
-                        </ul>
+                        <button class="button button-elevated product-btn">Compete</button>
                     </div>
-                    <div class="activity-card">
-                        <div class="activity-header">
-                            <h3>Restoration Projects</h3>
-                            <span class="activity-time">Ongoing</span>
+                </div>
+                
+                <div class="product-tile">
+                    <div class="product-tile-content">
+                        <div class="tile-eyebrow">Community</div>
+                        <h2 class="tile-headline">Network</h2>
+                        <p class="tile-copy">Connect with like-minded students who share your passion for automotive technology.</p>
+                        <div class="cta-links">
+                            <a href="#join" class="cta-link">Join Community</a>
                         </div>
-                        <p>Long-term vehicle restoration projects where club members work together to bring classic cars back to life.</p>
-                        <ul class="activity-features">
-                            <li>Engine rebuilding</li>
-                            <li>Body work and paint</li>
-                            <li>Interior restoration</li>
-                            <li>Modern upgrades</li>
-                        </ul>
+                        <button class="button button-elevated product-btn product-btn-white">Connect</button>
                     </div>
-                    <div class="activity-card">
-                        <div class="activity-header">
-                            <h3>Field Trips</h3>
-                            <span class="activity-time">Monthly</span>
+                </div>
+                
+                <div class="product-tile">
+                    <div class="product-tile-content">
+                        <div class="tile-eyebrow">Career Prep</div>
+                        <h2 class="tile-headline">Industry Connections</h2>
+                        <p class="tile-copy">Direct connections to automotive professionals and exclusive internship opportunities.</p>
+                        <div class="cta-links">
+                            <a href="professionaltraining.html" class="cta-link">Career Paths</a>
                         </div>
-                        <p>Educational visits to automotive facilities, museums, and industry events to expand learning beyond the classroom.</p>
-                        <ul class="activity-features">
-                            <li>Dealership tours</li>
-                            <li>Auto shows</li>
-                            <li>Racing events</li>
-                            <li>Manufacturing plants</li>
-                        </ul>
-                    </div>
-                    <div class="activity-card">
-                        <div class="activity-header">
-                            <h3>Skills Competitions</h3>
-                            <span class="activity-time">Seasonal</span>
-                        </div>
-                        <p>Participate in regional and state-level automotive technology competitions and skills challenges.</p>
-                        <ul class="activity-features">
-                            <li>SkillsUSA events</li>
-                            <li>Diagnostic challenges</li>
-                            <li>Speed competitions</li>
-                            <li>Team challenges</li>
-                        </ul>
+                        <button class="button button-elevated product-btn product-btn-white">Explore</button>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section class="membership" id="join">
-            <div class="container">
-                <div class="membership-content">
-                    <div class="membership-info">
-                        <h2>Join Bulldog Garage Club</h2>
-                        <p>Ready to take your automotive passion to the next level? Join our club and become part of a community dedicated to excellence in automotive education.</p>
-                        
-                        <div class="requirements">
-                            <h3>Membership Requirements</h3>
-                            <ul class="requirements-list">
-                                <li><i class="fas fa-check"></i> Currently enrolled in Bulldog Garage automotive program</li>
-                                <li><i class="fas fa-check"></i> Maintain minimum 2.5 GPA</li>
-                                <li><i class="fas fa-check"></i> Commit to regular meeting attendance</li>
-                                <li><i class="fas fa-check"></i> Participate in at least 2 club activities per semester</li>
-                                <li><i class="fas fa-check"></i> Demonstrate positive attitude and teamwork</li>
-                            </ul>
-                        </div>
-
-                        <div class="benefits">
-                            <h3>Member Benefits</h3>
-                            <ul class="benefits-list">
-                                <li><i class="fas fa-star"></i> Priority access to advanced equipment</li>
-                                <li><i class="fas fa-star"></i> Exclusive workshops and training sessions</li>
-                                <li><i class="fas fa-star"></i> Industry networking opportunities</li>
-                                <li><i class="fas fa-star"></i> Competition team eligibility</li>
-                                <li><i class="fas fa-star"></i> Club merchandise and recognition</li>
-                            </ul>
-                        </div>
+        <section class="section-promo" id="activities">
+            <div class="promo-content">
+                <div class="promo-header">
+                    <h2 class="promo-headline">Club Activities</h2>
+                    <p class="promo-subheading">Weekly meetings, competitions, and hands-on projects</p>
+                    <div class="promo-cta">
+                        <a href="#join" class="button">Join Today</a>
                     </div>
-                    
-                    <div class="membership-form">
-                        <div class="form-container">
-                            <h3>Application Form</h3>
-                            <form class="club-application">
-                                <div class="form-group">
-                                    <label for="fullName">Full Name</label>
-                                    <input type="text" id="fullName" name="fullName" required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="email">Email Address</label>
-                                    <input type="email" id="email" name="email" required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="grade">Grade Level</label>
-                                    <select id="grade" name="grade" required>
-                                        <option value="">Select Grade</option>
-                                        <option value="9">9th Grade</option>
-                                        <option value="10">10th Grade</option>
-                                        <option value="11">11th Grade</option>
-                                        <option value="12">12th Grade</option>
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <label for="year">Program Year</label>
-                                    <select id="year" name="year" required>
-                                        <option value="">Select Year</option>
-                                        <option value="1">Year 1</option>
-                                        <option value="2">Year 2</option>
-                                        <option value="3">Year 3</option>
-                                        <option value="4">Year 4</option>
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <label for="interest">Areas of Interest</label>
-                                    <textarea id="interest" name="interest" rows="4" 
-                                        placeholder="Tell us about your automotive interests and goals..."></textarea>
-                                </div>
-                                <div class="form-group">
-                                    <label class="checkbox-label">
-                                        <input type="checkbox" name="agreement" required>
-                                        <span class="checkmark"></span>
-                                        I agree to the club requirements and code of conduct
-                                    </label>
-                                </div>
-                                <button type="submit" class="btn btn-primary">Submit Application</button>
-                            </form>
-                        </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section-carousel" id="join">
+            <div class="carousel-container">
+                <div class="carousel-eyebrow">Membership</div>
+                <div class="carousel-items">
+                    <div class="carousel-item">
+                        <div class="carousel-item-eyebrow">Requirements</div>
+                        <h3 class="carousel-item-headline">Join Our Club</h3>
+                        <p>Currently enrolled in automotive program, maintain 2.5 GPA, commit to regular attendance, and demonstrate positive attitude.</p>
+                    </div>
+                    <div class="carousel-item">
+                        <div class="carousel-item-eyebrow">Benefits</div>
+                        <h3 class="carousel-item-headline">Member Perks</h3>
+                        <p>Priority equipment access, exclusive workshops, industry networking, competition eligibility, and club merchandise.</p>
+                    </div>
+                    <div class="carousel-item">
+                        <div class="carousel-item-eyebrow">Apply</div>
+                        <h3 class="carousel-item-headline">Get Started</h3>
+                        <p>Fill out our simple application form and join a community of passionate automotive enthusiasts today.</p>
                     </div>
                 </div>
             </div>
         </section>
     </main>
 
-    <footer class="footer">
-        <div class="footer-content">
-            <div class="footer-section">
-                <h3>Bulldog Garage</h3>
-                <p>Excellence in automotive education and career preparation.</p>
-            </div>
-            <div class="footer-section">
-                <h3>Quick Links</h3>
-                <ul>
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="news.html">News</a></li>
-                    <li><a href="club.html">Club</a></li>
-                    <li><a href="curriculum.html">Curriculum</a></li>
-                </ul>
-            </div>
-            <div class="footer-section">
-                <h3>Contact</h3>
-                <p>Hemet High School<br>Automotive Department</p>
-            </div>
-        </div>
-        
-        <div class="thomson-section">
-            <div class="rotating-cube">
-                <div class="cube">
-                    <div class="face front">T</div>
-                    <div class="face back">i</div>
-                    <div class="face right">T</div>
-                    <div class="face left">i</div>
-                    <div class="face top">T</div>
-                    <div class="face bottom">i</div>
+    <footer class="as-globalfooter">
+        <div class="as-globalfooter-content">
+            <div class="as-globalfooter-directory">
+                <div class="as-globalfooter-directory-column">
+                    <input class="as-globalfooter-directory-column-section-state" type="checkbox" id="as-globalfooter-directory-column-section-state-programs">
+                    <div class="as-globalfooter-directory-column-section">
+                        <label class="as-globalfooter-directory-column-section-label" for="as-globalfooter-directory-column-section-state-programs">
+                            <h3 class="as-globalfooter-directory-column-section-title">Programs</h3>
+                        </label>
+                        <div class="as-globalfooter-directory-column-section-list">
+                            <ul>
+                                <li><a href="curriculum.html">Curriculum</a></li>
+                                <li><a href="ford-ace.html">Ford ACE</a></li>
+                                <li><a href="professionaltraining.html">Professional Training</a></li>
+                                <li><a href="club.html">Automotive Club</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="as-globalfooter-directory-column">
+                    <input class="as-globalfooter-directory-column-section-state" type="checkbox" id="as-globalfooter-directory-column-section-state-resources">
+                    <div class="as-globalfooter-directory-column-section">
+                        <label class="as-globalfooter-directory-column-section-label" for="as-globalfooter-directory-column-section-state-resources">
+                            <h3 class="as-globalfooter-directory-column-section-title">Resources</h3>
+                        </label>
+                        <div class="as-globalfooter-directory-column-section-list">
+                            <ul>
+                                <li><a href="news.html">News</a></li>
+                                <li><a href="support.html">Support</a></li>
+                                <li><a href="google-classroom.html">Google Classroom</a></li>
+                                <li><a href="mitchell-ondemand.html">Mitchell OnDemand</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="as-globalfooter-directory-column">
+                    <input class="as-globalfooter-directory-column-section-state" type="checkbox" id="as-globalfooter-directory-column-section-state-about">
+                    <div class="as-globalfooter-directory-column-section">
+                        <label class="as-globalfooter-directory-column-section-label" for="as-globalfooter-directory-column-section-state-about">
+                            <h3 class="as-globalfooter-directory-column-section-title">About</h3>
+                        </label>
+                        <div class="as-globalfooter-directory-column-section-list">
+                            <ul>
+                                <li><a href="cte-program.html">CTE Program</a></li>
+                                <li><a href="fieldtrips.html">Field Trips</a></li>
+                                <li><a href="shop-vehicles.html">Shop Vehicles</a></li>
+                                <li><a href="forms.html">Forms</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="as-globalfooter-directory-column">
+                    <input class="as-globalfooter-directory-column-section-state" type="checkbox" id="as-globalfooter-directory-column-section-state-legal">
+                    <div class="as-globalfooter-directory-column-section">
+                        <label class="as-globalfooter-directory-column-section-label" for="as-globalfooter-directory-column-section-state-legal">
+                            <h3 class="as-globalfooter-directory-column-section-title">Legal</h3>
+                        </label>
+                        <div class="as-globalfooter-directory-column-section-list">
+                            <ul>
+                                <li><a href="privacypolicy.html">Privacy Policy</a></li>
+                                <li><a href="terms-of-service.html">Terms of Service</a></li>
+                                <li><a href="legal.html">Legal</a></li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="thomson-text">
-                <strong>Thomson innovations</strong>
+            
+            <div class="as-globalfooter-mini">
+                <div class="as-globalfooter-mini-shop">
+                    More ways to learn: <a href="support.html">Find Support</a> or <a href="index.html">Visit Homepage</a>
+                </div>
+                
+                <div class="as-globalfooter-mini-locale">
+                    <a href="#" class="as-globalfooter-mini-locale-link">
+                        <span class="as-globalfooter-mini-locale-flag">🇺🇸</span>
+                        United States
+                    </a>
+                </div>
+                
+                <div class="as-globalfooter-mini-legal">
+                    <div class="as-globalfooter-mini-legal-copyright">
+                        Copyright © 2024 Bulldog Garage. All rights reserved.
+                    </div>
+                    <div class="as-globalfooter-mini-legal-links">
+                        <a href="privacypolicy.html">Privacy Policy</a>
+                        <a href="terms-of-service.html">Terms of Use</a>
+                        <a href="legal.html">Legal</a>
+                    </div>
+                </div>
+                
+                <div class="as-globalfooter-mini-legal-text">
+                    <p>Bulldog Garage is a Career Technical Education program at Hemet High School, providing automotive excellence through hands-on learning and industry partnerships.</p>
+                </div>
             </div>
-        </div>
-        
-        <div class="footer-bottom">
-            <p>&copy; 2024 Bulldog Garage. All rights reserved.</p>
         </div>
     </footer>
 
