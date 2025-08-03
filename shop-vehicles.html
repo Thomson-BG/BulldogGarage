@@ -43,8 +43,8 @@
         <section class="vehicle-tiles-section" style="background:#f5f5f7;padding:48px 0 64px 0;">
           <div class="vehicle-tiles-grid" style="display:grid;grid-template-columns:repeat(4,1fr);gap:24px;max-width:1200px;margin:0 auto;padding:0 24px;">
             <!-- 22 Vehicle Tiles -->
-            <div class="vehicle-tile" style="background:#fff;border-radius:18px;box-shadow:0 4px 24px rgba(0,0,0,0.08);padding:24px;display:flex;flex-direction:column;align-items:center;">
-              <div class="vehicle-img-holder" style="width:100%;max-width:180px;height:120px;background:#e0e0e5;border-radius:12px;margin-bottom:18px;display:flex;align-items:center;justify-content:center;">
+            <div class="vehicle-tile" data-vehicle='{"name": "2000 Honda CRV", "year": "2000", "make": "Honda", "model": "CRV", "engine": "2.0L (4 cylinder)", "transmission": "Automatic", "type": "SUV"}' style="background:#fff;border-radius:18px;box-shadow:0 4px 24px rgba(0,0,0,0.08);padding:24px;display:flex;flex-direction:column;align-items:center;">
+              <div class="vehicle-img-holder clickable-image" style="width:100%;max-width:180px;height:120px;background:#e0e0e5;border-radius:12px;margin-bottom:18px;display:flex;align-items:center;justify-content:center;cursor:pointer;">
                 <img src="https://www.carjunction.com/car_images2/28132_40022/40022a.jpg" alt="2000 Honda CRV" style="max-width:100%;max-height:100%;border-radius:8px;">
               </div>
               <div class="vehicle-desc" style="text-align:center;font-size:1.1em;">2000 Honda CRV<br>2.0L (4 cylinder), Automatic</div>
@@ -260,6 +260,160 @@
             </div>
         </div>
     </footer>
+
+    <!-- Vehicle Modal -->
+    <div id="vehicleModal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modalTitle">Vehicle Details</h2>
+                <span class="modal-close">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="modal-image-container">
+                    <img id="modalImage" src="" alt="" />
+                </div>
+                <div class="modal-specs">
+                    <h3>Specifications</h3>
+                    <div class="spec-grid">
+                        <div class="spec-item">
+                            <span class="spec-label">Year:</span>
+                            <span class="spec-value" id="specYear">-</span>
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-label">Make:</span>
+                            <span class="spec-value" id="specMake">-</span>
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-label">Model:</span>
+                            <span class="spec-value" id="specModel">-</span>
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-label">Engine:</span>
+                            <span class="spec-value" id="specEngine">-</span>
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-label">Transmission:</span>
+                            <span class="spec-value" id="specTransmission">-</span>
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-label">Type:</span>
+                            <span class="spec-value" id="specType">-</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Vehicle Modal Functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const modal = document.getElementById('vehicleModal');
+            const modalClose = document.querySelector('.modal-close');
+            const modalTitle = document.getElementById('modalTitle');
+            const modalImage = document.getElementById('modalImage');
+            
+            // Spec elements
+            const specYear = document.getElementById('specYear');
+            const specMake = document.getElementById('specMake');
+            const specModel = document.getElementById('specModel');
+            const specEngine = document.getElementById('specEngine');
+            const specTransmission = document.getElementById('specTransmission');
+            const specType = document.getElementById('specType');
+
+            // Parse vehicle data from HTML
+            function parseVehicleData() {
+                const vehicles = [];
+                const vehicleTiles = document.querySelectorAll('.vehicle-tile');
+                
+                vehicleTiles.forEach((tile, index) => {
+                    const img = tile.querySelector('img');
+                    const desc = tile.querySelector('.vehicle-desc').textContent.trim();
+                    
+                    // Parse the description to extract vehicle data
+                    const lines = desc.split('\n').map(line => line.trim()).filter(line => line);
+                    const vehicleName = lines[0];
+                    const specs = lines[1] || '';
+                    
+                    // Extract vehicle information
+                    let year = '', make = '', model = '';
+                    const yearMatch = vehicleName.match(/(\d{4})/);
+                    if (yearMatch) {
+                        year = yearMatch[1];
+                        const remaining = vehicleName.replace(year, '').trim();
+                        const parts = remaining.split(' ');
+                        make = parts[0] || '';
+                        model = parts.slice(1).join(' ') || '';
+                    }
+
+                    vehicles.push({
+                        id: index,
+                        name: vehicleName,
+                        year: year,
+                        make: make,
+                        model: model,
+                        engine: specs.includes('L') ? specs.split(',')[0] : specs,
+                        transmission: specs.includes('Transmission') ? specs.split(',').slice(-1)[0].trim() : 'Not specified',
+                        type: model.includes('F-') ? 'Truck' : (model.includes('CRV') || model.includes('Vue') ? 'SUV' : 'Sedan'),
+                        image: img ? img.src : '',
+                        alt: img ? img.alt : ''
+                    });
+
+                    // Make the image clickable
+                    const imgHolder = tile.querySelector('.vehicle-img-holder');
+                    if (imgHolder) {
+                        imgHolder.style.cursor = 'pointer';
+                        imgHolder.addEventListener('click', () => openModal(vehicles[index]));
+                    }
+                });
+
+                return vehicles;
+            }
+
+            // Open modal with vehicle data
+            function openModal(vehicle) {
+                modalTitle.textContent = vehicle.name;
+                modalImage.src = vehicle.image;
+                modalImage.alt = vehicle.alt;
+                
+                specYear.textContent = vehicle.year;
+                specMake.textContent = vehicle.make;
+                specModel.textContent = vehicle.model;
+                specEngine.textContent = vehicle.engine;
+                specTransmission.textContent = vehicle.transmission;
+                specType.textContent = vehicle.type;
+                
+                modal.style.display = 'block';
+                document.body.style.overflow = 'hidden'; // Prevent background scrolling
+            }
+
+            // Close modal
+            function closeModal() {
+                modal.style.display = 'none';
+                document.body.style.overflow = 'auto'; // Restore scrolling
+            }
+
+            // Event listeners
+            modalClose.addEventListener('click', closeModal);
+            
+            // Close modal when clicking outside of it
+            modal.addEventListener('click', function(e) {
+                if (e.target === modal) {
+                    closeModal();
+                }
+            });
+
+            // Close modal with Escape key
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && modal.style.display === 'block') {
+                    closeModal();
+                }
+            });
+
+            // Initialize the vehicle parsing
+            parseVehicleData();
+        });
+    </script>
     </body>
 </html>
 
