@@ -3,302 +3,491 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Automotive Club - Bulldog Garage</title>
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>Bulldog Garage</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/svg+xml" href="Bulldog_new.svg">
 </head>
 <body>
-    <header class="header">
-        <nav class="navbar">
-            <div class="nav-container">
-                <div class="logo">
-                    <img src="images/logo.svg" alt="Bulldog Garage Logo" class="logo-img">
-                </div>
-                <ul class="nav-menu">
-                    <li class="nav-item">
-                        <a href="index.html" class="nav-link">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="news.html" class="nav-link">News</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="club.html" class="nav-link active">Club</a>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a href="curriculum.html" class="nav-link">Curriculum</a>
-                        <ul class="dropdown-menu">
-                            <li><a href="curriculum-year1.html">Year 1</a></li>
-                            <li><a href="curriculum-year2.html">Year 2</a></li>
-                            <li><a href="curriculum-year3.html">Year 3</a></li>
-                            <li><a href="curriculum-year4.html">Year 4</a></li>
-                        </ul>
-                    </li>
-                </ul>
-                <div class="hamburger">
-                    <span class="bar"></span>
-                    <span class="bar"></span>
-                    <span class="bar"></span>
-                </div>
-            </div>
-        </nav>
-    </header>
+    <!-- Apple-style Navigation -->
+       <nav class="globalnav">
+           <div class="globalnav-content">
+            <ul class="globalnav-list">
+             <li class="globalnav-item globalnav-item-apple">
+                  <a class="globalnav-link" href="index.html" aria-label="Bulldog Garage" style="display:flex;align-items:center;justify-content:center;padding:0;">
+                       <img src="bulldog.svg" alt="Bulldog Garage Logo" width="55px" height="55px">
+                    </a>
+                  </li>
+                <li class="globalnav-item"><a class="globalnav-link" href="cte-program.html">CTE Programs</a></li>
+                <li class="globalnav-item"><a class="globalnav-link" href="google-classroom.html">Google Classroom</a></li>
+                <li class="globalnav-item"><a class="globalnav-link" href="ford-ace.html">Ford ACE</a></li>
+                <li class="globalnav-item"><a class="globalnav-link" href="mitchell-ondemand.html">Mitchell OnDemand</a></li>
+                <li class="globalnav-item"><a class="globalnav-link" href="shop-vehicles.html">Shop Vehicles</a></li>
+                <li class="globalnav-item"><a class="globalnav-link" href="forms.html">Forms</a></li>
+                <li class="globalnav-item"><a class="globalnav-link" href="support.html">Support</a></li>
+                <li class="globalnav-item"><a class="globalnav-link" href="news.html">News</a></li>
+            </ul>
+        </div>
+    </nav>
 
-    <main class="main-content">
-        <section class="club-hero">
-            <div class="container">
-                <h1 class="page-title">Bulldog Garage Automotive Club</h1>
-                <p class="page-subtitle">Join our passionate community of automotive enthusiasts and future professionals</p>
-                <div class="hero-buttons">
-                    <a href="#join" class="btn btn-primary">Join Now</a>
-                    <a href="#activities" class="btn btn-secondary">View Activities</a>
-                </div>
+    <!-- Main Hero Section - Performance Kit -->
+    <main class="page-main">
+          <section class="section-hero" id="performance-kit" style="background: #000; color: #fff;">
+        <div class="section-content">
+                <span style="display:block;font-size:4em;font-weight:900;letter-spacing:0.05em;line-height:1.1;margin-bottom:0.2em;">BULLDOG GARAGE</span>
+                <div style="height: 16px;"></div>
+                <div class="hero-eyebrow">The ONLY Automotive Program In The Valley</div>
+            <h1 class="hero-headline">Professional Level Training</h1>
+            <p class="hero-copy" style="color:#fff; margin-bottom: 50px;">The ultimate CTE program. Designed for beginners.</p>
+            <div class="cta-links">
+                <a href="professionaltraining.html" class="button button-elevated">Learn more</a>
             </div>
-        </section>
+            <p class="hero-violator" style="font-size:2.2em;font-weight:700;background:linear-gradient(90deg,#0071e3 0%,#ff9500 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;text-fill-color:transparent;">A 4 year program</p>
+        </div>
+    </section>
 
-        <section class="club-features">
-            <div class="container">
-                <h2 class="section-title">What Makes Our Club Special?</h2>
-                <div class="club-grid">
-                    <div class="club-card">
-                        <div class="club-icon">
-                            <i class="fas fa-tools"></i>
-                        </div>
-                        <h3>Hands-On Projects</h3>
-                        <p>Work on real vehicles and cutting-edge automotive projects that challenge your skills and expand your knowledge.</p>
-                    </div>
-                    <div class="club-card">
-                        <div class="club-icon">
-                            <i class="fas fa-trophy"></i>
-                        </div>
-                        <h3>Competitions</h3>
-                        <p>Participate in regional and national automotive competitions, showcasing your technical expertise and teamwork.</p>
-                    </div>
-                    <div class="club-card">
-                        <div class="club-icon">
-                            <i class="fas fa-users"></i>
-                        </div>
-                        <h3>Community</h3>
-                        <p>Connect with like-minded students who share your passion for automotive technology and innovation.</p>
-                    </div>
-                    <div class="club-card">
-                        <div class="club-icon">
-                            <i class="fas fa-graduation-cap"></i>
-                        </div>
-                        <h3>Learning</h3>
-                        <p>Access to advanced training, guest speakers from the industry, and exclusive workshops beyond regular curriculum.</p>
-                    </div>
-                    <div class="club-card">
-                        <div class="club-icon">
-                            <i class="fas fa-briefcase"></i>
-                        </div>
-                        <h3>Career Prep</h3>
-                        <p>Direct connections to automotive industry professionals and exclusive internship opportunities.</p>
-                    </div>
-                    <div class="club-card">
-                        <div class="club-icon">
-                            <i class="fas fa-car"></i>
-                        </div>
-                        <h3>Vehicle Shows</h3>
-                        <p>Organize and participate in car shows, demonstrating restoration projects and custom modifications.</p>
+    <!-- Promotional Banner -->
+    <section class="section-promo">
+        <div class="promo-content">
+            <div class="promo-header" style="display:flex;flex-direction:row;align-items:center;justify-content:center;text-align:center;width:100%;max-width:100%;gap:32px;">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTTDzqNLRHsDipVJNvQvkAqxEZ80d2Sb09JCg&s" alt="Ford Logo" style="width:320px;height:320px;object-fit:contain;flex-shrink:0;margin-right:160px;">
+                <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;max-width:480px;width:100%;">
+                    <h2 class="promo-headline">The Same Training As Dealership Technicians</h2>
+                    <div class="promo-subheading">with the Ford Ace program</div>
+                    <img src="https://www.stanleyfordmcgregor.com/static/dealer-14981/Seo/ford-service-square.jpg" alt="Ford ACE Program" style="width:100%;max-width:340px;display:block;margin:24px auto 16px auto;border-radius:16px;box-shadow:0 4px 24px rgba(0,0,0,0.10);">
+                    <div class="promo-cta">Get certified in various Ford technologies</div>
+                    <a href="ford-ace.html" class="button button-elevated promo-btn">Learn more about Ford ACE</a>
+                </div>
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTTDzqNLRHsDipVJNvQvkAqxEZ80d2Sb09JCg&s" alt="Ford Logo" style="width:320px;height:320px;object-fit:contain;flex-shrink:0;margin-left:160px;">
+            </div>
+        </div>
+    </section>
+
+    <!-- Secondary Hero - Turbo System -->
+    <section class="section-hero hero-turbo">
+        <div class="section-content">
+            <div class="hero-eyebrow">Interactive</div>
+            <h1 class="hero-headline">Field Trips</h1>
+            <p class="hero-copy">Amazing adventures await.</p>
+            <div class="cta-links">
+                <a href="fieldtrips.html" class="button button-elevated" style="background:#fff;color:#000;">Learn more</a>
+            </div>
+            <p class="hero-violator">It doesn't get better than this...</p>
+        </div>
+    </section>
+
+    <!-- Product Grid Section -->
+    <section class="section-product-grid">
+        <div class="product-grid-container">
+            <!-- Large Product Card -->
+            <div class="product-tile product-tile-large">
+                <div class="product-tile-content">
+                    <img src="https://www.eastcentral.edu/community/wp-content/uploads/sites/78/2022/04/WHY-LEADERSHIP-IS-IMPORTANT-LEADERS-TRANSFORMATION.jpg" alt="Student Leadership" class="product-tile-image" style="width:100%;object-fit:contain;margin-bottom:16px;">
+                    <div class="tile-eyebrow">Student Leadership</div>
+                    <h3 class="tile-headline">Officers. Managers.</h3>
+                    <p class="tile-copy">Develop the skills needed to become a leader.</p>
+                    <div class="cta-links">
+                        <a href="leadership.html" class="button button-elevated product-btn product-btn-white">Learn more</a>
                     </div>
                 </div>
             </div>
-        </section>
 
-        <section class="activities" id="activities">
-            <div class="container">
-                <h2 class="section-title">Club Activities</h2>
-                <div class="activities-grid">
-                    <div class="activity-card">
-                        <div class="activity-header">
-                            <h3>Weekly Meetings</h3>
-                            <span class="activity-time">Fridays 3:30 PM</span>
-                        </div>
-                        <p>Regular club meetings to discuss projects, plan events, and share automotive knowledge and experiences.</p>
-                        <ul class="activity-features">
-                            <li>Technical discussions</li>
-                            <li>Project planning</li>
-                            <li>Guest speakers</li>
-                            <li>Industry updates</li>
-                        </ul>
-                    </div>
-                    <div class="activity-card">
-                        <div class="activity-header">
-                            <h3>Restoration Projects</h3>
-                            <span class="activity-time">Ongoing</span>
-                        </div>
-                        <p>Long-term vehicle restoration projects where club members work together to bring classic cars back to life.</p>
-                        <ul class="activity-features">
-                            <li>Engine rebuilding</li>
-                            <li>Body work and paint</li>
-                            <li>Interior restoration</li>
-                            <li>Modern upgrades</li>
-                        </ul>
-                    </div>
-                    <div class="activity-card">
-                        <div class="activity-header">
-                            <h3>Field Trips</h3>
-                            <span class="activity-time">Monthly</span>
-                        </div>
-                        <p>Educational visits to automotive facilities, museums, and industry events to expand learning beyond the classroom.</p>
-                        <ul class="activity-features">
-                            <li>Dealership tours</li>
-                            <li>Auto shows</li>
-                            <li>Racing events</li>
-                            <li>Manufacturing plants</li>
-                        </ul>
-                    </div>
-                    <div class="activity-card">
-                        <div class="activity-header">
-                            <h3>Skills Competitions</h3>
-                            <span class="activity-time">Seasonal</span>
-                        </div>
-                        <p>Participate in regional and state-level automotive technology competitions and skills challenges.</p>
-                        <ul class="activity-features">
-                            <li>SkillsUSA events</li>
-                            <li>Diagnostic challenges</li>
-                            <li>Speed competitions</li>
-                            <li>Team challenges</li>
-                        </ul>
+            <!-- Coilovers -->
+            <div class="product-tile">
+                <div class="product-tile-content">
+                    <img src="https://cdn-fastly.autoguide.com/media/2025/05/06/13111/media.jpg?size=720x845&nocrop=1" alt="Vehicle Maintenance" class="product-tile-image" style="width:100%;height:200px;object-fit:cover;margin-bottom:16px;">
+                    <div class="tile-eyebrow">Vehicle Maintenance</div>
+                    <h3 class="tile-headline">Learn the basics.</h3>
+                    <p class="tile-copy">Proper maintenance is the key to longevity.</p>
+                    <div class="cta-links">
+                        <a href=" maintenance.html" class="button button-elevated product-btn product-btn-white">Learn more</a>
                     </div>
                 </div>
             </div>
-        </section>
 
-        <section class="membership" id="join">
-            <div class="container">
-                <div class="membership-content">
-                    <div class="membership-info">
-                        <h2>Join Bulldog Garage Club</h2>
-                        <p>Ready to take your automotive passion to the next level? Join our club and become part of a community dedicated to excellence in automotive education.</p>
-                        
-                        <div class="requirements">
-                            <h3>Membership Requirements</h3>
-                            <ul class="requirements-list">
-                                <li><i class="fas fa-check"></i> Currently enrolled in Bulldog Garage automotive program</li>
-                                <li><i class="fas fa-check"></i> Maintain minimum 2.5 GPA</li>
-                                <li><i class="fas fa-check"></i> Commit to regular meeting attendance</li>
-                                <li><i class="fas fa-check"></i> Participate in at least 2 club activities per semester</li>
-                                <li><i class="fas fa-check"></i> Demonstrate positive attitude and teamwork</li>
-                            </ul>
-                        </div>
+            <!-- Electrical Diagnostics -->
+            <div class="product-tile">
+                <div class="product-tile-content">
+                    <img src="https://media.istockphoto.com/id/1317553408/photo/technician-uses-multimeter-voltmeter-to-check-voltage-level-in-car-battery-service-and.jpg?s=612x612&w=0&k=20&c=7Fjns4DgPy4ox4uQERCwY5bQJFiIefZq6yfz__OZ7nQ=" alt="Electrical Diagnostics" class="product-tile-image" style="width:100%;height:200px;object-fit:cover;margin-bottom:16px;">
+                    <div class="tile-eyebrow">Electrical Diagnostics</div>
+                    <h3 class="tile-headline">What controls it all.</h3>
+                    <p class="tile-copy">Diagnose and repair electrical circuits.</p>
+                    <div class="cta-links">
+                        <a href="diagnostic.html" class="button button-elevated product-btn">Learn more</a>
+                    </div>
+                </div>
+            </div>
 
-                        <div class="benefits">
-                            <h3>Member Benefits</h3>
-                            <ul class="benefits-list">
-                                <li><i class="fas fa-star"></i> Priority access to advanced equipment</li>
-                                <li><i class="fas fa-star"></i> Exclusive workshops and training sessions</li>
-                                <li><i class="fas fa-star"></i> Industry networking opportunities</li>
-                                <li><i class="fas fa-star"></i> Competition team eligibility</li>
-                                <li><i class="fas fa-star"></i> Club merchandise and recognition</li>
-                            </ul>
+            <!-- Brake Kit -->
+            <div class="product-tile">
+                <div class="product-tile-content">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRUafsx7nB2Gf97t4Oq8x2z4eXYiLeAfKudow&s" alt="Brake Kit" class="product-tile-image" style="width:100%;height:200px;object-fit:cover;margin-bottom:16px;">
+                    <div class="tile-eyebrow">Stopping Power</div>
+                    <h3 class="tile-headline">Stop with confidence.</h3>
+                    <p class="tile-copy">The essentials to ensure you stop.</p>
+                    <div class="cta-links">
+                        <a href="stop.html" class="button button-elevated product-btn">Learn more</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Wheels -->
+            <div class="product-tile">
+                <div class="product-tile-content">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQW2xpjadClbqwBGUOHEHLa1H8bXcgAnV3BTA&s" alt="Wheel and Tires" class="product-tile-image" style="width:100%;height:200px;object-fit:cover;margin-bottom:16px;">
+                    <div class="tile-eyebrow">Wheel and Tires</div>
+                    <h3 class="tile-headline">Precision engineered.</h3>
+                    <p class="tile-copy">Power to the road. Wheel and tire maintenance for safety and reliability.</p>
+                    <div class="cta-links">
+                        <a href="wt.html" class="button button-elevated product-btn product-btn-white">Learn more</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Services Carousel Section -->
+    <section class="section-carousel">
+        <div class="carousel-container">
+            <div class="carousel-eyebrow">Bulldog Services</div>
+            <div class="carousel-items">
+                <div class="carousel-item">
+                    <div class="carousel-item-link">
+                        <div class="carousel-item-eyebrow">Professional Training</div>
+                        <h3 class="carousel-item-headline">Learn how the professionals diagnose and work on vehicles</h3>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <div class="carousel-item-link">
+                        <div class="carousel-item-eyebrow">Custom Tuning</div>
+                        <h3 class="carousel-item-headline">ECU mapping for your specific build</h3>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <div class="carousel-item-link">
+                        <div class="carousel-item-eyebrow">Performance Dyno</div>
+                        <h3 class="carousel-item-headline">Precise power measurement and optimization</h3>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <div class="carousel-item-link">
+                        <div class="carousel-item-eyebrow">Race Prep</div>
+                        <h3 class="carousel-item-headline">Track-ready builds for serious racers</h3>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <div class="carousel-item-link">
+                        <div class="carousel-item-eyebrow">Race Prep</div>
+                        <h3 class="carousel-item-headline">Track-ready builds for serious racers</h3>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <div class="carousel-item-link">
+                        <div class="carousel-item-eyebrow">Race Prep</div>
+                        <h3 class="carousel-item-headline">Track-ready builds for serious racers</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Apple-style Video/Content Carousel -->
+    <section class="section-media-carousel">
+        <div class="media-carousel-container">
+            <div class="media-carousel-header">
+                <div class="media-carousel-eyebrow">Bulldog Garage News</div>
+                <h2 class="media-carousel-headline">The latest builds and tech.</h2>
+            </div>
+            
+            <div class="media-carousel-wrapper">
+                <div class="media-carousel-track" id="mediaCarousel">
+                    <div class="media-carousel-item">
+                        <div class="media-item-content">
+                            <div style="position:relative;display:block;width:100%;max-width:480px;margin:0 auto;">
+                                <a href="https://www.youtube.com/watch?v=_bkX5VkZg8U" target="_blank" rel="noopener">
+                                    <img src="https://img.youtube.com/vi/_bkX5VkZg8U/hqdefault.jpg" alt="Ken Block Gymkhana Nine" class="media-item-image" style="width:100%;height:180px;object-fit:cover;border-radius:12px;">
+                                    <span style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);background:rgba(0,0,0,0.6);border-radius:50%;padding:12px;display:flex;align-items:center;justify-content:center;">
+                                        <svg width="36" height="36" viewBox="0 0 48 48" fill="white" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="24" r="24" fill="rgba(0,0,0,0.4)"/><polygon points="18,15 36,24 18,33" fill="white"/></svg>
+                                    </span>
+                                </a>
+                            </div>
+                            <div class="media-item-info" style="margin-top:12px;">
+                                <div class="media-item-eyebrow">Watch now</div>
+                                <h3 class="media-item-title">Ken Block</h3>
+                                <p class="media-item-subtitle">GYMKHANA NINE: Raw Industrial Playground</p>
+                            </div>
                         </div>
                     </div>
                     
-                    <div class="membership-form">
-                        <div class="form-container">
-                            <h3>Application Form</h3>
-                            <form class="club-application">
-                                <div class="form-group">
-                                    <label for="fullName">Full Name</label>
-                                    <input type="text" id="fullName" name="fullName" required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="email">Email Address</label>
-                                    <input type="email" id="email" name="email" required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="grade">Grade Level</label>
-                                    <select id="grade" name="grade" required>
-                                        <option value="">Select Grade</option>
-                                        <option value="9">9th Grade</option>
-                                        <option value="10">10th Grade</option>
-                                        <option value="11">11th Grade</option>
-                                        <option value="12">12th Grade</option>
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <label for="year">Program Year</label>
-                                    <select id="year" name="year" required>
-                                        <option value="">Select Year</option>
-                                        <option value="1">Year 1</option>
-                                        <option value="2">Year 2</option>
-                                        <option value="3">Year 3</option>
-                                        <option value="4">Year 4</option>
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <label for="interest">Areas of Interest</label>
-                                    <textarea id="interest" name="interest" rows="4" 
-                                        placeholder="Tell us about your automotive interests and goals..."></textarea>
-                                </div>
-                                <div class="form-group">
-                                    <label class="checkbox-label">
-                                        <input type="checkbox" name="agreement" required>
-                                        <span class="checkmark"></span>
-                                        I agree to the club requirements and code of conduct
-                                    </label>
-                                </div>
-                                <button type="submit" class="btn btn-primary">Submit Application</button>
-                            </form>
+                    <div class="media-carousel-item">
+                        <div class="media-item-content">
+                            <div style="position:relative;display:block;width:100%;max-width:480px;margin:0 auto;">
+                                <a href="https://www.youtube.com/watch?v=5qanlirrRWs" target="_blank" rel="noopener">
+                                    <img src="https://img.youtube.com/vi/5qanlirrRWs/hqdefault.jpg" alt="Ken Block Gymkhana Ten" class="media-item-image" style="width:100%;height:180px;object-fit:cover;border-radius:12px;">
+                                    <span style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);background:rgba(0,0,0,0.6);border-radius:50%;padding:12px;display:flex;align-items:center;justify-content:center;">
+                                        <svg width="36" height="36" viewBox="0 0 48 48" fill="white" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="24" r="24" fill="rgba(0,0,0,0.4)"/><polygon points="18,15 36,24 18,33" fill="white"/></svg>
+                                    </span>
+                                </a>
+                            </div>
+                            <div class="media-item-info" style="margin-top:12px;">
+                                <div class="media-item-eyebrow">Watch now</div>
+                                <h3 class="media-item-title">Ken Block</h3>
+                                <p class="media-item-subtitle">GYMKHANA TEN: Ultimate Tire Slaying Tour</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="media-carousel-item">
+                        <div class="media-item-content">
+                            <div style="position:relative;display:block;width:100%;max-width:480px;margin:0 auto;">
+                                <a href="https://www.youtube.com/watch?v=LuDN2bCIyus" target="_blank" rel="noopener">
+                                    <img src="https://img.youtube.com/vi/LuDN2bCIyus/hqdefault.jpg" alt="Ken Block Gymkhana Five" class="media-item-image" style="width:100%;height:180px;object-fit:cover;border-radius:12px;">
+                                    <span style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);background:rgba(0,0,0,0.6);border-radius:50%;padding:12px;display:flex;align-items:center;justify-content:center;">
+                                        <svg width="36" height="36" viewBox="0 0 48 48" fill="white" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="24" r="24" fill="rgba(0,0,0,0.4)"/><polygon points="18,15 36,24 18,33" fill="white"/></svg>
+                                    </span>
+                                </a>
+                            </div>
+                            <div class="media-item-info" style="margin-top:12px;">
+                                <div class="media-item-eyebrow">Watch now</div>
+                                <h3 class="media-item-title">Ken Block</h3>
+                                <p class="media-item-subtitle">GYMKHANA FIVE: San Francisco Streets</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="media-carousel-item">
+                        <div class="media-item-content">
+                            <div style="position:relative;display:block;width:100%;max-width:480px;margin:0 auto;">
+                                <a href="https://www.youtube.com/watch?v=4TshFWSsrn8" target="_blank" rel="noopener">
+                                    <img src="https://img.youtube.com/vi/4TshFWSsrn8/hqdefault.jpg" alt="Ken Block Gymkhana Six" class="media-item-image" style="width:100%;height:180px;object-fit:cover;border-radius:12px;">
+                                    <span style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);background:rgba(0,0,0,0.6);border-radius:50%;padding:12px;display:flex;align-items:center;justify-content:center;">
+                                        <svg width="36" height="36" viewBox="0 0 48 48" fill="white" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="24" r="24" fill="rgba(0,0,0,0.4)"/><polygon points="18,15 36,24 18,33" fill="white"/></svg>
+                                    </span>
+                                </a>
+                            </div>
+                            <div class="media-item-info" style="margin-top:12px;">
+                                <div class="media-item-eyebrow">Watch now</div>
+                                <h3 class="media-item-title">Ken Block</h3>
+                                <p class="media-item-subtitle">GYMKHANA SIX: Ultimate Gymkhana Grid</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="media-carousel-item">
+                        <div class="media-item-content">
+                            <div style="position:relative;display:block;width:100%;max-width:480px;margin:0 auto;">
+                                <a href="https://www.youtube.com/watch?v=R6A2r9p2jXA" target="_blank" rel="noopener">
+                                    <img src="https://img.youtube.com/vi/R6A2r9p2jXA/hqdefault.jpg" alt="Ken Block Gymkhana Seven" class="media-item-image" style="width:100%;height:180px;object-fit:cover;border-radius:12px;">
+                                    <span style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);background:rgba(0,0,0,0.6);border-radius:50%;padding:12px;display:flex;align-items:center;justify-content:center;">
+                                        <svg width="36" height="36" viewBox="0 0 48 48" fill="white" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="24" r="24" fill="rgba(0,0,0,0.4)"/><polygon points="18,15 36,24 18,33" fill="white"/></svg>
+                                    </span>
+                                </a>
+                            </div>
+                            <div class="media-item-info" style="margin-top:12px;">
+                                <div class="media-item-eyebrow">Watch now</div>
+                                <h3 class="media-item-title">Ken Block</h3>
+                                <p class="media-item-subtitle">GYMKHANA SEVEN: Wild in Los Angeles</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="media-carousel-item">
+                        <div class="media-item-content">
+                            <img src="https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?auto=format&fit=crop&w=600&q=80" alt="Track Day" class="media-item-image">
+                            <div class="media-item-info">
+                                <div class="media-item-eyebrow">Experience now</div>
+                                <h3 class="media-item-title">Track Day Prep</h3>
+                                <p class="media-item-subtitle">Everything you need for your first track experience.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="media-carousel-item">
+                        <div class="media-item-content">
+                            <img src="https://images.unsplash.com/photo-1552519507-da3b142c6e3d?auto=format&fit=crop&w=600&q=80" alt="Dyno Tuning" class="media-item-image">
+                            <div class="media-item-info">
+                                <div class="media-item-eyebrow">Watch now</div>
+                                <h3 class="media-item-title">Dyno Tuning Secrets</h3>
+                                <p class="media-item-subtitle">Inside look at professional ECU tuning process.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="media-carousel-item">
+                        <div class="media-item-content">
+                            <img src="https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&w=600&q=80" alt="Carbon Fiber" class="media-item-image">
+                            <div class="media-item-info">
+                                <div class="media-item-eyebrow">Discover now</div>
+                                <h3 class="media-item-title">Carbon Fiber Benefits</h3>
+                                <p class="media-item-subtitle">Why lightweight materials make all the difference.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="media-carousel-item">
+                        <div class="media-item-content">
+                            <img src="https://images.unsplash.com/photo-1606664515524-ed2f786a0bd6?auto=format&fit=crop&w=600&q=80" alt="Engine Build" class="media-item-image">
+                            <div class="media-item-info">
+                                <div class="media-item-eyebrow">Build now</div>
+                                <h3 class="media-item-title">Engine Build Series</h3>
+                                <p class="media-item-subtitle">Complete engine rebuild from start to finish.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="media-carousel-item">
+                        <div class="media-item-content">
+                            <img src="https://images.unsplash.com/photo-1583121274602-3e2820c69888?auto=format&fit=crop&w=600&q=80" alt="Maintenance Tips" class="media-item-image">
+                            <div class="media-item-info">
+                                <div class="media-item-eyebrow">Learn now</div>
+                                <h3 class="media-item-title">Performance Maintenance</h3>
+                                <p class="media-item-subtitle">Keep your build running at peak performance.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="media-carousel-controls">
+                    <button class="carousel-nav-btn carousel-prev" id="carouselPrev" aria-label="Previous items">‹</button>
+                    <button class="carousel-nav-btn carousel-next" id="carouselNext" aria-label="Next items">›</button>
+                </div>
+                
+                <div class="media-carousel-indicators">
+                    <div class="carousel-indicator active" data-slide="0"></div>
+                    <div class="carousel-indicator" data-slide="1"></div>
+                    <div class="carousel-indicator" data-slide="2"></div>
+                    <div class="carousel-indicator" data-slide="3"></div>
+                    <div class="carousel-indicator" data-slide="4"></div>
+                    <div class="carousel-indicator" data-slide="5"></div>
+                    <div class="carousel-indicator" data-slide="6"></div>
+                    <div class="carousel-indicator" data-slide="7"></div>
+                    <div class="carousel-indicator" data-slide="8"></div>
+                    <div class="carousel-indicator" data-slide="9"></div>
+                </div>
+            </div>
+        </div>
+   
+    <footer class="as-globalfooter">
+        <div class="as-globalfooter-content">
+            <!-- Shop and Learn -->
+            <div class="as-globalfooter-directory">
+                <div class="as-globalfooter-directory-column">
+                    <input class="as-globalfooter-directory-column-section-state" type="checkbox" id="as-globalfooter-directory-column-section-state-products">
+                    <div class="as-globalfooter-directory-column-section">
+                        <label class="as-globalfooter-directory-column-section-label" for="as-globalfooter-directory-column-section-state-products">
+                            <h3 class="as-globalfooter-directory-column-section-title">Site Map</h3>
+                        </label>
+                        <div class="as-globalfooter-directory-column-section-list">
+                            <ul>
+                                <li><a href="index.html">Home</a></li>
+                                <li><a href="cte-program.html">CTE Programs</a></li>
+                                <li><a href="google-classroom.html">Google Classroom</a></li>
+                                <li><a href="ford-ace.html">Ford ACE</a></li>
+                                <li><a href="mitchell-ondemand.html">Mitchell OnDemand</a></li>
+                                <li><a href="shop-vehicles.html">Shop Vehicles</a></li>
+                                <li><a href="forms.html">Forms</a></li>
+                                <li><a href="support.html">Support</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="as-globalfooter-directory-column">
+                    <input class="as-globalfooter-directory-column-section-state" type="checkbox" id="as-globalfooter-directory-column-section-state-services">
+                    <div class="as-globalfooter-directory-column-section">
+                        <label class="as-globalfooter-directory-column-section-label" for="as-globalfooter-directory-column-section-state-services">
+                            <h3 class="as-globalfooter-directory-column-section-title">Services</h3>
+                        </label>
+                        <div class="as-globalfooter-directory-column-section-list">
+                            <ul>
+                                <li><a href="#">Bulldog Garage+</a></li>
+                                <li><a href="#">Professional Installation</a></li>
+                                <li><a href="#">Custom Tuning</a></li>
+                                <li><a href="#">Performance Dyno</a></li>
+                                <li><a href="#">Race Prep</a></li>
+                                <li><a href="#">Track Support</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="as-globalfooter-directory-column">
+                    <input class="as-globalfooter-directory-column-section-state" type="checkbox" id="as-globalfooter-directory-column-section-state-account">
+                    <div class="as-globalfooter-directory-column-section">
+                        <label class="as-globalfooter-directory-column-section-label" for="as-globalfooter-directory-column-section-state-account">
+                            <h3 class="as-globalfooter-directory-column-section-title">Account</h3>
+                        </label>
+                        <div class="as-globalfooter-directory-column-section-list">
+                            <ul>
+                                <li><a href="#">Manage Your Bulldog ID</a></li>
+                                <li><a href="#">Bulldog Store Account</a></li>
+                                <li><a href="#">iCloud.com</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="as-globalfooter-directory-column">
+                    <input class="as-globalfooter-directory-column-section-state" type="checkbox" id="as-globalfooter-directory-column-section-state-bulldog">
+                    <div class="as-globalfooter-directory-column-section">
+                        <label class="as-globalfooter-directory-column-section-label" for="as-globalfooter-directory-column-section-state-bulldog">
+                            <h3 class="as-globalfooter-directory-column-section-title">Bulldog Garage</h3>
+                        </label>
+                        <div class="as-globalfooter-directory-column-section-list">
+                            <ul>
+                                <li><a href="club.html">Club Information</a></li>
+                                <li><a href="clubofficers.html">Officers</a></li>
+                                <li><a href="clubmeetings.html">Club Meetings</a></li>
+                                <li><a href="clubactivities.html">Club Activities</a></li>
+                                <li><a href="clubnews.html">Club News</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="as-globalfooter-directory-column">
+                    <input class="as-globalfooter-directory-column-section-state" type="checkbox" id="as-globalfooter-directory-column-section-state-values">
+                    <div class="as-globalfooter-directory-column-section">
+                        <label class="as-globalfooter-directory-column-section-label" for="as-globalfooter-directory-column-section-state-values">
+                            <h3 class="as-globalfooter-directory-column-section-title">HHS CTE Programs</h3>
+                        </label>
+                        <div class="as-globalfooter-directory-column-section-list">
+                            <ul>
+                                <li><a class="as-globalfooter-link" href="cte-anatomy-nursing.html">Anatomy/Nursing</a></li>
+                                <li><a class="as-globalfooter-link" href="cte-automotive.html">Automotive</a></li>
+                                <li><a class="as-globalfooter-link" href="cte-business-logistics.html">Business Logistics</a></li>
+                                <li><a class="as-globalfooter-link" href="cte-digital-media.html">Digital Media</a></li>
+                                <li><a class="as-globalfooter-link" href="cte-first-responder.html">First Responder</a></li>
+                                <li><a class="as-globalfooter-link" href="cte-sports-medicine.html">Sports Medicine</a></li>
+                                <li><a class="as-globalfooter-link" href="cte-theater-tech.html">Theater Tech</a></li>
+                            </ul>
                         </div>
                     </div>
                 </div>
             </div>
-        </section>
-    </main>
 
-    <footer class="footer">
-        <div class="footer-content">
-            <div class="footer-section">
-                <h3>Bulldog Garage</h3>
-                <p>Excellence in automotive education and career preparation.</p>
-            </div>
-            <div class="footer-section">
-                <h3>Quick Links</h3>
-                <ul>
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="news.html">News</a></li>
-                    <li><a href="club.html">Club</a></li>
-                    <li><a href="curriculum.html">Curriculum</a></li>
-                </ul>
-            </div>
-            <div class="footer-section">
-                <h3>Contact</h3>
-                <p>Hemet High School<br>Automotive Department</p>
-            </div>
-        </div>
-        
-        <div class="thomson-section">
-            <div class="rotating-cube">
-                <div class="cube">
-                    <div class="face front">T</div>
-                    <div class="face back">i</div>
-                    <div class="face right">T</div>
-                    <div class="face left">i</div>
-                    <div class="face top">T</div>
-                    <div class="face bottom">i</div>
+            <div class="as-globalfooter-mini">
+                <div class="as-globalfooter-mini-shop">
+                    Contact Mr. Thomson</a> at jthomson@hemetusd.org
                 </div>
-            </div>
-            <div class="thomson-text">
-                <strong>Thomson innovations</strong>
-            </div>
-        </div>
-        
-        <div class="as-globalfooter-mini-legal">
-            <div class="as-globalfooter-mini-legal-copyright"><b>Copyright © 2025 Bulldog Garage Inc. All rights reserved.</b></div>
-            <div class="as-globalfooter-mini-legal-links">
-                <a href="privacypolicy.html">Privacy Policy</a>
-                <a href="terms-of-service.html">Terms of Use</a>
-                <a href="https://www.hemetusd.org">HUSD</a>
-                <a href="legal.html">Legal</a>
+                <div class="as-globalfooter-mini-locale">
+                    <a href="#" class="as-globalfooter-mini-locale-link">
+                        <span class="as-globalfooter-mini-locale-flag">🇺🇸</span>United States
+                    </a>
+                </div>
+                <div class="as-globalfooter-mini-legal">
+                    <div class="as-globalfooter-mini-legal-copyright"><b>Copyright © 2025 Bulldog Garage Inc. All rights reserved.</b></div>
+                    <div class="as-globalfooter-mini-legal-links">
+                        <a href="privacypolicy.html">Privacy Policy</a>
+                        <a href="terms-of-service.html">Terms of Use</a>
+                        <a href="https://www.hemetusd.org">HUSD</a>
+                        <a href="legal.html">Legal</a>
+                    </div>
+                </div>
             </div>
         </div>
     </footer>
-
 <script src="js/script.js"></script>
-</body>
+    </body>
 </html>
+
