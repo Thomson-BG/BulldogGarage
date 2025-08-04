@@ -3,186 +3,266 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bulldog Garage - Automotive Excellence</title>
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="icon" type="image/svg+xml" href="images/Bulldog.svg">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>Bulldog Garage</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/svg+xml" href="bulldog.svg">
 </head>
-<body>
-    <header class="header">
-        <nav class="navbar">
-            <div class="nav-container">
-                <div class="logo">
-                    <img src="images/Bulldog.svg" alt="Bulldog Garage Logo" class="logo-img">
-                </div>
-                <ul class="nav-menu">
-                    <li class="nav-item">
-                        <a href="index.html" class="nav-link active">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="news.html" class="nav-link">News</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="club.html" class="nav-link">Club</a>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a href="curriculum.html" class="nav-link">Curriculum</a>
-                        <ul class="dropdown-menu">
-                            <li><a href="curriculum-year1.html">Year 1</a></li>
-                            <li><a href="curriculum-year2.html">Year 2</a></li>
-                            <li><a href="curriculum-year3.html">Year 3</a></li>
-                            <li><a href="curriculum-year4.html">Year 4</a></li>
-                        </ul>
-                    </li>
-                </ul>
-                <div class="hamburger">
-                    <span class="bar"></span>
-                    <span class="bar"></span>
-                    <span class="bar"></span>
-                </div>
-            </div>
-        </nav>
-    </header>
+<body style="background:#f7f7fa;">
+    <!-- Top Navigation -->
+    <nav class="globalnav" style="background:#fff;border-bottom:1px solid #eee;">
+        <div class="globalnav-content" style="max-width:1400px;margin:0 auto;">
+            <ul class="globalnav-list" style="display:flex;align-items:center;justify-content:flex-start;gap:16px;list-style:none;padding:0 24px;">
+                <li class="globalnav-item globalnav-item-apple" style="padding:0;">
+                    <a class="globalnav-link" href="index.html" aria-label="Bulldog Garage" style="display:flex;align-items:center;justify-content:center;padding:0;">
+                        <img src="bulldog.svg" alt="Bulldog Head Logo" style="height:44px;width:44px;display:block;object-fit:contain;" />
+                    </a>
+                </li>
+                <li class="globalnav-item"><a class="globalnav-link" href="cte-program.html">CTE Programs</a></li>
+                <li class="globalnav-item"><a class="globalnav-link" href="google-classroom.html">Google Classroom</a></li>
+                <li class="globalnav-item"><a class="globalnav-link" href="ford-ace.html">Ford ACE</a></li>
+                <li class="globalnav-item"><a class="globalnav-link" href="mitchell-ondemand.html">Mitchell OnDemand</a></li>
+                <li class="globalnav-item"><a class="globalnav-link" href="shop-vehicles.html">Shop Vehicles</a></li>
+                <li class="globalnav-item"><a class="globalnav-link" href="forms.html">Forms</a></li>
+                <li class="globalnav-item"><a class="globalnav-link" href="support.html">Support</a></li>
+                <li class="globalnav-item"><a class="globalnav-link" href="news.html">News</a></li>
+            </ul>
+        </div>
+    </nav>
 
-    <main class="main-content">
-        <section class="hero">
-            <div class="hero-overlay"></div>
-            <div class="hero-content">
-                <h1 class="hero-title">
-                    <span class="hero-subtitle">Welcome to</span>
-                    <span class="hero-main">Bulldog Garage</span>
-                </h1>
-                <p class="hero-description">
-                    Automotive Excellence Through Education<br>
-                    <span class="highlight">Career Technical Education at its finest</span>
-                </p>
-                <div class="hero-buttons">
-                    <a href="club.html" class="btn btn-primary">Join Our Club</a>
-                    <a href="curriculum.html" class="btn btn-secondary">View Curriculum</a>
+    <!-- Hero Section -->
+    <section style="padding:56px 0 32px 0;background:#f7f7fa;text-align:center;">
+        <div style="max-width:800px;margin:0 auto;">
+            <div style="color:#2196f3;font-weight:700;font-size:20px;margin-bottom:12px;">The ONLY Automotive Program In The Valley</div>
+            <h1 style="font-size:3rem;font-weight:800;margin:0 0 12px 0;">Professional Level Training</h1>
+            <div style="font-size:1.5rem;color:#757575;margin-bottom:28px;">The ultimate CTE program. Designed for beginners.</div>
+            <a href="professionaltraining.html" style="display:inline-block;background:#111;color:#fff;padding:16px 38px;font-size:1.25rem;border-radius:32px;font-weight:700;text-decoration:none;box-shadow:0 2px 14px 0 rgba(60,60,60,.10);margin-bottom:6px;">Learn more</a>
+            <div style="margin-top:10px;font-size:1rem;color:#af4be6;font-weight:700;">A 4 year program</div>
+        </div>
+    </section>
+
+    <!-- Ford ACE Program Info -->
+    <section style="background:#fff;padding:44px 0 44px 0;">
+        <div style="max-width:1100px;margin:0 auto;display:flex;flex-direction:column;align-items:center;">
+            <div style="font-size:1.35rem;font-weight:700;color:#222;margin-bottom:3px;text-align:center;">
+                The Same Training As Dealership Technicians
+            </div>
+            <div style="font-size:1.05rem;color:#5c5c5c;margin-bottom:24px;text-align:center;">
+                with the Ford Ace program
+            </div>
+            <div style="display:flex;flex-direction:row;align-items:center;justify-content:center;gap:48px;">
+                <img src="https://www.motorcraft.com/content/dam/ford-motorcraft/motorcraft/en_us/homepage/ace-program/Ford-Lincoln-ACE.jpg" alt="Ford ACE" style="width:180px;height:140px;object-fit:contain;background:#fff;border-radius:10px;box-shadow:0 2px 8px #0001;">
+                <img src="image2" alt="Ford ACE Tech" style="width:180px;height:220px;object-fit:cover;border-radius:12px;box-shadow:0 2px 10px #0001;">
+                <img src="https://www.motorcraft.com/content/dam/ford-motorcraft/motorcraft/en_us/homepage/ace-program/Ford-Lincoln-ACE.jpg" alt="Ford ACE" style="width:180px;height:140px;object-fit:contain;background:#fff;border-radius:10px;box-shadow:0 2px 8px #0001;">
+            </div>
+            <div style="margin-top:28px;color:#555;font-size:1.08rem;">
+                Get certified in various Ford technologies
+            </div>
+            <a href="ford-ace.html" style="margin-top:12px;display:inline-block;background:#111;color:#fff;padding:14px 36px;font-size:1.1rem;border-radius:28px;font-weight:700;text-decoration:none;box-shadow:0 2px 14px 0 rgba(60,60,60,.10);">Learn more about Ford ACE</a>
+        </div>
+    </section>
+
+    <!-- Field Trips Section -->
+    <section style="background:#101014;color:#fff;padding:64px 0 56px 0;text-align:center;">
+        <div style="max-width:720px;margin:0 auto;">
+            <div style="color:#44aaff;font-weight:700;font-size:1.15rem;margin-bottom:8px;">Interactive</div>
+            <h1 style="font-size:2.6rem;font-weight:800;margin-bottom:12px;">Field Trips</h1>
+            <div style="color:#b8e0ff;font-size:1.35rem;margin-bottom:34px;">Amazing adventures await.</div>
+            <a href="fieldtrips.html" style="display:inline-block;background:#111;color:#fff;padding:16px 38px;font-size:1.1rem;border-radius:32px;font-weight:700;text-decoration:none;box-shadow:0 2px 14px 0 rgba(60,60,60,.10);margin-bottom:14px;">Learn more</a>
+            <div style="margin-top:10px;font-size:1.02rem;color:#ccc;font-weight:400;">It doesn't get better than this...</div>
+        </div>
+    </section>
+
+    <!-- Product Cards Grid -->
+    <section style="padding:48px 0 0 0;">
+        <div style="max-width:1150px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:36px;">
+            <!-- Student Leadership -->
+            <div style="background:#232328;color:#fff;border-radius:24px;box-shadow:0 2px 8px #0001;padding:32px 32px 24px 32px;display:flex;flex-direction:column;align-items:flex-start;">
+                <img src="https://www.eastcentral.edu/community/wp-content/uploads/sites/78/2022/04/WHY-LEADERSHIP-IS-IMPORTANT-LEADERS-TRANSFORMATION.jpg" alt="Student Leadership" style="width:100%;max-width:520px;height:210px;object-fit:cover;border-radius:14px;margin-bottom:18px;">
+                <div style="font-size:1.02rem;font-weight:700;margin-bottom:3px;">Student Leadership</div>
+                <h3 style="font-size:2rem;font-weight:800;margin:0 0 7px 0;">Officers. Managers.</h3>
+                <div style="font-size:1.1rem;color:#d6d6d6;margin-bottom:12px;">Develop the skills needed to become a leader.</div>
+                <a href="#" style="background:#fff;color:#111;padding:12px 32px;font-size:1rem;border-radius:28px;font-weight:700;text-decoration:none;box-shadow:0 2px 12px 0 rgba(60,60,60,.08);">Learn more</a>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:36px;">
+                <div style="background:#e7e7ea;color:#232328;border-radius:24px;box-shadow:0 2px 8px #0001;padding:32px 32px 24px 32px;display:flex;flex-direction:column;align-items:flex-start;">
+                    <img src="https://media.istockphoto.com/id/1317553408/photo/technician-uses-multimeter-voltmeter-to-check-voltage-level-in-car-battery-service-and.jpg?s=612x612&w=0&k=20&c=7Fjns4DgPy4ox4uQERCwY5bQJFiIefZq6yfz__OZ7nQ=" alt="Electrical Diagnostics" style="width:100%;max-width:400px;height:160px;object-fit:cover;border-radius:12px;margin-bottom:14px;">
+                    <div style="font-size:1.02rem;font-weight:700;margin-bottom:3px;">Electrical Diagnostics</div>
+                    <h3 style="font-size:1.5rem;font-weight:800;margin:0 0 7px 0;">What controls it all.</h3>
+                    <div style="font-size:1.1rem;color:#353535;margin-bottom:12px;">Diagnose and repair electrical circuits.</div>
+                    <a href="#" style="background:#111;color:#fff;padding:12px 32px;font-size:1rem;border-radius:28px;font-weight:700;text-decoration:none;box-shadow:0 2px 12px 0 rgba(60,60,60,.08);">Learn more</a>
+                </div>
+                <div style="background:#e7e7ea;color:#232328;border-radius:24px;box-shadow:0 2px 8px #0001;padding:32px 32px 24px 32px;display:flex;flex-direction:column;align-items:flex-start;">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRUafsx7nB2Gf97t4Oq8x2z4eXYiLeAfKudow&s" alt="Brake Kit" style="width:100%;max-width:400px;height:160px;object-fit:cover;border-radius:12px;margin-bottom:14px;">
+                    <div style="font-size:1.02rem;font-weight:700;margin-bottom:3px;">Stopping Power</div>
+                    <h3 style="font-size:1.5rem;font-weight:800;margin:0 0 7px 0;">Stop with confidence.</h3>
+                    <div style="font-size:1.1rem;color:#353535;margin-bottom:12px;">The essentials to ensure you stop.</div>
+                    <a href="#" style="background:#111;color:#fff;padding:12px 32px;font-size:1rem;border-radius:28px;font-weight:700;text-decoration:none;box-shadow:0 2px 12px 0 rgba(60,60,60,.08);">Learn more</a>
                 </div>
             </div>
-            <div class="hero-graphics">
-                <div class="floating-element element-1"></div>
-                <div class="floating-element element-2"></div>
-                <div class="floating-element element-3"></div>
-            </div>
-        </section>
-
-        <section class="features">
-            <div class="container">
-                <h2 class="section-title">Why Choose Bulldog Garage?</h2>
-                <div class="features-grid">
-                    <div class="feature-card">
-                        <div class="feature-icon">
-                            <i class="fas fa-wrench"></i>
-                        </div>
-                        <h3>Hands-On Learning</h3>
-                        <p>Real-world automotive repair experience with industry-standard equipment and techniques.</p>
-                    </div>
-                    <div class="feature-card">
-                        <div class="feature-icon">
-                            <i class="fas fa-graduation-cap"></i>
-                        </div>
-                        <h3>4-Year Program</h3>
-                        <p>Comprehensive curriculum from basics to advanced automotive systems and technologies.</p>
-                    </div>
-                    <div class="feature-card">
-                        <div class="feature-icon">
-                            <i class="fas fa-users"></i>
-                        </div>
-                        <h3>Automotive Club</h3>
-                        <p>Join our passionate community of automotive enthusiasts and future professionals.</p>
-                    </div>
-                    <div class="feature-card">
-                        <div class="feature-icon">
-                            <i class="fas fa-trophy"></i>
-                        </div>
-                        <h3>Excellence</h3>
-                        <p>Award-winning program recognized for outstanding technical education and student success.</p>
-                    </div>
+            <div style="display:flex;flex-direction:column;gap:36px;">
+                <div style="background:#232328;color:#fff;border-radius:24px;box-shadow:0 2px 8px #0001;padding:32px 32px 24px 32px;display:flex;flex-direction:column;align-items:flex-start;">
+                    <img src="https://cdn-fastly.autoguide.com/media/2025/05/06/13111/media.jpg?size=720x845&nocrop=1" alt="Vehicle Maintenance" style="width:100%;max-width:400px;height:160px;object-fit:cover;border-radius:12px;margin-bottom:14px;">
+                    <div style="font-size:1.02rem;font-weight:700;margin-bottom:3px;">Vehicle Maintenance</div>
+                    <h3 style="font-size:1.5rem;font-weight:800;margin:0 0 7px 0;">Learn the basics.</h3>
+                    <div style="font-size:1.1rem;color:#d6d6d6;margin-bottom:12px;">Proper maintenance is the key to longevity.</div>
+                    <a href="#" style="background:#fff;color:#111;padding:12px 32px;font-size:1rem;border-radius:28px;font-weight:700;text-decoration:none;box-shadow:0 2px 12px 0 rgba(60,60,60,.08);">Learn more</a>
                 </div>
-            </div>
-        </section>
-
-        <section class="stats">
-            <div class="container">
-                <div class="stats-grid">
-                    <div class="stat-item">
-                        <div class="stat-number" data-target="500">0</div>
-                        <div class="stat-label">Students Trained</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-number" data-target="95">0</div>
-                        <div class="stat-label">Success Rate %</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-number" data-target="15">0</div>
-                        <div class="stat-label">Years of Excellence</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-number" data-target="50">0</div>
-                        <div class="stat-label">Industry Partners</div>
-                    </div>
+                <div style="background:#232328;color:#fff;border-radius:24px;box-shadow:0 2px 8px #0001;padding:32px 32px 24px 32px;display:flex;flex-direction:column;align-items:flex-start;">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQW2xpjadClbqwBGUOHEHLa1H8bXcgAnV3BTA&s" alt="Wheel and Tires" style="width:100%;max-width:400px;height:160px;object-fit:cover;border-radius:12px;margin-bottom:14px;">
+                    <div style="font-size:1.02rem;font-weight:700;margin-bottom:3px;">Wheel and Tires</div>
+                    <h3 style="font-size:1.5rem;font-weight:800;margin:0 0 7px 0;">Precision engineered.</h3>
+                    <div style="font-size:1.1rem;color:#d6d6d6;margin-bottom:12px;">Power to the road. Wheel and tire maintenance for safety and reliability.</div>
+                    <a href="#" style="background:#fff;color:#111;padding:12px 32px;font-size:1rem;border-radius:28px;font-weight:700;text-decoration:none;box-shadow:0 2px 12px 0 rgba(60,60,60,.08);">Learn more</a>
                 </div>
-            </div>
-        </section>
-
-        <section class="cta">
-            <div class="container">
-                <div class="cta-content">
-                    <h2>Ready to Start Your Automotive Journey?</h2>
-                    <p>Join the next generation of automotive professionals at Bulldog Garage</p>
-                    <a href="club.html" class="btn btn-primary">Get Started Today</a>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <footer class="footer">
-        <div class="footer-content">
-            <div class="footer-section">
-                <h3>Bulldog Garage</h3>
-                <p>Excellence in automotive education and career preparation.</p>
-            </div>
-            <div class="footer-section">
-                <h3>Quick Links</h3>
-                <ul>
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="news.html">News</a></li>
-                    <li><a href="club.html">Club</a></li>
-                    <li><a href="curriculum.html">Curriculum</a></li>
-                </ul>
-            </div>
-            <div class="footer-section">
-                <h3>Contact</h3>
-                <p>Hemet High School<br>Automotive Department</p>
             </div>
         </div>
-        
-        <div class="thomson-section">
-            <div class="rotating-cube">
-                <div class="cube">
-                    <div class="face front">T</div>
-                    <div class="face back">i</div>
-                    <div class="face right">T</div>
-                    <div class="face left">i</div>
-                    <div class="face top">T</div>
-                    <div class="face bottom">i</div>
+    </section>
+
+    <!-- Bulldog Services Cards -->
+    <section style="background:#f8faff;padding:56px 0 48px 0;">
+        <div style="max-width:1200px;margin:0 auto;">
+            <div style="text-align:center;color:#44aaff;font-size:1.35rem;font-weight:700;margin-bottom:24px;">
+                Bulldog Services
+            </div>
+            <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:32px;">
+                <div style="background:#fff;border-radius:18px;box-shadow:0 2px 8px #0001;padding:32px 24px;">
+                    <div style="color:#2196f3;font-size:.95rem;font-weight:700;margin-bottom:8px;">PROFESSIONAL TRAINING</div>
+                    <div style="font-size:1.15rem;font-weight:800;margin-bottom:6px;">Learn how the professionals diagnose and work on vehicles</div>
+                </div>
+                <div style="background:#fff;border-radius:18px;box-shadow:0 2px 8px #0001;padding:32px 24px;">
+                    <div style="color:#14b8a6;font-size:.95rem;font-weight:700;margin-bottom:8px;">CUSTOM TUNING</div>
+                    <div style="font-size:1.15rem;font-weight:800;margin-bottom:6px;">ECU mapping for your specific build</div>
+                </div>
+                <div style="background:#fff;border-radius:18px;box-shadow:0 2px 8px #0001;padding:32px 24px;">
+                    <div style="color:#ff9800;font-size:.95rem;font-weight:700;margin-bottom:8px;">PERFORMANCE DYNO</div>
+                    <div style="font-size:1.15rem;font-weight:800;margin-bottom:6px;">Precise power measurement and optimization</div>
                 </div>
             </div>
-            <div class="thomson-text">
-                <strong>Thomson innovations</strong>
-            </div>
         </div>
-        
-        <div class="footer-bottom">
-            <p>&copy; 2024 Bulldog Garage. All rights reserved.</p>
+    </section>
+
+    <!-- Footer (you can copy the same one from your Bulldog Garage.html for consistency) -->
+    <footer class="as-globalfooter">
+        <div class="as-globalfooter-content">
+            <div class="as-globalfooter-directory">
+                <div class="as-globalfooter-directory-column">
+                    <input class="as-globalfooter-directory-column-section-state" type="checkbox" id="as-globalfooter-directory-column-section-state-products">
+                    <div class="as-globalfooter-directory-column-section">
+                        <label class="as-globalfooter-directory-column-section-label" for="as-globalfooter-directory-column-section-state-products">
+                            <h3 class="as-globalfooter-directory-column-section-title">Site Map</h3>
+                        </label>
+                        <div class="as-globalfooter-directory-column-section-list">
+                            <ul>
+                                <li><a href="index.html">Home</a></li>
+                                <li><a href="cte-program.html">CTE Programs</a></li>
+                                <li><a href="google-classroom.html">Google Classroom</a></li>
+                                <li><a href="ford-ace.html">Ford ACE</a></li>
+                                <li><a href="mitchell-ondemand.html">Mitchell OnDemand</a></li>
+                                <li><a href="shop-vehicles.html">Shop Vehicles</a></li>
+                                <li><a href="forms.html">Forms</a></li>
+                                <li><a href="support.html">Support</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="as-globalfooter-directory-column">
+                    <input class="as-globalfooter-directory-column-section-state" type="checkbox" id="as-globalfooter-directory-column-section-state-services">
+                    <div class="as-globalfooter-directory-column-section">
+                        <label class="as-globalfooter-directory-column-section-label" for="as-globalfooter-directory-column-section-state-services">
+                            <h3 class="as-globalfooter-directory-column-section-title">Services</h3>
+                        </label>
+                        <div class="as-globalfooter-directory-column-section-list">
+                            <ul>
+                                <li><a href="#">Bulldog Garage+</a></li>
+                                <li><a href="#">Professional Installation</a></li>
+                                <li><a href="#">Custom Tuning</a></li>
+                                <li><a href="#">Performance Dyno</a></li>
+                                <li><a href="#">Race Prep</a></li>
+                                <li><a href="#">Track Support</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="as-globalfooter-directory-column">
+                    <input class="as-globalfooter-directory-column-section-state" type="checkbox" id="as-globalfooter-directory-column-section-state-account">
+                    <div class="as-globalfooter-directory-column-section">
+                        <label class="as-globalfooter-directory-column-section-label" for="as-globalfooter-directory-column-section-state-account">
+                            <h3 class="as-globalfooter-directory-column-section-title">Account</h3>
+                        </label>
+                        <div class="as-globalfooter-directory-column-section-list">
+                            <ul>
+                                <li><a href="#">Manage Your Bulldog ID</a></li>
+                                <li><a href="#">Bulldog Store Account</a></li>
+                                <li><a href="#">iCloud.com</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="as-globalfooter-directory-column">
+                    <input class="as-globalfooter-directory-column-section-state" type="checkbox" id="as-globalfooter-directory-column-section-state-bulldog">
+                    <div class="as-globalfooter-directory-column-section">
+                        <label class="as-globalfooter-directory-column-section-label" for="as-globalfooter-directory-column-section-state-bulldog">
+                            <h3 class="as-globalfooter-directory-column-section-title">Bulldog Garage</h3>
+                        </label>
+                        <div class="as-globalfooter-directory-column-section-list">
+                            <ul>
+                                <li><a href="#">Newsroom</a></li>
+                                <li><a href="#">Bulldog Leadership</a></li>
+                                <li><a href="#">Career Opportunities</a></li>
+                                <li><a href="#">Investors</a></li>
+                                <li><a href="#">Ethics & Compliance</a></li>
+                                <li><a href="#">Events</a></li>
+                                <li><a href="#">Contact Bulldog</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="as-globalfooter-directory-column">
+                    <input class="as-globalfooter-directory-column-section-state" type="checkbox" id="as-globalfooter-directory-column-section-state-values">
+                    <div class="as-globalfooter-directory-column-section">
+                        <label class="as-globalfooter-directory-column-section-label" for="as-globalfooter-directory-column-section-state-values">
+                            <h3 class="as-globalfooter-directory-column-section-title">HHS CTE Programs</h3>
+                        </label>
+                        <div class="as-globalfooter-directory-column-section-list">
+                            <ul>
+                                <li><a class="as-globalfooter-link" href="cte-anatomy-nursing.html">Anatomy/Nursing</a></li>
+                                <li><a class="as-globalfooter-link" href="index.html">Automotive</a></li>
+                                <li><a class="as-globalfooter-link" href="cte-business-logistics.html">Business Logistics</a></li>
+                                <li><a class="as-globalfooter-link" href="cte-digital-media.html">Digital Media</a></li>
+                                <li><a class="as-globalfooter-link" href="cte-first-responder.html">First Responder</a></li>
+                                <li><a class="as-globalfooter-link" href="cte-sports-medicine.html">Sports Medicine</a></li>
+                                <li><a class="as-globalfooter-link" href="cte-theater-tech.html">Theater Tech</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="as-globalfooter-mini">
+                <div class="as-globalfooter-mini-shop">
+                    Contact Mr. Thomson at jthomson@hemetusd.org
+                </div>
+                <div class="as-globalfooter-mini-locale">
+                    <a href="#" class="as-globalfooter-mini-locale-link">
+                        <span class="as-globalfooter-mini-locale-flag">🇺🇸</span>United States
+                    </a>
+                </div>
+                <div class="as-globalfooter-mini-legal">
+                    <div class="as-globalfooter-mini-legal-copyright">Copyright © 2025 Bulldog Garage Inc. All rights reserved.</div>
+                    <div class="as-globalfooter-mini-legal-links">
+                        <a href="privacypolicy.html">Privacy Policy</a>
+                        <a href="#">Terms of Use</a>
+                        <a href="#">HUSD</a>
+                        <a href="legal.html">Legal</a>
+                        <a href="#">Site Map</a>
+                    </div>
+                </div>
+            </div>
         </div>
     </footer>
-
-    <script src="js/script.js"></script>
 </body>
 </html>
