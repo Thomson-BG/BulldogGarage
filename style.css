@@ -202,8 +202,8 @@
 
 /* Glass-like effect for elevated buttons */
 .button.button-elevated {
-background: rgba(0,0,0,0.85);
-color: #fff;
+background: white;
+color: black;
     border-radius: 980px;
     padding: 0.7em 2em;
     font-size: 1.1em;

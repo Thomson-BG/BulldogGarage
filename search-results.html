@@ -54,5 +54,27 @@
         </section>
     </main>
 <script src="js/script.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const links = document.querySelectorAll('a[href]');
+    let legalLink = null;
+
+    for (let i = 0; i < links.length; i++) {
+      if (links[i].textContent.trim() === 'Legal') {
+        legalLink = links[i];
+        break;
+      }
+    }
+
+    if (legalLink) {
+      const parent = legalLink.parentNode;
+      const siteMapLink = Array.from(parent.children).find(child => child.textContent.trim() === 'Site Map');
+
+      if (siteMapLink) {
+        parent.removeChild(siteMapLink);
+      }
+    }
+  });
+</script>
 </body>
 </html>
