@@ -131,15 +131,22 @@
     </main>
     <footer class="as-globalfooter">
         <div class="as-globalfooter-content">
+            <!-- ...footer content copied from index.html... -->
+        </div>
+    </footer>
+    <script src="script.js"></script>
+    <!-- Apple-style Footer -->
+    <footer class="as-globalfooter">
+        <div class="as-globalfooter-content">
             <!-- Shop and Learn -->
             <div class="as-globalfooter-directory">
                 <div class="as-globalfooter-directory-column">
                     <input class="as-globalfooter-directory-column-section-state" type="checkbox" id="as-globalfooter-directory-column-section-state-products">
                     <div class="as-globalfooter-directory-column-section">
                         <label class="as-globalfooter-directory-column-section-label" for="as-globalfooter-directory-column-section-state-products">
-                            <h3 class="as-globalfooter-directory-column-section-title">Site Map</h3>
+                            <h3 class="as-globalfooter-directory-column-section-title"></h3>
                         </label>
-                        <div class="as-globalfooter-directory-column-section-list">
+                        <div class="as-globalfooter-directory-column-section-list" style="display:none;">
                             <ul>
                                 <li><a href="index.html">Home</a></li>
                                 <li><a href="cte-program.html">CTE Programs</a></li>
@@ -218,7 +225,7 @@
                         <div class="as-globalfooter-directory-column-section-list">
                             <ul>
                                 <li><a class="as-globalfooter-link" href="cte-anatomy-nursing.html">Anatomy/Nursing</a></li>
-                                <li><a class="as-globalfooter-link" href="cte-automotive.html">Automotive</a></li>
+                  <li><a class="as-globalfooter-link" href="index.html">Automotive</a></li>
                                 <li><a class="as-globalfooter-link" href="cte-business-logistics.html">Business Logistics</a></li>
                                 <li><a class="as-globalfooter-link" href="cte-digital-media.html">Digital Media</a></li>
                                 <li><a class="as-globalfooter-link" href="cte-first-responder.html">First Responder</a></li>
@@ -240,18 +247,243 @@
                     </a>
                 </div>
                 <div class="as-globalfooter-mini-legal">
-                    <div class="as-globalfooter-mini-legal-copyright"><b>Copyright © 2025 Bulldog Garage Inc. All rights reserved.</b></div>
+                    <div class="as-globalfooter-mini-legal-copyright">Copyright © 2025 Bulldog Garage Inc. All rights reserved.</div>
                     <div class="as-globalfooter-mini-legal-links">
                         <a href="privacypolicy.html">Privacy Policy</a>
-                        <a href="terms-of-service.html">Terms of Use</a>
-                        <a href="https://www.hemetusd.org">HUSD</a>
+                        <a href="#">Terms of Use</a>
+                        <a href="#">HUSD</a>
                         <a href="legal.html">Legal</a>
                     </div>
                 </div>
             </div>
         </div>
     </footer>
-<script src="js/script.js"></script>
-    </body>
-</html>
+
+    <!-- Vehicle Modal -->
+    <div id="vehicleModal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modalTitle">Vehicle Details</h2>
+                <span class="modal-close">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="modal-image-container">
+                    <img id="modalImage" src="" alt="" />
+                </div>
+                <div class="modal-specs">
+                    <h3>Specifications</h3>
+                    <div class="spec-grid">
+                        <div class="spec-item">
+                            <span class="spec-label">Year:</span>
+                            <span class="spec-value" id="specYear">-</span>
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-label">Make:</span>
+                            <span class="spec-value" id="specMake">-</span>
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-label">Model:</span>
+                            <span class="spec-value" id="specModel">-</span>
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-label">Engine:</span>
+                            <span class="spec-value" id="specEngine">-</span>
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-label">Transmission:</span>
+                            <span class="spec-value" id="specTransmission">-</span>
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-label">Type:</span>
+                            <span class="spec-value" id="specType">-</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Vehicle Modal Functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            // Modal elements - Check if they exist before using
+            const modal = document.getElementById('vehicleModal');
+            const modalClose = document.querySelector('.modal-close');
+            const modalTitle = document.getElementById('modalTitle');
+            const modalImage = document.getElementById('modalImage');
+            
+            // Spec elements
+            const specYear = document.getElementById('specYear');
+            const specMake = document.getElementById('specMake');
+            const specModel = document.getElementById('specModel');
+            const specEngine = document.getElementById('specEngine');
+            const specTransmission = document.getElementById('specTransmission');
+            const specType = document.getElementById('specType');
+
+            // Only proceed if modal elements exist
+            if (!modal || !modalTitle || !modalImage || !specYear || !specMake || !specModel || !specEngine || !specTransmission || !specType) {
+                console.error('Modal elements not found');
+                return;
+            }
+
+            // Parse vehicle data from HTML
+            function parseVehicleData() {
+                const vehicles = [];
+                const vehicleTiles = document.querySelectorAll('.vehicle-tile');
+                
+                vehicleTiles.forEach((tile, index) => {
+                    const img = tile.querySelector('img');
+                    const descElement = tile.querySelector('.vehicle-desc');
+                    
+                    if (!descElement) return;
+                    
+                    // Check if the tile has data-vehicle attribute
+                    const dataVehicle = tile.getAttribute('data-vehicle');
+                    if (dataVehicle) {
+                        try {
+                            const vehicleData = JSON.parse(dataVehicle);
+                            vehicles.push({
+                                id: index,
+                                name: vehicleData.name,
+                                year: vehicleData.year,
+                                make: vehicleData.make,
+                                model: vehicleData.model,
+                                engine: vehicleData.engine,
+                                transmission: vehicleData.transmission,
+                                type: vehicleData.type,
+                                image: img ? img.src : '',
+                                alt: img ? img.alt : ''
+                            });
+                        } catch (e) {
+                            console.error('Error parsing vehicle data:', e);
+                        }
+                    } else {
+                        // Fallback to text parsing
+                        const desc = descElement.textContent.trim();
+                        const lines = desc.split('\n').map(line => line.trim()).filter(line => line);
+                        const vehicleName = lines[0];
+                        const specs = lines[1] || '';
+                        
+                        // Extract vehicle information with better parsing
+                        let year = '', make = '', model = '';
+                        const yearMatch = vehicleName.match(/(\d{4})/);
+                        if (yearMatch) {
+                            year = yearMatch[1];
+                            const remaining = vehicleName.replace(year, '').trim();
+                            const parts = remaining.split(' ');
+                            make = parts[0] || '';
+                            model = parts.slice(1).join(' ') || '';
+                        }
+
+                        // Clean up engine and transmission parsing
+                        let engine = 'Not specified';
+                        let transmission = 'Not specified';
+                        
+                        if (specs) {
+                            const specParts = specs.split(',').map(part => part.trim());
+                            engine = specParts[0] || 'Not specified';
+                            
+                            const transMatch = specs.match(/(Manual|Automatic)(?:\s+Transmission)?/i);
+                            if (transMatch) {
+                                transmission = transMatch[1] + ' Transmission';
+                            }
+                        }
+
+                        // Determine vehicle type
+                        let type = 'Sedan';
+                        const modelLower = model.toLowerCase();
+                        if (modelLower.includes('f-') || modelLower.includes('silverado') || modelLower.includes('tacoma')) {
+                            type = 'Truck';
+                        } else if (modelLower.includes('crv') || modelLower.includes('vue') || modelLower.includes('equinox') || modelLower.includes('escalade') || modelLower.includes('aviator')) {
+                            type = 'SUV';
+                        }
+
+                        vehicles.push({
+                            id: index,
+                            name: vehicleName,
+                            year: year,
+                            make: make,
+                            model: model,
+                            engine: engine,
+                            transmission: transmission,
+                            type: type,
+                            image: img ? img.src : '',
+                            alt: img ? img.alt : ''
+                        });
+                    }
+
+                    // Make the image clickable
+                    const imgHolder = tile.querySelector('.vehicle-img-holder');
+                    if (imgHolder) {
+                        imgHolder.style.cursor = 'pointer';
+                        imgHolder.addEventListener('click', () => openModal(vehicles[index]));
+                    }
+                });
+
+                return vehicles;
+            }
+
+            // Open modal with vehicle data
+            function openModal(vehicle) {
+                if (!modal || !modalTitle || !modalImage) return;
+                
+                modalTitle.textContent = vehicle.name;
+                modalImage.src = vehicle.image;
+                modalImage.alt = vehicle.alt;
+                
+                if (specYear) specYear.textContent = vehicle.year;
+                if (specMake) specMake.textContent = vehicle.make;
+                if (specModel) specModel.textContent = vehicle.model;
+                if (specEngine) specEngine.textContent = vehicle.engine;
+                if (specTransmission) specTransmission.textContent = vehicle.transmission;
+                if (specType) specType.textContent = vehicle.type;
+                
+                modal.style.display = 'block';
+                document.body.style.overflow = 'hidden'; // Prevent background scrolling
+            }
+
+            // Close modal
+            function closeModal() {
+                if (!modal) return;
+                modal.style.display = 'none';
+                document.body.style.overflow = 'auto'; // Restore scrolling
+            }
+
+            // Event listeners
+            if (modalClose) {
+                modalClose.addEventListener('click', closeModal);
+            }
+            
+            // Close modal when clicking outside of it
+            if (modal) {
+                modal.addEventListener('click', function(e) {
+                    if (e.target === modal) {
+                        closeModal();
+                    }
+                });
+            }
+
+            // Close modal with Escape key
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && modal && modal.style.display === 'block') {
+                    closeModal();
+                }
+            });
+
+            // Initialize the vehicle parsing
+            parseVehicleData();
+        });
+    </script>
+   <div class="as-globalfooter-mini-legal">
+        <div class="as-globalfooter-mini-legal-copyright"><b>Copyright © 2025 Bulldog Garage Inc. All rights reserved.</b></div>
+        <div class="as-globalfooter-mini-legal-links">
+            <a href="privacypolicy.html">Privacy Policy</a>
+            <a href="terms-of-service.html">Terms of Use</a>
+            <a href="https://www.hemetusd.org">HUSD</a>
+            <a href="legal.html">Legal</a>
+        </div>
+    </div>
+    <script src="js/script.js"></script>
+    </footer>
+
 
