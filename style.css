@@ -1250,6 +1250,12 @@ footer {
     animation: slideUp 0.3s ease;
 }
 
+.modal-content {
+    /* existing styles ... */
+    max-height: 80vh;
+    overflow-y: auto;
+}
+
 .modal-header {
     background: linear-gradient(135deg, #1d1d1f, #2d2d2f);
     color: #fff;
