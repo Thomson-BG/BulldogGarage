@@ -123,18 +123,27 @@ document.addEventListener('DOMContentLoaded', function() {
     
     let currentSlide = 0;
     const itemsToShow = 3; // Number of items visible at once
-    const totalSlides = Math.max(0, items.length - itemsToShow + 1);
+    function getTotalSlides() {
+        return Math.max(1, items.length - itemsToShow + 1);
+    }
+    let totalSlides = getTotalSlides();
     let isTransitioning = false;
 
     function updateCarousel() {
         if (isTransitioning) return;
-        
         isTransitioning = true;
-        const itemWidth = items[0].offsetWidth + 20; // item width + margin
+        totalSlides = getTotalSlides();
+        // Clamp currentSlide to valid range
+        if (currentSlide > totalSlides - 1) currentSlide = totalSlides - 1;
+        if (currentSlide < 0) currentSlide = 0;
+        // Calculate the width of a single item (including margin if any)
+        const item = items[0];
+        if (!item) return;
+        const style = window.getComputedStyle(item);
+        const marginRight = parseInt(style.marginRight) || 0;
+        const itemWidth = item.offsetWidth + marginRight;
         const translateX = -currentSlide * itemWidth;
-        
         carousel.style.transform = `translateX(${translateX}px)`;
-        
         // Update indicators
         indicators.forEach((indicator, index) => {
             if (index === currentSlide) {
@@ -143,17 +152,16 @@ document.addEventListener('DOMContentLoaded', function() {
                 indicator.classList.remove('active');
             }
         });
-        
         // Update button states
         prevBtn.style.opacity = currentSlide === 0 ? '0.5' : '1';
         nextBtn.style.opacity = currentSlide >= totalSlides - 1 ? '0.5' : '1';
-        
         setTimeout(() => {
             isTransitioning = false;
         }, 600);
     }
 
     function nextSlide() {
+        totalSlides = getTotalSlides();
         if (currentSlide < totalSlides - 1) {
             currentSlide++;
             updateCarousel();
@@ -161,6 +169,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function prevSlide() {
+        totalSlides = getTotalSlides();
         if (currentSlide > 0) {
             currentSlide--;
             updateCarousel();
@@ -168,6 +177,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function goToSlide(slideIndex) {
+        totalSlides = getTotalSlides();
         if (slideIndex >= 0 && slideIndex < totalSlides) {
             currentSlide = slideIndex;
             updateCarousel();
@@ -322,9 +332,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 checkbox.checked = false;
             });
         }
-        
         // Update carousel on resize
         if (carousel) {
+            totalSlides = getTotalSlides();
             updateCarousel();
         }
     });
