@@ -49,7 +49,7 @@
     <section class="section-promo">
         <div class="promo-content">
             <div class="promo-header" style="display:flex;flex-direction:row;align-items:center;justify-content:center;text-align:center;width:100%;max-width:100%;gap:32px;">
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTTDzqNLRHsDipVJNvQvkAqxEZ80d2Sb09JCg&s" alt="Ford Logo" style="width:320px;height:320px;object-fit:contain;flex-shrink:0;margin-right:160px;">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTTDzqNLRHsDipVJNvQvkAqxEZ80d2Sb09JCg&s" alt="Ford Logo" style="width:320px;height:320px;object-fit:contain;flex-shrink:0;margin-right:40px;">
                 <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;max-width:480px;width:100%;">
                     <h2 class="promo-headline">The Same Training As Dealership Technicians</h2>
                     <div class="promo-subheading">with the Ford Ace program</div>
@@ -57,7 +57,7 @@
                     <div class="promo-cta">Get certified in various Ford technologies</div>
                     <a href="ford-ace.html" class="button button-elevated promo-btn">Learn more about Ford ACE</a>
                 </div>
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTTDzqNLRHsDipVJNvQvkAqxEZ80d2Sb09JCg&s" alt="Ford Logo" style="width:320px;height:320px;object-fit:contain;flex-shrink:0;margin-left:160px;">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTTDzqNLRHsDipVJNvQvkAqxEZ80d2Sb09JCg&s" alt="Ford Logo" style="width:320px;height:320px;object-fit:contain;flex-shrink:0;margin-left:40px;">
             </div>
         </div>
     </section>
@@ -367,7 +367,6 @@
             </div>
         </div>
    
-    !-- Apple-style Footer -->
     <footer class="as-globalfooter">
         <div class="as-globalfooter-content">
             <!-- Shop and Learn -->
@@ -401,10 +400,12 @@
                         </label>
                         <div class="as-globalfooter-directory-column-section-list">
                             <ul>
-                                <li><a href="#">Student Vehicles</a></li>
-                                <li><a href="#">Family Vehicles</a></li>
-                                <li><a href="#">Staff Vehicles</a></li>
-                                <li><a href="#">Community Vehicles</a></li>
+                                <li><a href="#">Bulldog Garage+</a></li>
+                                <li><a href="#">Professional Installation</a></li>
+                                <li><a href="#">Custom Tuning</a></li>
+                                <li><a href="#">Performance Dyno</a></li>
+                                <li><a href="#">Race Prep</a></li>
+                                <li><a href="#">Track Support</a></li>
                             </ul>
                         </div>
                     </div>
@@ -418,9 +419,9 @@
                         </label>
                         <div class="as-globalfooter-directory-column-section-list">
                             <ul>
-                                <li><a href="#">Google Classroom</a></li>
-                                <li><a href="#">Ford ACE Training</a></li>
-                                <li><a href="#">Student Email</a></li>
+                                <li><a href="#">Manage Your Bulldog ID</a></li>
+                                <li><a href="#">Bulldog Store Account</a></li>
+                                <li><a href="#">iCloud.com</a></li>
                             </ul>
                         </div>
                     </div>
@@ -434,11 +435,11 @@
                         </label>
                         <div class="as-globalfooter-directory-column-section-list">
                             <ul>
-                                <li><a href="aboutclub.html">About The Club</a></li>
+                                <li><a href="club.html">Club Information</a></li>
                                 <li><a href="clubofficers.html">Officers</a></li>
-                                <li><a href="clubnews.html">Club News</a></li>
-                                <li><a href="clubactivities.html">Club Activities</a></li>
                                 <li><a href="clubmeetings.html">Club Meetings</a></li>
+                                <li><a href="clubactivities.html">Club Activities</a></li>
+                                <li><a href="clubnews.html">Club News</a></li>
                             </ul>
                         </div>
                     </div>
@@ -467,7 +468,7 @@
 
             <div class="as-globalfooter-mini">
                 <div class="as-globalfooter-mini-shop">
-                    Contact Mr. Thomson at jthomson@hemetusd.org
+                    Contact Mr. Thomson</a> at jthomson@hemetusd.org
                 </div>
                 <div class="as-globalfooter-mini-locale">
                     <a href="#" class="as-globalfooter-mini-locale-link">
@@ -489,41 +490,4 @@
 <script src="js/script.js"></script>
     </body>
 </html>
-    <script>
-        // JavaScript for carousel functionality
-        document.addEventListener('DOMContentLoaded', function() {
-            const carousel = document.getElementById('mediaCarousel');
-            const prevButton = document.getElementById('carouselPrev');
-            const nextButton = document.getElementById('carouselNext');
-            const indicators = document.querySelectorAll('.carousel-indicator');
 
-            let currentIndex = 0;
-
-            function updateCarousel() {
-                const totalItems = carousel.children.length;
-                carousel.style.transform = `translateX(-${currentIndex * 100}%)`;
-                indicators.forEach((indicator, index) => {
-                    indicator.classList.toggle('active', index === currentIndex);
-                });
-            }
-
-            prevButton.addEventListener('click', () => {
-                currentIndex = (currentIndex > 0) ? currentIndex - 1 : carousel.children.length - 1;
-                updateCarousel();
-            });
-
-            nextButton.addEventListener('click', () => {
-                currentIndex = (currentIndex < carousel.children.length - 1) ? currentIndex + 1 : 0;
-                updateCarousel();
-            });
-
-            indicators.forEach((indicator, index) => {
-                indicator.addEventListener('click', () => {
-                    currentIndex = index;
-                    updateCarousel();
-                });
-            });
-
-            updateCarousel(); // Initial call to set the correct position
-        });
-    </script>
