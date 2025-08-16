@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard | Bulldog Garage</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/svg+xml" href="favicon.ico">
+    <style>
+        body {
+            margin: 0;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #f5f5f7;
+        }
+        
+        .admin-header {
+            background: #1a1a1a;
+            color: #fff;
+            padding: 20px 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .admin-header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .admin-title {
+            font-size: 24px;
+            font-weight: 700;
+            margin: 0;
+        }
+        
+        .admin-user {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+        
+        .logout-button {
+            background: #ff3b30;
+            color: #fff;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            text-decoration: none;
+            font-size: 14px;
+            transition: background 0.3s ease;
+        }
+        
+        .logout-button:hover {
+            background: #d32f2f;
+        }
+        
+        .dashboard-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+            margin-bottom: 40px;
+        }
+        
+        .dashboard-card {
+            background: #fff;
+            border-radius: 12px;
+            padding: 24px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s ease;
+        }
+        
+        .dashboard-card:hover {
+            transform: translateY(-2px);
+        }
+        
+        .card-title {
+            font-size: 20px;
+            font-weight: 600;
+            margin: 0 0 16px 0;
+            color: #1a1a1a;
+        }
+        
+        .stat-number {
+            font-size: 36px;
+            font-weight: 700;
+            color: #0071e3;
+            margin: 0 0 8px 0;
+        }
+        
+        .stat-label {
+            color: #666;
+            font-size: 14px;
+        }
+        
+        .content-management {
+            background: #fff;
+            border-radius: 12px;
+            padding: 24px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+        }
+        
+        .section-title {
+            font-size: 24px;
+            font-weight: 600;
+            margin: 0 0 24px 0;
+            color: #1a1a1a;
+        }
+        
+        .page-list {
+            display: grid;
+            gap: 16px;
+        }
+        
+        .page-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px;
+            background: #f5f5f7;
+            border-radius: 8px;
+            transition: background 0.3s ease;
+        }
+        
+        .page-item:hover {
+            background: #e8e8ea;
+        }
+        
+        .page-info h3 {
+            margin: 0 0 4px 0;
+            font-size: 16px;
+            font-weight: 600;
+        }
+        
+        .page-info p {
+            margin: 0;
+            color: #666;
+            font-size: 14px;
+        }
+        
+        .page-actions {
+            display: flex;
+            gap: 8px;
+        }
+        
+        .action-button {
+            background: #0071e3;
+            color: #fff;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 12px;
+            text-decoration: none;
+            transition: background 0.3s ease;
+        }
+        
+        .action-button:hover {
+            background: #0056b3;
+        }
+        
+        .action-button.edit {
+            background: #ff9500;
+        }
+        
+        .action-button.edit:hover {
+            background: #e6850e;
+        }
+        
+        .action-button.delete {
+            background: #ff3b30;
+        }
+        
+        .action-button.delete:hover {
+            background: #d32f2f;
+        }
+        
+        .quick-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+            margin-bottom: 32px;
+        }
+        
+        .stat-card {
+            background: linear-gradient(135deg, #0071e3, #0056b3);
+            color: #fff;
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+        }
+        
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(4px);
+        }
+        
+        .modal-content {
+            background: #fff;
+            margin: 10% auto;
+            padding: 32px;
+            border-radius: 16px;
+            width: 90%;
+            max-width: 600px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+        
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+        }
+        
+        .modal-title {
+            font-size: 24px;
+            font-weight: 600;
+            margin: 0;
+        }
+        
+        .close-button {
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: #666;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #1a1a1a;
+        }
+        
+        .form-input, .form-textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e5e5e7;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.3s ease;
+        }
+        
+        .form-input:focus, .form-textarea:focus {
+            outline: none;
+            border-color: #0071e3;
+        }
+        
+        .form-textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+        
+        .button-group {
+            display: flex;
+            gap: 12px;
+            justify-content: flex-end;
+        }
+        
+        .button {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+        
+        .button-primary {
+            background: #0071e3;
+            color: #fff;
+        }
+        
+        .button-primary:hover {
+            background: #0056b3;
+        }
+        
+        .button-secondary {
+            background: #e5e5e7;
+            color: #1a1a1a;
+        }
+        
+        .button-secondary:hover {
+            background: #d2d2d7;
+        }
+    </style>
+</head>
+<body>
+    <!-- Admin Header -->
+    <header class="admin-header">
+        <div class="admin-header-content">
+            <h1 class="admin-title">Bulldog Garage Admin Dashboard</h1>
+            <div class="admin-user">
+                <span id="adminUsername">Welcome, Admin</span>
+                <a href="#" class="logout-button" onclick="logout()">Logout</a>
+            </div>
+        </div>
+    </header>
+
+    <div class="dashboard-container">
+        <!-- Quick Stats -->
+        <div class="quick-stats">
+            <div class="stat-card">
+                <div class="stat-number" id="dailyViews">247</div>
+                <div class="stat-label">Daily Views</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="totalPages">45</div>
+                <div class="stat-label">Total Pages</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="activeUsers">89</div>
+                <div class="stat-label">Active Users</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="testSubmissions">156</div>
+                <div class="stat-label">Test Submissions</div>
+            </div>
+        </div>
+
+        <!-- Statistics Dashboard -->
+        <div class="dashboard-grid">
+            <div class="dashboard-card">
+                <h3 class="card-title">Most Accessed Pages</h3>
+                <div class="stat-list">
+                    <div style="margin-bottom: 12px;">
+                        <strong>1. tests.html</strong> - 89 views today
+                    </div>
+                    <div style="margin-bottom: 12px;">
+                        <strong>2. index.html</strong> - 67 views today
+                    </div>
+                    <div style="margin-bottom: 12px;">
+                        <strong>3. cte-program.html</strong> - 45 views today
+                    </div>
+                    <div style="margin-bottom: 12px;">
+                        <strong>4. tests-year1.html</strong> - 34 views today
+                    </div>
+                    <div>
+                        <strong>5. forms.html</strong> - 28 views today
+                    </div>
+                </div>
+            </div>
+
+            <div class="dashboard-card">
+                <h3 class="card-title">Recent Activity</h3>
+                <div class="activity-list">
+                    <div style="margin-bottom: 12px; font-size: 14px;">
+                        <strong>2 minutes ago:</strong> Student accessed Year 1 Module 3 test
+                    </div>
+                    <div style="margin-bottom: 12px; font-size: 14px;">
+                        <strong>5 minutes ago:</strong> New form submission received
+                    </div>
+                    <div style="margin-bottom: 12px; font-size: 14px;">
+                        <strong>12 minutes ago:</strong> Admin Thomson logged in
+                    </div>
+                    <div style="margin-bottom: 12px; font-size: 14px;">
+                        <strong>18 minutes ago:</strong> Page content updated
+                    </div>
+                    <div style="font-size: 14px;">
+                        <strong>25 minutes ago:</strong> Student completed Year 2 Module 5 test
+                    </div>
+                </div>
+            </div>
+
+            <div class="dashboard-card">
+                <h3 class="card-title">System Status</h3>
+                <div style="margin-bottom: 16px;">
+                    <div style="display: flex; align-items: center; margin-bottom: 8px;">
+                        <div style="width: 12px; height: 12px; background: #34c759; border-radius: 50%; margin-right: 8px;"></div>
+                        <span>Website Status: Online</span>
+                    </div>
+                    <div style="display: flex; align-items: center; margin-bottom: 8px;">
+                        <div style="width: 12px; height: 12px; background: #34c759; border-radius: 50%; margin-right: 8px;"></div>
+                        <span>Database: Connected</span>
+                    </div>
+                    <div style="display: flex; align-items: center;">
+                        <div style="width: 12px; height: 12px; background: #ff9500; border-radius: 50%; margin-right: 8px;"></div>
+                        <span>Backup: Scheduled</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Content Management -->
+        <div class="content-management">
+            <h2 class="section-title">Content Management</h2>
+            
+            <div class="page-list">
+                <div class="page-item">
+                    <div class="page-info">
+                        <h3>Home Page (index.html)</h3>
+                        <p>Main landing page with hero section and navigation</p>
+                    </div>
+                    <div class="page-actions">
+                        <button class="action-button" onclick="viewPage('index.html')">View</button>
+                        <button class="action-button edit" onclick="editPage('index.html')">Edit</button>
+                    </div>
+                </div>
+
+                <div class="page-item">
+                    <div class="page-info">
+                        <h3>Tests Main Page (tests.html)</h3>
+                        <p>Student testing portal with year-based options</p>
+                    </div>
+                    <div class="page-actions">
+                        <button class="action-button" onclick="viewPage('tests.html')">View</button>
+                        <button class="action-button edit" onclick="editPage('tests.html')">Edit</button>
+                    </div>
+                </div>
+
+                <div class="page-item">
+                    <div class="page-info">
+                        <h3>Year 1 Tests (tests-year1.html)</h3>
+                        <p>Foundation level tests with 11 collapsible modules</p>
+                    </div>
+                    <div class="page-actions">
+                        <button class="action-button" onclick="viewPage('tests-year1.html')">View</button>
+                        <button class="action-button edit" onclick="editPage('tests-year1.html')">Edit</button>
+                    </div>
+                </div>
+
+                <div class="page-item">
+                    <div class="page-info">
+                        <h3>Year 2 Tests (tests-year2.html)</h3>
+                        <p>Intermediate level tests with advanced diagnostics</p>
+                    </div>
+                    <div class="page-actions">
+                        <button class="action-button" onclick="viewPage('tests-year2.html')">View</button>
+                        <button class="action-button edit" onclick="editPage('tests-year2.html')">Edit</button>
+                    </div>
+                </div>
+
+                <div class="page-item">
+                    <div class="page-info">
+                        <h3>Year 3 & 4 Tests (tests-year3-4.html)</h3>
+                        <p>Advanced level tests with certification preparation</p>
+                    </div>
+                    <div class="page-actions">
+                        <button class="action-button" onclick="viewPage('tests-year3-4.html')">View</button>
+                        <button class="action-button edit" onclick="editPage('tests-year3-4.html')">Edit</button>
+                    </div>
+                </div>
+
+                <div class="page-item">
+                    <div class="page-info">
+                        <h3>CTE Programs (cte-program.html)</h3>
+                        <p>Career and Technical Education program information</p>
+                    </div>
+                    <div class="page-actions">
+                        <button class="action-button" onclick="viewPage('cte-program.html')">View</button>
+                        <button class="action-button edit" onclick="editPage('cte-program.html')">Edit</button>
+                    </div>
+                </div>
+
+                <div class="page-item">
+                    <div class="page-info">
+                        <h3>Forms (forms.html)</h3>
+                        <p>Student and parent resources and forms</p>
+                    </div>
+                    <div class="page-actions">
+                        <button class="action-button" onclick="viewPage('forms.html')">View</button>
+                        <button class="action-button edit" onclick="editPage('forms.html')">Edit</button>
+                        <button class="action-button delete" onclick="deletePage('forms.html')">Delete</button>
+                    </div>
+                </div>
+
+                <div class="page-item">
+                    <div class="page-info">
+                        <h3>Support (support.html)</h3>
+                        <p>Support and help resources for students</p>
+                    </div>
+                    <div class="page-actions">
+                        <button class="action-button" onclick="viewPage('support.html')">View</button>
+                        <button class="action-button edit" onclick="editPage('support.html')">Edit</button>
+                        <button class="action-button delete" onclick="deletePage('support.html')">Delete</button>
+                    </div>
+                </div>
+            </div>
+
+            <div style="margin-top: 24px;">
+                <button class="button button-primary" onclick="addNewPage()">Add New Page</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Edit Page Modal -->
+    <div id="editModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Edit Page Content</h3>
+                <button class="close-button" onclick="closeModal()">&times;</button>
+            </div>
+            <form id="editForm">
+                <div class="form-group">
+                    <label class="form-label" for="pageTitle">Page Title</label>
+                    <input type="text" id="pageTitle" class="form-input" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="pageDescription">Page Description</label>
+                    <input type="text" id="pageDescription" class="form-input" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="pageContent">Page Content</label>
+                    <textarea id="pageContent" class="form-textarea" placeholder="Enter HTML content or description..."></textarea>
+                </div>
+                <div class="button-group">
+                    <button type="button" class="button button-secondary" onclick="closeModal()">Cancel</button>
+                    <button type="submit" class="button button-primary">Save Changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Check admin authentication
+        function checkAuth() {
+            const isAuthenticated = sessionStorage.getItem('adminAuthenticated');
+            const username = sessionStorage.getItem('adminUsername');
+            
+            if (!isAuthenticated) {
+                window.location.href = 'admin-login.html';
+                return;
+            }
+            
+            // Update username display
+            document.getElementById('adminUsername').textContent = `Welcome, ${username}`;
+        }
+
+        // Initialize dashboard
+        function initDashboard() {
+            // Update stats with simulated real-time data
+            updateStats();
+            
+            // Update stats every 30 seconds
+            setInterval(updateStats, 30000);
+        }
+
+        // Update statistics
+        function updateStats() {
+            // Simulate real-time data updates
+            const dailyViews = Math.floor(Math.random() * 50) + 200;
+            const activeUsers = Math.floor(Math.random() * 30) + 70;
+            const testSubmissions = Math.floor(Math.random() * 20) + 140;
+            
+            document.getElementById('dailyViews').textContent = dailyViews;
+            document.getElementById('activeUsers').textContent = activeUsers;
+            document.getElementById('testSubmissions').textContent = testSubmissions;
+        }
+
+        // View page function
+        function viewPage(filename) {
+            window.open(filename, '_blank');
+        }
+
+        // Edit page function
+        function editPage(filename) {
+            // Populate modal with page data
+            document.getElementById('pageTitle').value = getPageTitle(filename);
+            document.getElementById('pageDescription').value = getPageDescription(filename);
+            document.getElementById('pageContent').value = `Editing content for ${filename}...`;
+            
+            // Show modal
+            document.getElementById('editModal').style.display = 'block';
+        }
+
+        // Delete page function
+        function deletePage(filename) {
+            if (confirm(`Are you sure you want to delete ${filename}? This action cannot be undone.`)) {
+                alert(`${filename} would be deleted. (Demo mode - no actual deletion)`);
+            }
+        }
+
+        // Add new page function
+        function addNewPage() {
+            // Clear modal
+            document.getElementById('pageTitle').value = '';
+            document.getElementById('pageDescription').value = '';
+            document.getElementById('pageContent').value = '';
+            
+            // Show modal
+            document.getElementById('editModal').style.display = 'block';
+        }
+
+        // Close modal
+        function closeModal() {
+            document.getElementById('editModal').style.display = 'none';
+        }
+
+        // Handle form submission
+        document.getElementById('editForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const title = document.getElementById('pageTitle').value;
+            const description = document.getElementById('pageDescription').value;
+            const content = document.getElementById('pageContent').value;
+            
+            alert(`Page saved successfully!\nTitle: ${title}\nDescription: ${description}\n(Demo mode - no actual changes made)`);
+            
+            closeModal();
+        });
+
+        // Helper functions
+        function getPageTitle(filename) {
+            const titles = {
+                'index.html': 'Bulldog Garage - Home',
+                'tests.html': 'Tests - Bulldog Garage',
+                'tests-year1.html': 'Year 1 Auto Tests - Bulldog Garage',
+                'tests-year2.html': 'Year 2 Auto Tests - Bulldog Garage',
+                'tests-year3-4.html': 'Year 3 & 4 Auto Tests - Bulldog Garage',
+                'cte-program.html': 'CTE Programs - Bulldog Garage',
+                'forms.html': 'Forms - Bulldog Garage',
+                'support.html': 'Support - Bulldog Garage'
+            };
+            return titles[filename] || filename;
+        }
+
+        function getPageDescription(filename) {
+            const descriptions = {
+                'index.html': 'Main landing page with hero section and navigation',
+                'tests.html': 'Student testing portal with year-based options',
+                'tests-year1.html': 'Foundation level tests with 11 collapsible modules',
+                'tests-year2.html': 'Intermediate level tests with advanced diagnostics',
+                'tests-year3-4.html': 'Advanced level tests with certification preparation',
+                'cte-program.html': 'Career and Technical Education program information',
+                'forms.html': 'Student and parent resources and forms',
+                'support.html': 'Support and help resources for students'
+            };
+            return descriptions[filename] || 'Page description';
+        }
+
+        // Logout function
+        function logout() {
+            if (confirm('Are you sure you want to logout?')) {
+                sessionStorage.removeItem('adminAuthenticated');
+                sessionStorage.removeItem('adminUsername');
+                sessionStorage.removeItem('adminLoginTime');
+                window.location.href = 'admin-login.html';
+            }
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const modal = document.getElementById('editModal');
+            if (event.target === modal) {
+                closeModal();
+            }
+        }
+
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            checkAuth();
+            initDashboard();
+        });
+    </script>
+</body>
+</html>

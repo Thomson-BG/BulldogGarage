@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login | Bulldog Garage</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/svg+xml" href="favicon.ico">
+    <style>
+        .login-container {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            padding: 20px;
+        }
+        
+        .login-box {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 16px;
+            padding: 48px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+        }
+        
+        .login-logo {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 24px;
+            display: block;
+        }
+        
+        .login-title {
+            font-size: 32px;
+            font-weight: 700;
+            color: #1a1a1a;
+            margin-bottom: 8px;
+        }
+        
+        .login-subtitle {
+            color: #666;
+            margin-bottom: 32px;
+            font-size: 16px;
+        }
+        
+        .form-group {
+            margin-bottom: 24px;
+            text-align: left;
+        }
+        
+        .form-label {
+            display: block;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+        
+        .form-input {
+            width: 100%;
+            padding: 16px;
+            border: 2px solid #e5e5e7;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.3s ease;
+            background: #fff;
+        }
+        
+        .form-input:focus {
+            outline: none;
+            border-color: #0071e3;
+            box-shadow: 0 0 0 3px rgba(0, 113, 227, 0.1);
+        }
+        
+        .login-button {
+            width: 100%;
+            background: #0071e3;
+            color: #fff;
+            border: none;
+            padding: 16px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s ease;
+            margin-bottom: 24px;
+        }
+        
+        .login-button:hover {
+            background: #0056b3;
+        }
+        
+        .login-button:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+        
+        .error-message {
+            background: #ff3b30;
+            color: #fff;
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 24px;
+            display: none;
+        }
+        
+        .back-link {
+            color: #0071e3;
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.3s ease;
+        }
+        
+        .back-link:hover {
+            color: #0056b3;
+        }
+        
+        body {
+            margin: 0;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <div class="login-box">
+            <img src="bulldog.svg" alt="Bulldog Garage" class="login-logo">
+            <h1 class="login-title">Admin Login</h1>
+            <p class="login-subtitle">Access the administrative dashboard</p>
+            
+            <div class="error-message" id="errorMessage">
+                Invalid username or password. Please try again.
+            </div>
+            
+            <form id="loginForm">
+                <div class="form-group">
+                    <label class="form-label" for="username">Username</label>
+                    <input type="text" id="username" class="form-input" required autocomplete="username">
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label" for="password">Password</label>
+                    <input type="password" id="password" class="form-input" required autocomplete="current-password">
+                </div>
+                
+                <button type="submit" class="login-button" id="loginButton">
+                    Sign In
+                </button>
+            </form>
+            
+            <a href="index.html" class="back-link">← Back to Home</a>
+        </div>
+    </div>
+
+    <script>
+        // Protected admin credentials
+        const adminCredentials = {
+            'admin': 'superadmin123',
+            'Thomson': 'Bulldog!1'
+        };
+
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            const errorMessage = document.getElementById('errorMessage');
+            const loginButton = document.getElementById('loginButton');
+            
+            // Show loading state
+            loginButton.textContent = 'Signing In...';
+            loginButton.disabled = true;
+            
+            // Simulate network delay for security
+            setTimeout(() => {
+                if (adminCredentials[username] && adminCredentials[username] === password) {
+                    // Set session storage for admin authentication
+                    sessionStorage.setItem('adminAuthenticated', 'true');
+                    sessionStorage.setItem('adminUsername', username);
+                    sessionStorage.setItem('adminLoginTime', Date.now());
+                    
+                    // Redirect to admin dashboard
+                    window.location.href = 'admin-dashboard.html';
+                } else {
+                    // Show error message
+                    errorMessage.style.display = 'block';
+                    loginButton.textContent = 'Sign In';
+                    loginButton.disabled = false;
+                    
+                    // Clear form
+                    document.getElementById('password').value = '';
+                    
+                    // Hide error after 5 seconds
+                    setTimeout(() => {
+                        errorMessage.style.display = 'none';
+                    }, 5000);
+                }
+            }, 1000);
+        });
+
+        // Clear any existing admin session on load
+        sessionStorage.removeItem('adminAuthenticated');
+        sessionStorage.removeItem('adminUsername');
+        sessionStorage.removeItem('adminLoginTime');
+
+        // Focus on username field
+        document.getElementById('username').focus();
+    </script>
+</body>
+</html>
