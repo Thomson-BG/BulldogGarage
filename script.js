@@ -362,5 +362,92 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
+    // Security and Protection Features
+    // Disable right-click context menu
+    document.addEventListener('contextmenu', function(e) {
+        e.preventDefault();
+        return false;
+    });
+
+    // Disable F12, Ctrl+Shift+I, Ctrl+Shift+J, Ctrl+U, Ctrl+Shift+C
+    document.addEventListener('keydown', function(e) {
+        // F12 key
+        if (e.keyCode === 123) {
+            e.preventDefault();
+            return false;
+        }
+        
+        // Ctrl+Shift+I (Developer Tools)
+        if (e.ctrlKey && e.shiftKey && e.keyCode === 73) {
+            e.preventDefault();
+            return false;
+        }
+        
+        // Ctrl+Shift+J (Console)
+        if (e.ctrlKey && e.shiftKey && e.keyCode === 74) {
+            e.preventDefault();
+            return false;
+        }
+        
+        // Ctrl+U (View Source)
+        if (e.ctrlKey && e.keyCode === 85) {
+            e.preventDefault();
+            return false;
+        }
+        
+        // Ctrl+Shift+C (Element Inspector)
+        if (e.ctrlKey && e.shiftKey && e.keyCode === 67) {
+            e.preventDefault();
+            return false;
+        }
+        
+        // Ctrl+S (Save Page)
+        if (e.ctrlKey && e.keyCode === 83) {
+            e.preventDefault();
+            return false;
+        }
+    });
+
+    // Disable drag and drop
+    document.addEventListener('dragstart', function(e) {
+        e.preventDefault();
+        return false;
+    });
+
+    // Disable text selection for sensitive areas
+    document.addEventListener('selectstart', function(e) {
+        if (e.target.classList.contains('no-select') || 
+            e.target.closest('.admin-content') || 
+            e.target.closest('.login-box')) {
+            e.preventDefault();
+            return false;
+        }
+    });
+
+    // Monitor for developer tools opening
+    let devtools = {
+        open: false,
+        orientation: null
+    };
+
+    setInterval(function() {
+        if (window.outerHeight - window.innerHeight > 200 || 
+            window.outerWidth - window.innerWidth > 200) {
+            if (!devtools.open) {
+                devtools.open = true;
+                // Optional: redirect or show warning
+                console.clear();
+                console.warn('Developer tools detected. This site contains protected content.');
+            }
+        } else {
+            devtools.open = false;
+        }
+    }, 500);
+
+    // Clear console periodically
+    setInterval(function() {
+        console.clear();
+    }, 1000);
+
     console.log('Bulldog Garage - Apple.com Clone with Carousel initialized');
 });
