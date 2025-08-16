@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Year 3 & 4 Auto Tests | Bulldog Garage</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/svg+xml" href="favicon.ico">
+    <style>
+        .modules-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        
+        .module-item {
+            background: #f5f5f7;
+            border-radius: 12px;
+            margin-bottom: 16px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .module-header {
+            background: #1a1a1a;
+            color: #fff;
+            padding: 20px 24px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background 0.3s ease;
+        }
+        
+        .module-header:hover {
+            background: #0071e3;
+        }
+        
+        .module-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin: 0;
+        }
+        
+        .module-toggle {
+            font-size: 24px;
+            transition: transform 0.3s ease;
+        }
+        
+        .module-content {
+            padding: 0 24px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease, padding 0.3s ease;
+        }
+        
+        .module-content.active {
+            max-height: 800px;
+            padding: 24px;
+        }
+        
+        .test-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .test-item {
+            background: #fff;
+            border: 1px solid #d2d2d7;
+            border-radius: 8px;
+            padding: 16px;
+            margin-bottom: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .test-name {
+            font-weight: 500;
+            color: #1a1a1a;
+        }
+        
+        .test-button {
+            background: #0071e3;
+            color: #fff;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            text-decoration: none;
+            font-size: 14px;
+            transition: background 0.2s ease;
+        }
+        
+        .test-button:hover {
+            background: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <!-- Apple-style Navigation -->
+    <nav class="globalnav">
+        <div class="globalnav-content">
+            <ul class="globalnav-list">
+                <li class="globalnav-item globalnav-item-apple">
+                    <a class="globalnav-link" href="index.html" aria-label="Bulldog Garage" style="display:flex;align-items:center;justify-content:center;padding:0;">
+                        <img src="bulldog.svg" alt="Bulldog Head Logo" style="height:55px;width:55px;display:block;object-fit:contain;" />
+                    </a>
+                </li>
+                <li class="globalnav-item"><a class="globalnav-link" href="cte-program.html">CTE Programs</a></li>
+                <li class="globalnav-item"><a class="globalnav-link" href="google-classroom.html">Google Classroom</a></li>
+                <li class="globalnav-item"><a class="globalnav-link" href="ford-ace.html">Ford ACE</a></li>
+                <li class="globalnav-item"><a class="globalnav-link" href="mitchell-ondemand.html">Mitchell OnDemand</a></li>
+                <li class="globalnav-item"><a class="globalnav-link" href="shop-vehicles.html">Shop Vehicles</a></li>
+                <li class="globalnav-item"><a class="globalnav-link" href="forms.html">Forms</a></li>
+                <li class="globalnav-item"><a class="globalnav-link" href="tests.html">Tests</a></li>
+                <li class="globalnav-item"><a class="globalnav-link" href="support.html">Support</a></li>
+                <li class="globalnav-item">
+                    <a class="globalnav-link" href="news.html">News</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="page-main">
+        <!-- Hero Section -->
+        <section class="section-hero" style="background: #000; color: #fff;">
+            <div class="section-content">
+                <div class="hero-eyebrow" style="color: #0071e3;">Year 3 & 4 Auto</div>
+                <h1 class="hero-headline">Advanced Level Tests</h1>
+                <p class="hero-copy">Academic tests covering professional-level diagnostics, advanced systems, and certification preparation.</p>
+                <div class="cta-links" style="margin-top: 20px;">
+                    <a href="tests.html" class="button button-elevated" style="background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.3);">← Back to Tests</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Modules Section -->
+        <section class="modules-container">
+            <!-- Module 0 -->
+            <div class="module-item">
+                <div class="module-header" onclick="toggleModule(0)">
+                    <h3 class="module-title">Module 0: Professional Standards and ASE Prep</h3>
+                    <span class="module-toggle">+</span>
+                </div>
+                <div class="module-content" id="module-0">
+                    <ul class="test-list">
+                        <li class="test-item">
+                            <span class="test-name">ASE A1 Engine Repair Practice Test</span>
+                            <a href="#" class="test-button">Take Test</a>
+                        </li>
+                        <li class="test-item">
+                            <span class="test-name">ASE A4 Suspension and Steering</span>
+                            <a href="#" class="test-button">Take Test</a>
+                        </li>
+                        <li class="test-item">
+                            <span class="test-name">ASE A5 Brakes Practice Test</span>
+                            <a href="#" class="test-button">Take Test</a>
+                        </li>
+                        <li class="test-item">
+                            <span class="test-name">Professional Ethics and Standards</span>
+                            <a href="#" class="test-button">Take Test</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Module 1 -->
+            <div class="module-item">
+                <div class="module-header" onclick="toggleModule(1)">
+                    <h3 class="module-title">Module 1: Computer Diagnostics</h3>
+                    <span class="module-toggle">+</span>
+                </div>
+                <div class="module-content" id="module-1">
+                    <ul class="test-list">
+                        <li class="test-item">
+                            <span class="test-name">Engine Control Module Diagnostics</span>
+                            <a href="#" class="test-button">Take Test</a>
+                        </li>
+                        <li class="test-item">
+                            <span class="test-name">Network Communication Systems</span>
+                            <a href="#" class="test-button">Take Test</a>
+                        </li>
+                        <li class="test-item">
+                            <span class="test-name">Advanced OBD-II Protocols</span>
+                            <a href="#" class="test-button">Take Test</a>
+                        </li>
+                        <li class="test-item">
+                            <span class="test-name">Module Programming and Updates</span>
+                            <a href="#" class="test-button">Take Test</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Module 2 -->
+            <div class="module-item">
+                <div class="module-header" onclick="toggleModule(2)">
+                    <h3 class="module-title">Module 2: Advanced Fuel Systems</h3>
+                    <span class="module-toggle">+</span>
+                </div>
+                <div class="module-content" id="module-2">
+                    <ul class="test-list">
+                        <li class="test-item">
+                            <span class="test-name">GDI System Diagnosis and Service</span>
+                            <a href="#" class="test-button">Take Test</a>
+                        </li>
+                        <li class="test-item">
+                            <span class="test-name">Turbocharger and Supercharger Systems</span>
+                            <a href="#" class="test-button">Take Test</a>
+                        </li>
+                        <li class="test-item">
+                            <span class="test-name">Variable Valve Timing Systems</span>
+                            <a href="#" class="test-button">Take Test</a>
+                        </li>
+                        <li class="test-item">
+                            <span class="test-name">Advanced Emissions Control</span>
+                            <a href="#" class="test-button">Take Test</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Module 3 -->
+            <div class="module-item">
+                <div class="module-header" onclick="toggleModule(3)">
+                    <h3 class="module-title">Module 3: Automatic Transmission Systems</h3>
+                    <span class="module-toggle">+</span>
+                </div>
+                <div class="module-content" id="module-3">
+                    <ul class="test-list">
+                        <li class="test-item">
+                            <span class="test-name">Hydraulic Control Systems</span>
+                            <a href="#" class="test-button">Take Test</a>
+                        </li>
+                        <li class="test-item">
+                            <span class="test-name">Electronic Transmission Controls</span>
+                            <a href="#" class="test-button">Take Test</a>
+                        </li>
+                        <li class="test-item">
+                            <span class="test-name">CVT System Diagnosis</span>
+                            <a href="#" class="test-button">Take Test</a>
+                        </li>
+                        <li class="test-item">
+                            <span class="test-name">Transmission Overhaul Procedures</span>
+                            <a href="#" class="test-button">Take Test</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Module 4 -->
+            <div class="module-item">
+                <div class="module-header" onclick="toggleModule(4)">
+                    <h3 class="module-title">Module 4: Advanced Air Conditioning</h3>
+                    <span class="module-toggle">+</span>
+                </div>
+                <div class="module-content" id="module-4">
+                    <ul class="test-list">
+                        <li class="test-item">
+                            <span class="test-name">Automatic Climate Control Systems</span>
+                            <a href="#" class="test-button">Take Test</a>
+                        </li>
+                        <li class="test-item">
+                            <span class="test-name">R-134a vs R-1234yf Systems</span>
+                            <a href="#" class="test-button">Take Test</a>
+                        </li>
+                        <li class="test-item">
+                            <span class="test-name">EPA Certification Requirements</span>
+                            <a href="#" class="test-button">Take Test</a>
+                        </li>
+                        <li class="test-item">
+                            <span class="test-name">Advanced A/C Diagnostics</span>
+                            <a href="#" class="test-button">Take Test</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Module 5 -->
+            <div class="module-item">
+                <div class="module-header" onclick="toggleModule(5)">
+                    <h3 class="module-title">Module 5: Advanced Electrical Systems</h3>
+                    <span class="module-toggle">+</span>
+                </div>
+                <div class="module-content" id="module-5">
+                    <ul class="test-list">
+                        <li class="test-item">
+                            <span class="test-name">Oscilloscope Usage and Waveform Analysis</span>
+                            <a href="#" class="test-button">Take Test</a>
+                        </li>
+                        <li class="test-item">
+                            <span class="test-name">CAN Bus Network Diagnostics</span>
+                            <a href="#" class="test-button">Take Test</a>
+                        </li>
+                        <li class="test-item">
+                            <span class="test-name">Body Control Module Systems</span>
+                            <a href="#" class="test-button">Take Test</a>
+                        </li>
+                        <li class="test-item">
+                            <span class="test-name">Advanced Lighting Systems</span>
+                            <a href="#" class="test-button">Take Test</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Module 6 -->
+            <div class="module-item">
+                <div class="module-header" onclick="toggleModule(6)">
+                    <h3 class="module-title">Module 6: Hybrid and Electric Vehicles</h3>
+                    <span class="module-toggle">+</span>
+                </div>
+                <div class="module-content" id="module-6">
+                    <ul class="test-list">
+                        <li class="test-item">
+                            <span class="test-name">High Voltage Safety Procedures</span>
+                            <a href="#" class="test-button">Take Test</a>
+                        </li>
+                        <li class="test-item">
+                            <span class="test-name">Hybrid Battery Systems</span>
+                            <a href="#" class="test-button">Take Test</a>
+                        </li>
+                        <li class="test-item">
+                            <span class="test-name">Electric Motor Diagnostics</span>
+                            <a href="#" class="test-button">Take Test</a>
+                        </li>
+                        <li class="test-item">
+                            <span class="test-name">Charging System Service</span>
+                            <a href="#" class="test-button">Take Test</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Module 7 -->
+            <div class="module-item">
+                <div class="module-header" onclick="toggleModule(7)">
+                    <h3 class="module-title">Module 7: Advanced Brake Systems</h3>
+                    <span class="module-toggle">+</span>
+                </div>
+                <div class="module-content" id="module-7">
+                    <ul class="test-list">
+                        <li class="test-item">
+                            <span class="test-name">Electronic Stability Control</span>
+                            <a href="#" class="test-button">Take Test</a>
+                        </li>
+                        <li class="test-item">
+                            <span class="test-name">Anti-lock Brake System Diagnosis</span>
+                            <a href="#" class="test-button">Take Test</a>
+                        </li>
+                        <li class="test-item">
+                            <span class="test-name">Brake Assist Systems</span>
+                            <a href="#" class="test-button">Take Test</a>
+                        </li>
+                        <li class="test-item">
+                            <span class="test-name">Electronic Parking Brake Service</span>
+                            <a href="#" class="test-button">Take Test</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Module 8 -->
+            <div class="module-item">
+                <div class="module-header" onclick="toggleModule(8)">
+                    <h3 class="module-title">Module 8: Advanced Driver Assistance Systems</h3>
+                    <span class="module-toggle">+</span>
+                </div>
+                <div class="module-content" id="module-8">
+                    <ul class="test-list">
+                        <li class="test-item">
+                            <span class="test-name">Adaptive Cruise Control Systems</span>
+                            <a href="#" class="test-button">Take Test</a>
+                        </li>
+                        <li class="test-item">
+                            <span class="test-name">Lane Departure Warning Systems</span>
+                            <a href="#" class="test-button">Take Test</a>
+                        </li>
+                        <li class="test-item">
+                            <span class="test-name">Collision Avoidance Systems</span>
+                            <a href="#" class="test-button">Take Test</a>
+                        </li>
+                        <li class="test-item">
+                            <span class="test-name">Camera and Radar Calibration</span>
+                            <a href="#" class="test-button">Take Test</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Module 9 -->
+            <div class="module-item">
+                <div class="module-header" onclick="toggleModule(9)">
+                    <h3 class="module-title">Module 9: Shop Management and Business</h3>
+                    <span class="module-toggle">+</span>
+                </div>
+                <div class="module-content" id="module-9">
+                    <ul class="test-list">
+                        <li class="test-item">
+                            <span class="test-name">Labor Time Calculations</span>
+                            <a href="#" class="test-button">Take Test</a>
+                        </li>
+                        <li class="test-item">
+                            <span class="test-name">Parts Pricing and Markup</span>
+                            <a href="#" class="test-button">Take Test</a>
+                        </li>
+                        <li class="test-item">
+                            <span class="test-name">Warranty Claims Processing</span>
+                            <a href="#" class="test-button">Take Test</a>
+                        </li>
+                        <li class="test-item">
+                            <span class="test-name">Shop Efficiency and Productivity</span>
+                            <a href="#" class="test-button">Take Test</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Module 10 -->
+            <div class="module-item">
+                <div class="module-header" onclick="toggleModule(10)">
+                    <h3 class="module-title">Module 10: Career Development and Portfolio</h3>
+                    <span class="module-toggle">+</span>
+                </div>
+                <div class="module-content" id="module-10">
+                    <ul class="test-list">
+                        <li class="test-item">
+                            <span class="test-name">Resume and Interview Skills</span>
+                            <a href="#" class="test-button">Take Test</a>
+                        </li>
+                        <li class="test-item">
+                            <span class="test-name">Portfolio Development</span>
+                            <a href="#" class="test-button">Take Test</a>
+                        </li>
+                        <li class="test-item">
+                            <span class="test-name">Continuing Education Planning</span>
+                            <a href="#" class="test-button">Take Test</a>
+                        </li>
+                        <li class="test-item">
+                            <span class="test-name">Industry Certification Pathways</span>
+                            <a href="#" class="test-button">Take Test</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Apple-style Footer -->
+    <footer class="as-globalfooter">
+        <div class="as-globalfooter-content">
+            <!-- Site Map -->
+            <div class="as-globalfooter-directory">
+                <div class="as-globalfooter-directory-column">
+                    <input class="as-globalfooter-directory-column-section-state" type="checkbox" id="as-globalfooter-directory-column-section-state-products">
+                    <div class="as-globalfooter-directory-column-section">
+                        <label class="as-globalfooter-directory-column-section-label" for="as-globalfooter-directory-column-section-state-products">
+                            <h3 class="as-globalfooter-directory-column-section-title">Site Map</h3>
+                        </label>
+                        <div class="as-globalfooter-directory-column-section-list">
+                            <ul>
+                                <li><a href="index.html">Home</a></li>
+                                <li><a href="cte-program.html">CTE Programs</a></li>
+                                <li><a href="google-classroom.html">Google Classroom</a></li>
+                                <li><a href="ford-ace.html">Ford ACE</a></li>
+                                <li><a href="mitchell-ondemand.html">Mitchell OnDemand</a></li>
+                                <li><a href="shop-vehicles.html">Shop Vehicles</a></li>
+                                <li><a href="forms.html">Forms</a></li>
+                                <li><a href="tests.html">Tests</a></li>
+                                <li><a href="support.html">Support</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="as-globalfooter-directory-column">
+                    <input class="as-globalfooter-directory-column-section-state" type="checkbox" id="as-globalfooter-directory-column-section-state-services">
+                    <div class="as-globalfooter-directory-column-section">
+                        <label class="as-globalfooter-directory-column-section-label" for="as-globalfooter-directory-column-section-state-services">
+                            <h3 class="as-globalfooter-directory-column-section-title">Services</h3>
+                        </label>
+                        <div class="as-globalfooter-directory-column-section-list">
+                            <ul>
+                                <li><a href="#">Student Vehicles</a></li>
+                                <li><a href="#">Family Vehicles</a></li>
+                                <li><a href="#">Staff Vehicles</a></li>
+                                <li><a href="#">Community Vehicles</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="as-globalfooter-directory-column">
+                    <input class="as-globalfooter-directory-column-section-state" type="checkbox" id="as-globalfooter-directory-column-section-state-account">
+                    <div class="as-globalfooter-directory-column-section">
+                        <label class="as-globalfooter-directory-column-section-label" for="as-globalfooter-directory-column-section-state-account">
+                            <h3 class="as-globalfooter-directory-column-section-title">Account</h3>
+                        </label>
+                        <div class="as-globalfooter-directory-column-section-list">
+                            <ul>
+                                <li><a href="#">Student Portal</a></li>
+                                <li><a href="#">Parent Portal</a></li>
+                                <li><a href="admin-login.html">Admin Login</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Thomson innovations logo -->
+        <div class="as-globalfooter-mini">
+            <div class="as-globalfooter-mini-locale">
+                <a href="#" class="as-globalfooter-mini-locale-link">United States</a>
+            </div>
+            <div class="as-globalfooter-mini-thomson">
+                <div class="thomson-logo">
+                    <div class="face top">T</div>
+                    <div class="face bottom">i</div>
+                </div>
+            </div>
+            <div class="thomson-text">
+                <strong>Thomson innovations</strong>
+            </div>
+        </div>
+        
+        <div class="as-globalfooter-mini-legal">
+            <div class="as-globalfooter-mini-legal-copyright"><b>Copyright © 2025 Bulldog Garage Inc. All rights reserved.</b></div>
+            <div class="as-globalfooter-mini-legal-links">
+                <a href="privacypolicy.html">Privacy Policy</a>
+                <a href="terms-of-service.html">Terms of Use</a>
+                <a href="https://www.hemetusd.org">HUSD</a>
+                <a href="legal.html">Legal</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        function toggleModule(moduleNum) {
+            const content = document.getElementById(`module-${moduleNum}`);
+            const toggle = content.previousElementSibling.querySelector('.module-toggle');
+            
+            if (content.classList.contains('active')) {
+                content.classList.remove('active');
+                toggle.textContent = '+';
+            } else {
+                content.classList.add('active');
+                toggle.textContent = '−';
+            }
+        }
+    </script>
+</body>
+</html>
