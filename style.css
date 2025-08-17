@@ -228,6 +228,12 @@ color: black;
 
 }
 
+/* Override scrolled state for tests.html buttons to ensure proper readability */
+.button.button-elevated.scrolled {
+    background: white !important;
+    color: black !important;
+}
+
 .cta-link:hover {
     color: #ffffff;
     text-decoration: underline;
