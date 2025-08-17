@@ -6,6 +6,8 @@
     <title>Year 2 Auto Tests | Bulldog Garage</title>
     <link rel="stylesheet" href="style.css">
     <link rel="icon" type="image/svg+xml" href="favicon.ico">
+    <script src="js/access-code-system.js"></script>
+    <script src="js/access-code-modal.js"></script>
     <style>
         .modules-container {
             max-width: 1200px;
@@ -583,6 +585,27 @@
                 toggle.textContent = '−';
             }
         }
+
+        // Function to launch test with access code validation
+        function launchTest(testName) {
+            showAccessCodeModal(testName, function() {
+                // This is where the test would actually launch
+                // For now, we'll show a success message
+                alert(`Access granted! Launching test: ${testName}\n\n(In a real implementation, this would redirect to the test platform)`);
+            });
+        }
+
+        // Update all test buttons to use access code validation
+        document.addEventListener('DOMContentLoaded', function() {
+            const testButtons = document.querySelectorAll('.test-button');
+            testButtons.forEach(button => {
+                const testName = button.parentElement.querySelector('.test-name').textContent;
+                button.onclick = function(e) {
+                    e.preventDefault();
+                    launchTest(testName);
+                };
+            });
+        });
     </script>
 </body>
 </html>
