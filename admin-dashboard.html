@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="style.css">
     <link rel="icon" type="image/svg+xml" href="favicon.ico">
     <script src="js/access-code-system.js"></script>
+    <script src="js/test-manager.js"></script>
     <style>
         body {
             margin: 0;
@@ -305,6 +306,144 @@
         .button-secondary:hover {
             background: #d2d2d7;
         }
+        
+        .test-management {
+            background: #fff;
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 24px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+        }
+        
+        .tests-list {
+            display: grid;
+            gap: 16px;
+        }
+        
+        .test-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px;
+            border: 1px solid #d2d2d7;
+            border-radius: 8px;
+            background: #fafafa;
+        }
+        
+        .test-info h4 {
+            margin: 0 0 4px 0;
+            font-size: 16px;
+            font-weight: 600;
+        }
+        
+        .test-info p {
+            margin: 0;
+            font-size: 14px;
+            color: #666;
+        }
+        
+        .test-actions {
+            display: flex;
+            gap: 8px;
+        }
+        
+        .test-actions button {
+            padding: 6px 12px;
+            font-size: 12px;
+        }
+        
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+        }
+        
+        .modal-content {
+            background: #fff;
+            margin: 5% auto;
+            padding: 0;
+            border-radius: 12px;
+            max-width: 600px;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+        
+        .modal-header {
+            padding: 20px 24px;
+            border-bottom: 1px solid #d2d2d7;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .modal-title {
+            margin: 0;
+            font-size: 20px;
+            font-weight: 600;
+        }
+        
+        .close-button {
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: #666;
+            padding: 0;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .modal-body {
+            padding: 24px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-label {
+            display: block;
+            margin-bottom: 6px;
+            font-weight: 600;
+            color: #1a1a1a;
+        }
+        
+        .form-input,
+        .form-select,
+        .form-textarea {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1px solid #d2d2d7;
+            border-radius: 6px;
+            font-size: 14px;
+            box-sizing: border-box;
+        }
+        
+        .form-textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+        
+        .button-group {
+            display: flex;
+            gap: 12px;
+            justify-content: flex-end;
+            margin-top: 24px;
+        }
+        
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: #666;
+        }
     </style>
 </head>
 <body>
@@ -351,8 +490,21 @@
                     <div style="font-size: 14px; color: #666; margin-bottom: 16px;">
                         Time remaining: <span id="codeTimeRemaining">00:00</span>
                     </div>
-                    <button onclick="refreshAccessCode()" class="button button-primary" style="background: #ff3b30; padding: 8px 16px; border-radius: 6px; border: none; color: white; cursor: pointer;">
+                    <div style="margin-bottom: 16px;">
+                        <label style="display: block; margin-bottom: 8px;">Visibility Duration (hours):</label>
+                        <input type="number" id="codeDuration" min="0.1" max="24" step="0.1" value="1" style="width: 80px; text-align: center;">
+                    </div>
+                    <div style="margin-bottom: 16px;">
+                        <label style="display: flex; align-items: center; justify-content: center; gap: 8px;">
+                            <input type="checkbox" id="codeVisible" onchange="toggleCodeVisibility()">
+                            <span>Make code visible to students</span>
+                        </label>
+                    </div>
+                    <button onclick="refreshAccessCode()" class="button button-primary" style="background: #ff3b30; padding: 8px 16px; border-radius: 6px; border: none; color: white; cursor: pointer; margin-right: 8px;">
                         Refresh Code
+                    </button>
+                    <button onclick="updateCodeSettings()" class="button button-primary" style="background: #0071e3; padding: 8px 16px; border-radius: 6px; border: none; color: white; cursor: pointer;">
+                        Update Settings
                     </button>
                 </div>
             </div>
@@ -415,6 +567,23 @@
                         <span>Backup: Scheduled</span>
                     </div>
                 </div>
+            </div>
+        </div>
+
+        <!-- Test Management Section -->
+        <div class="test-management">
+            <h2 class="section-title">Test Management</h2>
+            
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                <div>
+                    <button onclick="showCreateTestModal()" class="action-button" style="background: #0071e3; color: white;">Create New Test</button>
+                    <button onclick="showUploadModal()" class="action-button" style="margin-left: 10px;">Upload from XLSX</button>
+                    <button onclick="showFormatInstructions()" class="action-button" style="margin-left: 10px;">Format Instructions</button>
+                </div>
+            </div>
+            
+            <div id="testsContainer" class="tests-list">
+                <div class="loading">Loading tests...</div>
             </div>
         </div>
 
@@ -571,6 +740,9 @@
             // Initialize access code system
             initAccessCodeSystem();
             
+            // Initialize test manager
+            initTestManager();
+            
             // Update stats every 30 seconds
             setInterval(updateStats, 30000);
             
@@ -693,14 +865,21 @@
         document.addEventListener('DOMContentLoaded', function() {
             checkAuth();
             initDashboard();
+            loadTests();
         });
 
         // Access Code System Functions
         let accessCodeSystem;
+        let testManager;
 
         function initAccessCodeSystem() {
             accessCodeSystem = new AccessCodeSystem();
             updateAccessCodeDisplay();
+            updateCodeVisibilityDisplay();
+        }
+
+        function initTestManager() {
+            testManager = new TestManager();
         }
 
         function updateAccessCodeDisplay() {
@@ -713,15 +892,256 @@
             document.getElementById('codeTimeRemaining').textContent = timeRemaining;
         }
 
+        function updateCodeVisibilityDisplay() {
+            if (!accessCodeSystem) return;
+            
+            const isVisible = accessCodeSystem.isCodeVisible();
+            const duration = accessCodeSystem.getCodeDuration();
+            
+            document.getElementById('codeVisible').checked = isVisible;
+            document.getElementById('codeDuration').value = duration;
+        }
+
+        function toggleCodeVisibility() {
+            if (!accessCodeSystem) return;
+            
+            const isVisible = document.getElementById('codeVisible').checked;
+            accessCodeSystem.setCodeVisibility(isVisible);
+            
+            if (isVisible) {
+                const duration = parseFloat(document.getElementById('codeDuration').value);
+                accessCodeSystem.makeCodeVisible(duration);
+                alert(`Access code is now visible to students for ${duration} hour(s).`);
+            } else {
+                alert('Access code is now hidden from students.');
+            }
+        }
+
+        function updateCodeSettings() {
+            if (!accessCodeSystem) return;
+            
+            const duration = parseFloat(document.getElementById('codeDuration').value);
+            const isVisible = document.getElementById('codeVisible').checked;
+            
+            accessCodeSystem.setCodeDuration(duration);
+            
+            if (isVisible) {
+                accessCodeSystem.makeCodeVisible(duration);
+                alert(`Settings updated. Code visible for ${duration} hour(s).`);
+            } else {
+                alert('Settings updated.');
+            }
+        }
+
         function refreshAccessCode() {
             if (!accessCodeSystem) return;
             
             const newCode = accessCodeSystem.forceRefreshCode();
             updateAccessCodeDisplay();
             
-            // Show confirmation
-            alert(`New access code generated: ${newCode}\nThis code will be valid for 1 hour.`);
+            const duration = accessCodeSystem.getCodeDuration();
+            alert(`New access code generated: ${newCode}\nThis code will be valid for ${duration} hour(s).`);
         }
+
+        // Test Management Functions
+        function loadTests() {
+            if (!testManager) {
+                testManager = new TestManager();
+            }
+            
+            const tests = testManager.getTests();
+            const container = document.getElementById('testsContainer');
+            
+            if (tests.length === 0) {
+                container.innerHTML = '<div class="loading">No tests found. Create your first test!</div>';
+                return;
+            }
+            
+            let testsHTML = '';
+            tests.forEach(test => {
+                testsHTML += `
+                    <div class="test-item">
+                        <div class="test-info">
+                            <h4>${test.name}</h4>
+                            <p>${test.description} - ${test.module}, Year ${test.year} (${test.questions.length} questions)</p>
+                        </div>
+                        <div class="test-actions">
+                            <button class="action-button" onclick="editTest('${test.id}')">Edit</button>
+                            <button class="action-button" onclick="manageQuestions('${test.id}')">Questions</button>
+                            <button class="action-button" onclick="duplicateTest('${test.id}')">Duplicate</button>
+                            <button class="action-button" onclick="deleteTest('${test.id}')" style="background: #ff3b30; color: white;">Delete</button>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            container.innerHTML = testsHTML;
+        }
+
+        function showCreateTestModal() {
+            const modalHTML = `
+                <div id="testModal" class="modal" style="display: block;">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h3 class="modal-title">Create New Test</h3>
+                            <button class="close-button" onclick="closeTestModal()">&times;</button>
+                        </div>
+                        <div class="modal-body">
+                            <form id="testForm" onsubmit="saveTest(event)">
+                                <div class="form-group">
+                                    <label class="form-label" for="testName">Test Name</label>
+                                    <input type="text" id="testName" class="form-input" required>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label class="form-label" for="testDescription">Description</label>
+                                    <textarea id="testDescription" class="form-textarea"></textarea>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label class="form-label" for="testModule">Module</label>
+                                    <input type="text" id="testModule" class="form-input" placeholder="e.g., Module 1" required>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label class="form-label" for="testYear">Year</label>
+                                    <select id="testYear" class="form-select" required>
+                                        <option value="1">Year 1</option>
+                                        <option value="2">Year 2</option>
+                                        <option value="3">Year 3</option>
+                                        <option value="4">Year 4</option>
+                                    </select>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label class="form-label" for="testTimeLimit">Time Limit (minutes)</label>
+                                    <input type="number" id="testTimeLimit" class="form-input" value="30" min="5" max="180">
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label class="form-label" for="testPassingScore">Passing Score (%)</label>
+                                    <input type="number" id="testPassingScore" class="form-input" value="70" min="50" max="100">
+                                </div>
+                                
+                                <div class="button-group">
+                                    <button type="button" class="button button-secondary" onclick="closeTestModal()">Cancel</button>
+                                    <button type="submit" class="button button-primary">Create Test</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            document.body.insertAdjacentHTML('beforeend', modalHTML);
+        }
+
+        function saveTest(event) {
+            event.preventDefault();
+            
+            const testData = {
+                name: document.getElementById('testName').value,
+                description: document.getElementById('testDescription').value,
+                module: document.getElementById('testModule').value,
+                year: parseInt(document.getElementById('testYear').value),
+                timeLimit: parseInt(document.getElementById('testTimeLimit').value),
+                passingScore: parseInt(document.getElementById('testPassingScore').value)
+            };
+            
+            if (currentEditingTestId) {
+                testManager.updateTest(currentEditingTestId, testData);
+                currentEditingTestId = null;
+            } else {
+                testManager.createTest(testData);
+            }
+            
+            closeTestModal();
+            loadTests();
+            alert('Test saved successfully!');
+        }
+
+        function editTest(testId) {
+            const test = testManager.getTest(testId);
+            if (!test) return;
+            
+            currentEditingTestId = testId;
+            showCreateTestModal();
+            
+            // Fill form with existing data
+            setTimeout(() => {
+                document.getElementById('testName').value = test.name;
+                document.getElementById('testDescription').value = test.description;
+                document.getElementById('testModule').value = test.module;
+                document.getElementById('testYear').value = test.year;
+                document.getElementById('testTimeLimit').value = test.timeLimit;
+                document.getElementById('testPassingScore').value = test.passingScore;
+                
+                document.querySelector('.modal-title').textContent = 'Edit Test';
+                document.querySelector('button[type="submit"]').textContent = 'Update Test';
+            }, 100);
+        }
+
+        function deleteTest(testId) {
+            const test = testManager.getTest(testId);
+            if (!test) return;
+            
+            if (confirm(`Are you sure you want to delete "${test.name}"? This action cannot be undone.`)) {
+                testManager.deleteTest(testId);
+                loadTests();
+                alert('Test deleted successfully.');
+            }
+        }
+
+        function duplicateTest(testId) {
+            const test = testManager.getTest(testId);
+            if (!test) return;
+            
+            const duplicatedTest = {
+                ...test,
+                name: test.name + ' (Copy)',
+                questions: [...test.questions]
+            };
+            
+            testManager.createTest(duplicatedTest);
+            loadTests();
+            alert('Test duplicated successfully!');
+        }
+
+        function closeTestModal() {
+            const modal = document.getElementById('testModal');
+            if (modal) {
+                modal.remove();
+            }
+            currentEditingTestId = null;
+        }
+
+        function showUploadModal() {
+            alert('XLSX upload functionality requires a file processing library. Please use the manual test creation for now, or see format instructions.');
+            showFormatInstructions();
+        }
+
+        function showFormatInstructions() {
+            if (!testManager) {
+                testManager = new TestManager();
+            }
+            
+            const instructions = testManager.getXLSXFormatInstructions();
+            
+            let instructionsText = instructions.format + '\n\n';
+            instructionsText += 'Columns:\n';
+            instructions.columns.forEach(col => {
+                instructionsText += '• ' + col + '\n';
+            });
+            instructionsText += '\nExample:\n' + instructions.example;
+            instructionsText += '\n\nNotes:\n';
+            instructions.notes.forEach(note => {
+                instructionsText += '• ' + note + '\n';
+            });
+            
+            alert(instructionsText);
+        }
+
+        let currentEditingTestId = null;
     </script>
 </body>
 </html>
