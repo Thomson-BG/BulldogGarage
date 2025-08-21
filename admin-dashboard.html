@@ -1141,6 +1141,196 @@
             alert(instructionsText);
         }
 
+        function manageQuestions(testId) {
+            const test = testManager.getTest(testId);
+            if (!test) return;
+            
+            const modalHTML = `
+                <div id="questionsModal" class="modal" style="display: block;">
+                    <div class="modal-content" style="max-width: 800px;">
+                        <div class="modal-header">
+                            <h3 class="modal-title">Manage Questions: ${test.name}</h3>
+                            <button class="close-button" onclick="closeQuestionsModal()">&times;</button>
+                        </div>
+                        <div class="modal-body">
+                            <div style="margin-bottom: 20px;">
+                                <button onclick="showAddQuestionForm()" class="button button-primary">Add New Question</button>
+                            </div>
+                            
+                            <div id="questionsList">
+                                ${renderQuestionsList(test.questions)}
+                            </div>
+                            
+                            <div id="addQuestionForm" style="display: none;">
+                                <h4>Add New Question</h4>
+                                <form onsubmit="saveQuestion(event, '${testId}')">
+                                    <div class="form-group">
+                                        <label class="form-label">Question Text</label>
+                                        <textarea id="questionText" class="form-textarea" required></textarea>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label class="form-label">Question Type</label>
+                                        <select id="questionType" class="form-select" onchange="updateQuestionForm()">
+                                            <option value="multiple-choice">Multiple Choice</option>
+                                            <option value="true-false">True/False</option>
+                                            <option value="short-answer">Short Answer</option>
+                                        </select>
+                                    </div>
+                                    
+                                    <div id="optionsContainer">
+                                        <div class="form-group">
+                                            <label class="form-label">Option A</label>
+                                            <input type="text" id="optionA" class="form-input">
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="form-label">Option B</label>
+                                            <input type="text" id="optionB" class="form-input">
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="form-label">Option C</label>
+                                            <input type="text" id="optionC" class="form-input">
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="form-label">Option D</label>
+                                            <input type="text" id="optionD" class="form-input">
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label class="form-label">Correct Answer</label>
+                                        <input type="text" id="correctAnswer" class="form-input" placeholder="A, B, C, D for multiple choice; True/False; or exact text" required>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label class="form-label">Explanation (Optional)</label>
+                                        <textarea id="explanation" class="form-textarea"></textarea>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label class="form-label">Points</label>
+                                        <input type="number" id="points" class="form-input" value="1" min="1" max="10">
+                                    </div>
+                                    
+                                    <div class="button-group">
+                                        <button type="button" class="button button-secondary" onclick="hideAddQuestionForm()">Cancel</button>
+                                        <button type="submit" class="button button-primary">Add Question</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            document.body.insertAdjacentHTML('beforeend', modalHTML);
+            currentEditingTestId = testId;
+        }
+
+        function renderQuestionsList(questions) {
+            if (!questions || questions.length === 0) {
+                return '<p>No questions added yet. Click "Add New Question" to get started.</p>';
+            }
+            
+            return questions.map((q, index) => `
+                <div class="question-item" style="border: 1px solid #d2d2d7; border-radius: 8px; padding: 16px; margin-bottom: 16px;">
+                    <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+                        <div style="flex: 1;">
+                            <h5 style="margin: 0 0 8px 0;">Question ${index + 1} (${q.points} point${q.points > 1 ? 's' : ''})</h5>
+                            <p style="margin: 0 0 8px 0; font-weight: 600;">${q.question}</p>
+                            <p style="margin: 0; color: #666; font-size: 14px;">Type: ${q.type} | Correct: ${q.correctAnswer}</p>
+                        </div>
+                        <div>
+                            <button onclick="deleteQuestion('${currentEditingTestId}', '${q.id}')" class="button" style="background: #ff3b30; color: white; padding: 4px 8px; font-size: 12px;">Delete</button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function showAddQuestionForm() {
+            document.getElementById('addQuestionForm').style.display = 'block';
+            updateQuestionForm();
+        }
+
+        function hideAddQuestionForm() {
+            document.getElementById('addQuestionForm').style.display = 'none';
+        }
+
+        function updateQuestionForm() {
+            const type = document.getElementById('questionType').value;
+            const optionsContainer = document.getElementById('optionsContainer');
+            
+            if (type === 'multiple-choice') {
+                optionsContainer.style.display = 'block';
+                document.getElementById('correctAnswer').placeholder = 'A, B, C, or D';
+            } else if (type === 'true-false') {
+                optionsContainer.style.display = 'none';
+                document.getElementById('correctAnswer').placeholder = 'True or False';
+            } else {
+                optionsContainer.style.display = 'none';
+                document.getElementById('correctAnswer').placeholder = 'Exact answer text';
+            }
+        }
+
+        function saveQuestion(event, testId) {
+            event.preventDefault();
+            
+            const questionData = {
+                question: document.getElementById('questionText').value,
+                type: document.getElementById('questionType').value,
+                correctAnswer: document.getElementById('correctAnswer').value,
+                explanation: document.getElementById('explanation').value,
+                points: parseInt(document.getElementById('points').value)
+            };
+            
+            if (questionData.type === 'multiple-choice') {
+                questionData.options = [
+                    document.getElementById('optionA').value,
+                    document.getElementById('optionB').value,
+                    document.getElementById('optionC').value,
+                    document.getElementById('optionD').value
+                ].filter(option => option.trim());
+                
+                if (questionData.options.length < 2) {
+                    alert('Please provide at least 2 options for multiple choice questions.');
+                    return;
+                }
+            }
+            
+            testManager.addQuestion(testId, questionData);
+            
+            // Refresh the questions list
+            const test = testManager.getTest(testId);
+            document.getElementById('questionsList').innerHTML = renderQuestionsList(test.questions);
+            
+            // Reset form
+            document.getElementById('addQuestionForm').reset();
+            hideAddQuestionForm();
+            
+            alert('Question added successfully!');
+        }
+
+        function deleteQuestion(testId, questionId) {
+            if (confirm('Are you sure you want to delete this question?')) {
+                testManager.deleteQuestion(testId, questionId);
+                
+                // Refresh the questions list
+                const test = testManager.getTest(testId);
+                document.getElementById('questionsList').innerHTML = renderQuestionsList(test.questions);
+                
+                alert('Question deleted successfully!');
+            }
+        }
+
+        function closeQuestionsModal() {
+            const modal = document.getElementById('questionsModal');
+            if (modal) {
+                modal.remove();
+            }
+            currentEditingTestId = null;
+        }
+
         let currentEditingTestId = null;
     </script>
 </body>

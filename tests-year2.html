@@ -8,6 +8,8 @@
     <link rel="icon" type="image/svg+xml" href="favicon.ico">
     <script src="js/access-code-system.js"></script>
     <script src="js/access-code-modal.js"></script>
+    <script src="js/test-manager.js"></script>
+    <script src="js/test-engine.js"></script>
     <style>
         .modules-container {
             max-width: 1200px;
@@ -605,6 +607,69 @@
                     launchTest(testName);
                 };
             });
+        });
+        
+        // Initialize access code checking
+        let accessCodeSystem;
+        
+        // Check access code every 3 seconds
+        setInterval(checkAccessCode, 3000);
+        
+        function checkAccessCode() {
+            if (!accessCodeSystem) {
+                accessCodeSystem = new AccessCodeSystem();
+            }
+            
+            // Display access code if visible
+            displayAccessCodeIfVisible();
+        }
+        
+        function displayAccessCodeIfVisible() {
+            if (!accessCodeSystem.isCodeVisible()) {
+                hideAccessCodeDisplay();
+                return;
+            }
+            
+            showAccessCodeDisplay();
+        }
+        
+        function showAccessCodeDisplay() {
+            let display = document.getElementById('accessCodeDisplay');
+            if (!display) {
+                display = document.createElement('div');
+                display.id = 'accessCodeDisplay';
+                display.style.cssText = `
+                    position: fixed;
+                    top: 20px;
+                    right: 20px;
+                    background: #0071e3;
+                    color: white;
+                    padding: 15px 20px;
+                    border-radius: 8px;
+                    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+                    z-index: 1000;
+                    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+                    font-weight: bold;
+                    font-size: 16px;
+                `;
+                document.body.appendChild(display);
+            }
+            
+            const code = accessCodeSystem.getCurrentCode();
+            const timeRemaining = accessCodeSystem.formatTimeRemaining();
+            display.innerHTML = `
+                <div>Test Access Code</div>
+                <div style="font-size: 24px; margin: 5px 0;">${code}</div>
+                <div style="font-size: 12px; opacity: 0.9;">Expires in: ${timeRemaining}</div>
+            `;
+        }
+        
+        function hideAccessCodeDisplay() {
+            const display = document.getElementById('accessCodeDisplay');
+            if (display) {
+                display.remove();
+            }
+        }
         });
     </script>
 </body>
