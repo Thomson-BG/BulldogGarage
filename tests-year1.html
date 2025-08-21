@@ -8,6 +8,8 @@
     <link rel="icon" type="image/svg+xml" href="favicon.ico">
     <script src="js/access-code-system.js"></script>
     <script src="js/access-code-modal.js"></script>
+    <script src="js/test-manager.js"></script>
+    <script src="js/test-engine.js"></script>
     <style>
         .modules-container {
             max-width: 1200px;
@@ -150,11 +152,11 @@
                     <ul class="test-list">
                         <li class="test-item">
                             <span class="test-name">Safety Procedures Quiz</span>
-                            <a href="#" class="test-button">Take Test</a>
+                            <a href="#" class="test-button" onclick="requestTestAccess('Safety Procedures Quiz'); return false;">Take Test</a>
                         </li>
                         <li class="test-item">
                             <span class="test-name">Tool Identification Test</span>
-                            <a href="#" class="test-button">Take Test</a>
+                            <a href="#" class="test-button" onclick="requestTestAccess('Tool Identification Test'); return false;">Take Test</a>
                         </li>
                         <li class="test-item">
                             <span class="test-name">Personal Protective Equipment Assessment</span>
@@ -573,6 +575,113 @@
 
     <script src="script.js"></script>
     <script>
+        // Initialize access code checking
+        let accessCodeSystem;
+        let testManager;
+        
+        // Check access code every 3 seconds
+        setInterval(checkAccessCode, 3000);
+        
+        function checkAccessCode() {
+            if (!accessCodeSystem) {
+                accessCodeSystem = new AccessCodeSystem();
+            }
+            
+            // Display access code if visible
+            displayAccessCodeIfVisible();
+        }
+        
+        function displayAccessCodeIfVisible() {
+            if (!accessCodeSystem.isCodeVisible()) {
+                hideAccessCodeDisplay();
+                return;
+            }
+            
+            showAccessCodeDisplay();
+        }
+        
+        function showAccessCodeDisplay() {
+            let display = document.getElementById('accessCodeDisplay');
+            if (!display) {
+                display = document.createElement('div');
+                display.id = 'accessCodeDisplay';
+                display.style.cssText = `
+                    position: fixed;
+                    top: 20px;
+                    right: 20px;
+                    background: #0071e3;
+                    color: white;
+                    padding: 15px 20px;
+                    border-radius: 8px;
+                    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+                    z-index: 1000;
+                    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+                    font-weight: bold;
+                    font-size: 16px;
+                `;
+                document.body.appendChild(display);
+            }
+            
+            const code = accessCodeSystem.getCurrentCode();
+            const timeRemaining = accessCodeSystem.formatTimeRemaining();
+            display.innerHTML = `
+                <div>Test Access Code</div>
+                <div style="font-size: 24px; margin: 5px 0;">${code}</div>
+                <div style="font-size: 12px; opacity: 0.9;">Expires in: ${timeRemaining}</div>
+            `;
+        }
+        
+        function hideAccessCodeDisplay() {
+            const display = document.getElementById('accessCodeDisplay');
+            if (display) {
+                display.remove();
+            }
+        }
+        
+        function requestTestAccess(testName) {
+            if (!accessCodeSystem) {
+                accessCodeSystem = new AccessCodeSystem();
+            }
+            
+            // Show access code modal
+            showAccessCodeModal(testName, function() {
+                startTest(testName);
+            });
+        }
+        
+        function startTest(testName) {
+            // Get student info
+            const studentName = prompt('Enter your full name:');
+            if (!studentName) return;
+            
+            const studentId = prompt('Enter your student ID:');
+            if (!studentId) return;
+            
+            const email = prompt('Enter your email address:');
+            if (!email) return;
+            
+            // Find test by name
+            if (!testManager) {
+                testManager = new TestManager();
+            }
+            
+            const tests = testManager.getTests();
+            const test = tests.find(t => t.name === testName);
+            
+            if (!test) {
+                alert('Test not found. Please contact your instructor.');
+                return;
+            }
+            
+            // Start test
+            const testEngine = new TestEngine();
+            testEngine.startTest(test.id, {
+                name: studentName,
+                studentId: studentId,
+                email: email
+            });
+        }
+        
         function toggleModule(moduleNum) {
             const content = document.getElementById(`module-${moduleNum}`);
             const toggle = content.previousElementSibling.querySelector('.module-toggle');

@@ -5,11 +5,23 @@ class AccessCodeSystem {
     constructor() {
         this.storageKey = 'bulldogGarageAccessCode';
         this.timestampKey = 'bulldogGarageCodeTimestamp';
-        this.codeExpiryHours = 1; // Code changes every hour
+        this.visibilityKey = 'bulldogGarageCodeVisible';
+        this.durationKey = 'bulldogGarageCodeDuration';
+        this.codeExpiryHours = 1; // Default code changes every hour
         this.init();
     }
 
     init() {
+        // Set default visibility to false if not set
+        if (localStorage.getItem(this.visibilityKey) === null) {
+            this.setCodeVisibility(false);
+        }
+        
+        // Set default duration to 1 hour if not set
+        if (localStorage.getItem(this.durationKey) === null) {
+            this.setCodeDuration(1);
+        }
+        
         // Generate initial code if none exists or if expired
         if (!this.isCurrentCodeValid()) {
             this.generateNewCode();
@@ -36,6 +48,38 @@ class AccessCodeSystem {
         return localStorage.getItem(this.storageKey);
     }
 
+    // New methods for visibility and duration control
+    setCodeVisibility(visible) {
+        localStorage.setItem(this.visibilityKey, visible.toString());
+    }
+
+    isCodeVisible() {
+        return localStorage.getItem(this.visibilityKey) === 'true';
+    }
+
+    setCodeDuration(hours) {
+        localStorage.setItem(this.durationKey, hours.toString());
+        this.codeExpiryHours = hours;
+    }
+
+    getCodeDuration() {
+        const duration = localStorage.getItem(this.durationKey);
+        return duration ? parseFloat(duration) : 1;
+    }
+
+    // Make code visible for specified duration (in hours)
+    makeCodeVisible(durationHours) {
+        this.setCodeDuration(durationHours);
+        this.setCodeVisibility(true);
+        
+        // Auto-hide after duration
+        setTimeout(() => {
+            this.setCodeVisibility(false);
+        }, durationHours * 60 * 60 * 1000);
+        
+        return this.getCurrentCode();
+    }
+
     isCurrentCodeValid() {
         const code = localStorage.getItem(this.storageKey);
         const timestamp = localStorage.getItem(this.timestampKey);
@@ -45,12 +89,17 @@ class AccessCodeSystem {
         }
 
         const codeAge = Date.now() - parseInt(timestamp);
-        const expiryTime = this.codeExpiryHours * 60 * 60 * 1000; // Convert hours to milliseconds
+        const durationHours = this.getCodeDuration();
+        const expiryTime = durationHours * 60 * 60 * 1000; // Convert hours to milliseconds
         
         return codeAge < expiryTime;
     }
 
     validateCode(inputCode) {
+        if (!this.isCodeVisible()) {
+            return false; // Code is not visible to users
+        }
+        
         const currentCode = this.getCurrentCode();
         return inputCode.toString() === currentCode;
     }
@@ -62,7 +111,8 @@ class AccessCodeSystem {
         }
 
         const codeAge = Date.now() - parseInt(timestamp);
-        const expiryTime = this.codeExpiryHours * 60 * 60 * 1000;
+        const durationHours = this.getCodeDuration();
+        const expiryTime = durationHours * 60 * 60 * 1000;
         const timeRemaining = expiryTime - codeAge;
         
         return Math.max(0, timeRemaining);
