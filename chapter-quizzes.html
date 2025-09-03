@@ -451,8 +451,21 @@
         // Function to launch quiz with access code validation
         function launchQuiz(quizName, quizId) {
             showAccessCodeModal(quizName, function() {
+                // Map quiz IDs to session storage keys
+                const sessionKeyMap = {
+                    'personal-protective-equipment': 'ppeQuizAccess',
+                    'workshop-safety-procedures': 'workshopSafetyAccess',
+                    'emergency-response-protocols': 'emergencyResponseAccess',
+                    'fire-safety-and-prevention': 'fireSafetyAccess',
+                    'hand-tool-safety': 'handToolAccess',
+                    'power-tool-operation': 'powerToolAccess',
+                    'lift-and-jack-safety': 'liftJackAccess',
+                    'pneumatic-tool-safety': 'pneumaticToolAccess'
+                };
+                
                 // Store quiz access in session storage
-                sessionStorage.setItem('ppeQuizAccess', 'true');
+                const sessionKey = sessionKeyMap[quizId] || 'quizAccess';
+                sessionStorage.setItem(sessionKey, 'true');
                 sessionStorage.setItem('validatedAccessCode', document.getElementById('accessCodeInput').value);
                 
                 // Redirect to actual quiz page
