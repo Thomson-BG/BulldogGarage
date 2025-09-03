@@ -5,7 +5,7 @@ class AccessCodeSystem {
     constructor() {
         this.storageKey = 'bulldogGarageAccessCode';
         this.timestampKey = 'bulldogGarageCodeTimestamp';
-        this.codeExpiryHours = 1; // Code changes every hour
+        this.codeExpiryHours = 1.5; // Code changes every 90 minutes
         this.init();
     }
 

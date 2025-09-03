@@ -346,7 +346,7 @@
                 <h3 class="card-title">Test Access Code</h3>
                 <div style="text-align: center; padding: 20px;">
                     <div style="font-size: 36px; font-weight: bold; color: #0071e3; margin-bottom: 16px;" id="currentAccessCode">
-                        00000
+                        Loading...
                     </div>
                     <div style="font-size: 14px; color: #666; margin-bottom: 16px;">
                         Time remaining: <span id="codeTimeRemaining">00:00</span>
@@ -480,6 +480,18 @@
 
                 <div class="page-item">
                     <div class="page-info">
+                        <h3>Chapter Quizzes (chapter-quizzes.html)</h3>
+                        <p>Comprehensive chapter assessments covering automotive safety topics</p>
+                    </div>
+                    <div class="page-actions">
+                        <button class="action-button" onclick="viewPage('chapter-quizzes.html')">View</button>
+                        <button class="action-button edit" onclick="editPage('chapter-quizzes.html')">Edit</button>
+                        <button class="action-button" onclick="manageQuizzes()">Manage Quizzes</button>
+                    </div>
+                </div>
+
+                <div class="page-item">
+                    <div class="page-info">
                         <h3>CTE Programs (cte-program.html)</h3>
                         <p>Career and Technical Education program information</p>
                     </div>
@@ -547,6 +559,166 @@
             </form>
         </div>
     </div>
+
+    <!-- Quiz Management Modal -->
+    <div id="quizModal" class="modal">
+        <div class="modal-content" style="max-width: 800px;">
+            <div class="modal-header">
+                <h3 class="modal-title">Manage Chapter Quizzes</h3>
+                <button class="close-button" onclick="closeQuizModal()">&times;</button>
+            </div>
+            <div style="margin-bottom: 24px;">
+                <h4>Quiz Status Management</h4>
+                <p style="color: #666; font-size: 14px;">Lock or unlock individual quizzes to control student access. Locked quizzes will be disabled for students.</p>
+            </div>
+            
+            <div id="quizList" class="quiz-management-list">
+                <!-- Quiz items will be populated here -->
+            </div>
+
+            <div style="margin-top: 24px; padding-top: 24px; border-top: 1px solid #e5e5e7;">
+                <h4>Quick Actions</h4>
+                <div class="button-group">
+                    <button type="button" class="button button-secondary" onclick="lockAllQuizzes()">Lock All Quizzes</button>
+                    <button type="button" class="button button-secondary" onclick="unlockAllQuizzes()">Unlock All Quizzes</button>
+                    <button type="button" class="button button-primary" onclick="addNewQuiz()">Add New Quiz</button>
+                </div>
+            </div>
+            
+            <div class="button-group" style="margin-top: 24px;">
+                <button type="button" class="button button-secondary" onclick="closeQuizModal()">Close</button>
+                <button type="button" class="button button-primary" onclick="saveQuizSettings()">Save Changes</button>
+            </div>
+        </div>
+    </div>
+
+    <style>
+        .quiz-management-list {
+            max-height: 400px;
+            overflow-y: auto;
+            border: 1px solid #e5e5e7;
+            border-radius: 8px;
+        }
+        
+        .quiz-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px;
+            border-bottom: 1px solid #e5e5e7;
+            background: #fff;
+        }
+        
+        .quiz-item:last-child {
+            border-bottom: none;
+        }
+        
+        .quiz-item:hover {
+            background: #f5f5f7;
+        }
+        
+        .quiz-info {
+            flex: 1;
+        }
+        
+        .quiz-name {
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+        
+        .quiz-chapter {
+            font-size: 14px;
+            color: #666;
+        }
+        
+        .quiz-controls {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
+        
+        .quiz-status {
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+        
+        .quiz-status.unlocked {
+            background: #d1f2eb;
+            color: #00695c;
+        }
+        
+        .quiz-status.locked {
+            background: #ffebee;
+            color: #c62828;
+        }
+        
+        .quiz-toggle {
+            background: none;
+            border: 1px solid #0071e3;
+            color: #0071e3;
+            padding: 6px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 12px;
+            transition: all 0.3s ease;
+        }
+        
+        .quiz-toggle:hover {
+            background: #0071e3;
+            color: #fff;
+        }
+        
+        .quiz-toggle.locked {
+            border-color: #ff3b30;
+            color: #ff3b30;
+        }
+        
+        .quiz-toggle.locked:hover {
+            background: #ff3b30;
+            color: #fff;
+        }
+        
+        .control-btn {
+            background: none;
+            border: 1px solid #0071e3;
+            color: #0071e3;
+            padding: 6px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 12px;
+            transition: all 0.3s ease;
+        }
+        
+        .control-btn:hover {
+            background: #0071e3;
+            color: #fff;
+        }
+        
+        .control-btn.edit {
+            border-color: #ff9500;
+            color: #ff9500;
+        }
+        
+        .control-btn.edit:hover {
+            background: #ff9500;
+            color: #fff;
+        }
+        
+        .control-btn.remove {
+            border-color: #ff3b30;
+            color: #ff3b30;
+        }
+        
+        .control-btn.remove:hover {
+            background: #ff3b30;
+            color: #fff;
+        }
+            color: #fff;
+        }
+    </style>
 
     <script>
         // Check admin authentication
@@ -681,11 +853,30 @@
             }
         }
 
-        // Close modal when clicking outside
+        function closeQuizModal() {
+            document.getElementById('quizModal').style.display = 'none';
+        }
+
+        function saveQuizSettings() {
+            // Settings are automatically saved as they're changed
+            showNotification('Quiz settings saved successfully');
+            closeQuizModal();
+        }
+
+        function addNewQuiz() {
+            showNotification('Add new quiz functionality would be implemented here');
+        }
+
+        // Update the modal close functionality
         window.onclick = function(event) {
             const modal = document.getElementById('editModal');
+            const quizModal = document.getElementById('quizModal');
+            
             if (event.target === modal) {
                 closeModal();
+            }
+            if (event.target === quizModal) {
+                closeQuizModal();
             }
         }
 
@@ -693,6 +884,10 @@
         document.addEventListener('DOMContentLoaded', function() {
             checkAuth();
             initDashboard();
+            initAccessCodeSystem();
+            
+            // Update access code display every 30 seconds
+            setInterval(updateAccessCodeDisplay, 30000);
         });
 
         // Access Code System Functions
@@ -720,7 +915,267 @@
             updateAccessCodeDisplay();
             
             // Show confirmation
-            alert(`New access code generated: ${newCode}\nThis code will be valid for 1 hour.`);
+            alert(`New access code generated: ${newCode}\nThis code will be valid for 90 minutes.`);
+        }
+
+        // Quiz Management Functions
+        let quizDataSystem;
+
+        function initQuizManagement() {
+            quizDataSystem = new QuizDataSystem();
+        }
+
+        function manageQuizzes() {
+            if (!quizDataSystem) {
+                initQuizManagement();
+            }
+            
+            populateQuizList();
+            document.getElementById('quizModal').style.display = 'block';
+        }
+
+        function populateQuizList() {
+            const quizzes = quizDataSystem.getAllQuizzes();
+            const container = document.getElementById('quizList');
+            if (!container) return;
+            
+            container.innerHTML = '';
+            
+            Object.values(quizzes).forEach(quiz => {
+                const quizItem = document.createElement('div');
+                quizItem.className = 'quiz-item';
+                quizItem.innerHTML = `
+                    <div class="quiz-info">
+                        <div class="quiz-name">${quiz.title}</div>
+                        <div class="quiz-chapter">${quiz.chapter}</div>
+                    </div>
+                    <div class="quiz-controls">
+                        <span class="quiz-status ${quiz.locked ? 'locked' : 'unlocked'}">
+                            ${quiz.locked ? 'LOCKED' : 'UNLOCKED'}
+                        </span>
+                        <button class="control-btn" onclick="toggleQuizLock('${quiz.id}')">
+                            ${quiz.locked ? 'Unlock' : 'Lock'}
+                        </button>
+                        <button class="control-btn edit" onclick="editQuiz('${quiz.id}')">Edit</button>
+                        <button class="control-btn remove" onclick="removeQuiz('${quiz.id}')">Remove</button>
+                    </div>
+                `;
+                container.appendChild(quizItem);
+            });
+        }
+
+        function toggleQuizLock(quizId) {
+            if (!quizDataSystem) return;
+            
+            const quiz = quizDataSystem.getQuiz(quizId);
+            if (!quiz) return;
+            
+            if (quiz.locked) {
+                quizDataSystem.unlockQuiz(quizId);
+                showNotification(`"${quiz.title}" has been unlocked`);
+            } else {
+                quizDataSystem.lockQuiz(quizId);
+                showNotification(`"${quiz.title}" has been locked`);
+            }
+            
+            populateQuizList();
+        }
+
+        function lockAllQuizzes() {
+            if (!quizDataSystem) return;
+            
+            quizDataSystem.lockAllQuizzes();
+            populateQuizList();
+            showNotification('All quizzes have been locked');
+        }
+
+        function unlockAllQuizzes() {
+            if (!quizDataSystem) return;
+            
+            quizDataSystem.unlockAllQuizzes();
+            populateQuizList();
+            showNotification('All quizzes have been unlocked');
+        }
+
+        function editQuiz(quizId) {
+            const quiz = quizDataSystem.getQuiz(quizId);
+            if (!quiz) return;
+            
+            const newTitle = prompt('Enter new quiz title:', quiz.title);
+            if (newTitle && newTitle.trim() !== '') {
+                // In a real implementation, this would update the quiz data
+                showNotification('Quiz editing functionality would be implemented here');
+            }
+        }
+
+        function removeQuiz(quizId) {
+            const quiz = quizDataSystem.getQuiz(quizId);
+            if (!quiz) return;
+            
+            if (confirm(`Are you sure you want to remove "${quiz.title}"? This action cannot be undone.`)) {
+                // In a real implementation, this would remove the quiz
+                showNotification('Quiz removal functionality would be implemented here');
+            }
+        }
+
+        function showNotification(message) {
+            // Simple notification system
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: #0071e3;
+                color: white;
+                padding: 16px 24px;
+                border-radius: 8px;
+                box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+                z-index: 10000;
+                font-weight: 600;
+            `;
+            notification.textContent = message;
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.remove();
+            }, 3000);
+        }
+        }
+
+        function populateQuizList() {
+            const quizList = document.getElementById('quizList');
+            quizList.innerHTML = '';
+
+            quizData.forEach(quiz => {
+                const quizItem = document.createElement('div');
+                quizItem.className = 'quiz-item';
+                quizItem.innerHTML = `
+                    <div class="quiz-info">
+                        <div class="quiz-name">${quiz.name}</div>
+                        <div class="quiz-chapter">${quiz.chapter}</div>
+                    </div>
+                    <div class="quiz-controls">
+                        <span class="quiz-status ${quiz.locked ? 'locked' : 'unlocked'}">
+                            ${quiz.locked ? 'Locked' : 'Unlocked'}
+                        </span>
+                        <button class="quiz-toggle ${quiz.locked ? 'locked' : ''}" onclick="toggleQuiz(${quiz.id})">
+                            ${quiz.locked ? 'Unlock' : 'Lock'}
+                        </button>
+                        <button class="button button-secondary" onclick="editQuiz(${quiz.id})" style="font-size: 12px; padding: 6px 12px;">Edit</button>
+                        <button class="button" onclick="removeQuiz(${quiz.id})" style="background: #ff3b30; color: white; font-size: 12px; padding: 6px 12px;">Remove</button>
+                    </div>
+                `;
+                quizList.appendChild(quizItem);
+            });
+        }
+
+        function toggleQuiz(quizId) {
+            const quiz = quizData.find(q => q.id === quizId);
+            if (quiz) {
+                quiz.locked = !quiz.locked;
+                populateQuizList();
+                updateQuizPageStatus(quiz);
+            }
+        }
+
+        function updateQuizPageStatus(quiz) {
+            // In a real implementation, this would update the actual HTML file
+            console.log(`Quiz "${quiz.name}" ${quiz.locked ? 'locked' : 'unlocked'}`);
+        }
+
+        function editQuiz(quizId) {
+            const quiz = quizData.find(q => q.id === quizId);
+            if (quiz) {
+                const newName = prompt('Enter new quiz name:', quiz.name);
+                if (newName && newName.trim()) {
+                    quiz.name = newName.trim();
+                    populateQuizList();
+                    alert('Quiz updated successfully!');
+                }
+            }
+        }
+
+        function removeQuiz(quizId) {
+            const quiz = quizData.find(q => q.id === quizId);
+            if (quiz && confirm(`Are you sure you want to remove "${quiz.name}"? This action cannot be undone.`)) {
+                quizData = quizData.filter(q => q.id !== quizId);
+                populateQuizList();
+                alert('Quiz removed successfully!');
+            }
+        }
+
+        function lockAllQuizzes() {
+            if (confirm('Are you sure you want to lock all quizzes? Students will not be able to access any quizzes until unlocked.')) {
+                quizData.forEach(quiz => quiz.locked = true);
+                populateQuizList();
+                alert('All quizzes have been locked.');
+            }
+        }
+
+        function unlockAllQuizzes() {
+            if (confirm('Are you sure you want to unlock all quizzes?')) {
+                quizData.forEach(quiz => quiz.locked = false);
+                populateQuizList();
+                alert('All quizzes have been unlocked.');
+            }
+        }
+
+        function addNewQuiz() {
+            const name = prompt('Enter quiz name:');
+            if (!name || !name.trim()) return;
+
+            const chapter = prompt('Enter chapter (e.g., "Chapter 1: Automotive Safety Fundamentals"):');
+            if (!chapter || !chapter.trim()) return;
+
+            const newQuiz = {
+                id: Math.max(...quizData.map(q => q.id)) + 1,
+                name: name.trim(),
+                chapter: chapter.trim(),
+                locked: false
+            };
+
+            quizData.push(newQuiz);
+            populateQuizList();
+            alert('New quiz added successfully!');
+        }
+
+        function saveQuizSettings() {
+            // In a real implementation, this would save to a database
+            alert('Quiz settings saved successfully!\n\n(In a real implementation, this would update the chapter-quizzes.html file and save settings to a database)');
+            closeQuizModal();
+        }
+
+        function closeQuizModal() {
+            document.getElementById('quizModal').style.display = 'none';
+        }
+
+        // Update the page descriptions to include chapter quizzes
+        function getPageDescription(filename) {
+            const descriptions = {
+                'index.html': 'Main landing page with hero section and navigation',
+                'tests.html': 'Student testing portal with year-based options',
+                'tests-year1.html': 'Foundation level tests with 11 collapsible modules',
+                'tests-year2.html': 'Intermediate level tests with advanced diagnostics',
+                'tests-year3-4.html': 'Advanced level tests with certification preparation',
+                'chapter-quizzes.html': 'Comprehensive chapter assessments covering automotive safety topics',
+                'cte-program.html': 'Career and Technical Education program information',
+                'forms.html': 'Student and parent resources and forms',
+                'support.html': 'Support and help resources for students'
+            };
+            return descriptions[filename] || 'Page description';
+        }
+
+        // Close modals when clicking outside
+        window.onclick = function(event) {
+            const editModal = document.getElementById('editModal');
+            const quizModal = document.getElementById('quizModal');
+            
+            if (event.target === editModal) {
+                closeModal();
+            }
+            if (event.target === quizModal) {
+                closeQuizModal();
+            }
         }
     </script>
 </body>

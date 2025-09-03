@@ -1,0 +1,835 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz: Workshop Safety Procedures | Bulldog Garage</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/svg+xml" href="favicon.ico">
+    <script src="js/access-code-system.js"></script>
+    <script src="js/quiz-data.js"></script>
+    <style>
+        .quiz-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+        }
+        
+        .quiz-header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #e5e5e7;
+        }
+        
+        .quiz-title {
+            font-size: 28px;
+            font-weight: 700;
+            color: #1a1a1a;
+            margin: 0 0 10px 0;
+        }
+        
+        .quiz-chapter {
+            font-size: 16px;
+            color: #0071e3;
+            margin: 0;
+        }
+        
+        .quiz-progress {
+            background: #f5f5f7;
+            border-radius: 20px;
+            height: 8px;
+            margin: 20px 0;
+            overflow: hidden;
+        }
+        
+        .quiz-progress-bar {
+            background: #0071e3;
+            height: 100%;
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+        
+        .quiz-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            font-size: 14px;
+            color: #666;
+        }
+        
+        .question-container {
+            margin-bottom: 40px;
+        }
+        
+        .question-number {
+            font-size: 14px;
+            font-weight: 600;
+            color: #0071e3;
+            margin-bottom: 10px;
+        }
+        
+        .question-text {
+            font-size: 20px;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 24px;
+            line-height: 1.4;
+        }
+        
+        .answer-options {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .answer-option {
+            margin-bottom: 12px;
+        }
+        
+        .answer-option input[type="radio"] {
+            margin-right: 12px;
+            transform: scale(1.2);
+        }
+        
+        .answer-option label {
+            display: flex;
+            align-items: center;
+            padding: 16px;
+            background: #f5f5f7;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+            font-size: 16px;
+            line-height: 1.4;
+        }
+        
+        .answer-option label:hover {
+            background: #e5e5e7;
+        }
+        
+        .answer-option input[type="radio"]:checked + label {
+            background: #0071e3;
+            color: #fff;
+        }
+        
+        .quiz-navigation {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 2px solid #e5e5e7;
+        }
+        
+        .nav-button {
+            background: #0071e3;
+            color: #fff;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .nav-button:hover {
+            background: #0056b3;
+        }
+        
+        .nav-button:disabled {
+            background: #8e8e93;
+            cursor: not-allowed;
+        }
+        
+        .nav-button.secondary {
+            background: #8e8e93;
+        }
+        
+        .nav-button.secondary:hover {
+            background: #636366;
+        }
+        
+        .quiz-results {
+            text-align: center;
+            padding: 40px;
+            background: #f5f5f7;
+            border-radius: 12px;
+            margin-top: 40px;
+            display: none;
+        }
+        
+        .results-score {
+            font-size: 48px;
+            font-weight: 700;
+            color: #0071e3;
+            margin: 0 0 10px 0;
+        }
+        
+        .results-percentage {
+            font-size: 24px;
+            color: #1a1a1a;
+            margin: 0 0 20px 0;
+        }
+        
+        .results-message {
+            font-size: 18px;
+            color: #666;
+            margin: 0 0 30px 0;
+        }
+        
+        .results-actions {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+        }
+        
+        .access-denied {
+            text-align: center;
+            padding: 60px 20px;
+        }
+        
+        .access-denied h1 {
+            color: #ff3b30;
+            margin-bottom: 20px;
+        }
+        
+        .access-denied p {
+            color: #666;
+            font-size: 18px;
+            margin-bottom: 30px;
+        }
+        
+        .quiz-locked {
+            text-align: center;
+            padding: 60px 20px;
+        }
+        
+        .quiz-locked h1 {
+            color: #ff9500;
+            margin-bottom: 20px;
+        }
+        
+        .quiz-locked p {
+            color: #666;
+            font-size: 18px;
+            margin-bottom: 30px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Apple-style Navigation -->
+    <nav class="globalnav">
+        <div class="globalnav-content">
+            <ul class="globalnav-list">
+                <li class="globalnav-item globalnav-item-apple">
+                    <a class="globalnav-link" href="index.html" aria-label="Bulldog Garage" style="display:flex;align-items:center;justify-content:center;padding:0;">
+                        <img src="bulldog.svg" alt="Bulldog Head Logo" style="height:55px;width:55px;display:block;object-fit:contain;" />
+                    </a>
+                </li>
+                <li class="globalnav-item"><a class="globalnav-link" href="cte-program.html">CTE Programs</a></li>
+                <li class="globalnav-item"><a class="globalnav-link" href="google-classroom.html">Google Classroom</a></li>
+                <li class="globalnav-item"><a class="globalnav-link" href="ford-ace.html">Ford ACE</a></li>
+                <li class="globalnav-item"><a class="globalnav-link" href="mitchell-ondemand.html">Mitchell OnDemand</a></li>
+                <li class="globalnav-item"><a class="globalnav-link" href="shop-vehicles.html">Shop Vehicles</a></li>
+                <li class="globalnav-item"><a class="globalnav-link" href="forms.html">Forms</a></li>
+                <li class="globalnav-item"><a class="globalnav-link" href="tests.html">Tests</a></li>
+                <li class="globalnav-item"><a class="globalnav-link" href="support.html">Support</a></li>
+                <li class="globalnav-item">
+                    <a class="globalnav-link" href="news.html">News</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="page-main" style="background: #f5f5f7; min-height: 100vh; padding: 40px 0;">
+        
+        <!-- Access Denied Content -->
+        <div id="accessDenied" class="access-denied" style="display: none;">
+            <h1>Access Code Required</h1>
+            <p>You need a valid access code to take this quiz. Please obtain the current access code from your instructor.</p>
+            <a href="chapter-quizzes.html" class="nav-button">← Back to Chapter Quizzes</a>
+        </div>
+
+        <!-- Quiz Locked Content -->
+        <div id="quizLocked" class="quiz-locked" style="display: none;">
+            <h1>Quiz Currently Locked</h1>
+            <p>This quiz has been temporarily locked by the administrator. Please check back later or contact your instructor.</p>
+            <a href="chapter-quizzes.html" class="nav-button">← Back to Chapter Quizzes</a>
+        </div>
+
+        <!-- Quiz Content -->
+        <div id="quizContent" class="quiz-container">
+            <div class="quiz-header">
+                <h1 class="quiz-title">Workshop Safety Procedures</h1>
+                <p class="quiz-chapter">Chapter 1: Automotive Safety Fundamentals</p>
+                <div class="quiz-progress">
+                    <div class="quiz-progress-bar" id="progressBar"></div>
+                </div>
+                <div class="quiz-info">
+                    <span>Question <span id="currentQuestion">1</span> of <span id="totalQuestions">30</span></span>
+                    <span id="timeRemaining">Time: Unlimited</span>
+                </div>
+            </div>
+
+            <div class="question-container">
+                <div class="question-number" id="questionNumber">Question 1</div>
+                <div class="question-text" id="questionText">Question text will appear here</div>
+                <ul class="answer-options" id="answerOptions">
+                    <!-- Answer options will be populated by JavaScript -->
+                </ul>
+            </div>
+
+            <div class="quiz-navigation">
+                <button class="nav-button secondary" id="prevButton" onclick="previousQuestion()" disabled>← Previous</button>
+                <div>
+                    <button class="nav-button" id="nextButton" onclick="nextQuestion()">Next →</button>
+                    <button class="nav-button" id="submitButton" onclick="submitQuiz()" style="display: none;">Submit Quiz</button>
+                </div>
+            </div>
+
+            <!-- Quiz Results -->
+            <div class="quiz-results" id="quizResults">
+                <div class="results-score" id="resultsScore">0/30</div>
+                <div class="results-percentage" id="resultsPercentage">0%</div>
+                <div class="results-message" id="resultsMessage">Quiz completed!</div>
+                <div class="results-actions">
+                    <button class="nav-button" onclick="retakeQuiz()">Retake Quiz</button>
+                    <a href="chapter-quizzes.html" class="nav-button secondary">Back to Quizzes</a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="script.js"></script>
+    <script>
+        // Quiz Engine Implementation for Workshop Safety Procedures Quiz
+        class WorkshopSafetyQuizEngine {
+            constructor() {
+                this.accessCodeSystem = new AccessCodeSystem();
+                this.currentQuestionIndex = 0;
+                this.userAnswers = [];
+                this.quizId = 'workshop-safety-procedures';
+                
+                // Workshop Safety Procedures Quiz Questions (30 questions)
+                this.questions = [
+                    {
+                        question: "What is the first step when entering an automotive workshop?",
+                        options: [
+                            "Start working immediately",
+                            "Conduct a visual safety inspection of the area",
+                            "Turn on all equipment",
+                            "Check the weather"
+                        ],
+                        correct: 1
+                    },
+                    {
+                        question: "What should be done before starting any vehicle in the shop?",
+                        options: [
+                            "Check the radio",
+                            "Ensure proper ventilation and check for leaks",
+                            "Warm up the engine",
+                            "Fill the gas tank"
+                        ],
+                        correct: 1
+                    },
+                    {
+                        question: "Where should flammable materials be stored in a workshop?",
+                        options: [
+                            "Near heat sources for easy access",
+                            "In approved fire-resistant containers away from ignition sources",
+                            "On high shelves",
+                            "In the main work area"
+                        ],
+                        correct: 1
+                    },
+                    {
+                        question: "What is the proper procedure for lifting heavy objects?",
+                        options: [
+                            "Bend at the waist",
+                            "Lift with your legs, keep back straight",
+                            "Lift alone to save time",
+                            "Use only one hand"
+                        ],
+                        correct: 1
+                    },
+                    {
+                        question: "When should shop floors be cleaned of oil and fluid spills?",
+                        options: [
+                            "At the end of each day",
+                            "Immediately when they occur",
+                            "Once a week",
+                            "Only when someone slips"
+                        ],
+                        correct: 1
+                    },
+                    {
+                        question: "What is the maximum safe working height without fall protection?",
+                        options: [
+                            "10 feet",
+                            "6 feet",
+                            "8 feet",
+                            "4 feet"
+                        ],
+                        correct: 1
+                    },
+                    {
+                        question: "How should compressed air be used safely?",
+                        options: [
+                            "At maximum pressure for efficiency",
+                            "Never exceed 30 PSI for cleaning, never direct at people",
+                            "Only for inflating tires",
+                            "With the safety removed for better access"
+                        ],
+                        correct: 1
+                    },
+                    {
+                        question: "What should be done before working under a raised vehicle?",
+                        options: [
+                            "Just use the lift",
+                            "Use proper jack stands and safety blocks",
+                            "Have someone watch",
+                            "Work quickly"
+                        ],
+                        correct: 1
+                    },
+                    {
+                        question: "How should electrical equipment be handled in wet conditions?",
+                        options: [
+                            "Use as normal",
+                            "Should not be used in wet conditions",
+                            "Dry it off first",
+                            "Use higher voltage"
+                        ],
+                        correct: 1
+                    },
+                    {
+                        question: "What is the proper way to handle battery connections?",
+                        options: [
+                            "Remove positive terminal first",
+                            "Remove negative terminal first",
+                            "Remove both simultaneously",
+                            "Order doesn't matter"
+                        ],
+                        correct: 1
+                    },
+                    {
+                        question: "When should machine guards be removed?",
+                        options: [
+                            "When they're in the way",
+                            "Only when machine is stopped and locked out",
+                            "Never",
+                            "During routine maintenance"
+                        ],
+                        correct: 1
+                    },
+                    {
+                        question: "What is the recommended minimum aisle width in a workshop?",
+                        options: [
+                            "2 feet",
+                            "3 feet",
+                            "1 foot",
+                            "5 feet"
+                        ],
+                        correct: 1
+                    },
+                    {
+                        question: "How should tools be stored when not in use?",
+                        options: [
+                            "Left where last used",
+                            "In designated storage areas, properly secured",
+                            "On the floor",
+                            "In vehicles"
+                        ],
+                        correct: 1
+                    },
+                    {
+                        question: "What should be done before operating any power tool?",
+                        options: [
+                            "Just turn it on",
+                            "Inspect for damage and ensure proper guards are in place",
+                            "Oil all moving parts",
+                            "Check the warranty"
+                        ],
+                        correct: 1
+                    },
+                    {
+                        question: "How often should emergency exits be checked?",
+                        options: [
+                            "Once a year",
+                            "Monthly",
+                            "Never",
+                            "Only during inspections"
+                        ],
+                        correct: 1
+                    },
+                    {
+                        question: "What is the proper procedure for handling hot engine components?",
+                        options: [
+                            "Touch test for temperature",
+                            "Allow to cool or use proper heat-resistant tools",
+                            "Pour cold water on them",
+                            "Work quickly to avoid burns"
+                        ],
+                        correct: 1
+                    },
+                    {
+                        question: "Where should fire extinguishers be located?",
+                        options: [
+                            "In the office only",
+                            "Accessible locations every 75 feet",
+                            "Only near the entrance",
+                            "In storage rooms"
+                        ],
+                        correct: 1
+                    },
+                    {
+                        question: "What should be done with damaged tools?",
+                        options: [
+                            "Use carefully",
+                            "Remove from service immediately",
+                            "Repair during use",
+                            "Give to apprentices"
+                        ],
+                        correct: 1
+                    },
+                    {
+                        question: "How should hazardous waste be disposed of?",
+                        options: [
+                            "In regular trash",
+                            "According to local environmental regulations",
+                            "Down the drain",
+                            "Burn in shop furnace"
+                        ],
+                        correct: 1
+                    },
+                    {
+                        question: "What is the proper ventilation requirement for enclosed work areas?",
+                        options: [
+                            "Windows only",
+                            "Adequate air exchange to remove contaminants",
+                            "No ventilation needed",
+                            "Air conditioning only"
+                        ],
+                        correct: 1
+                    },
+                    {
+                        question: "When should lockout/tagout procedures be used?",
+                        options: [
+                            "Only for major repairs",
+                            "Whenever servicing equipment with stored energy",
+                            "Never in automotive shops",
+                            "Only by supervisors"
+                        ],
+                        correct: 1
+                    },
+                    {
+                        question: "What should be done if you smell gas fumes in the shop?",
+                        options: [
+                            "Continue working",
+                            "Immediately evacuate and eliminate ignition sources",
+                            "Open a window",
+                            "Light a match to find the source"
+                        ],
+                        correct: 1
+                    },
+                    {
+                        question: "How should chemical containers be labeled?",
+                        options: [
+                            "With just the brand name",
+                            "With contents, hazards, and safety precautions",
+                            "Labels are not necessary",
+                            "Only with purchase date"
+                        ],
+                        correct: 1
+                    },
+                    {
+                        question: "What is the safe procedure for jump-starting a vehicle?",
+                        options: [
+                            "Connect positive to positive, negative to negative",
+                            "Connect positive to positive, negative to ground",
+                            "Connect any way",
+                            "Use only negative cables"
+                        ],
+                        correct: 1
+                    },
+                    {
+                        question: "When should safety meetings be conducted?",
+                        options: [
+                            "Only after accidents",
+                            "Regularly as part of ongoing safety training",
+                            "Never",
+                            "Only when OSHA visits"
+                        ],
+                        correct: 1
+                    },
+                    {
+                        question: "What should be done before pressure testing any system?",
+                        options: [
+                            "Use maximum pressure",
+                            "Ensure system is properly sealed and use appropriate pressure",
+                            "Test at low pressure only",
+                            "Have everyone watch"
+                        ],
+                        correct: 1
+                    },
+                    {
+                        question: "How should visitors be handled in the workshop?",
+                        options: [
+                            "Allow free access",
+                            "Provide safety briefing and required PPE",
+                            "Keep them in office only",
+                            "No special procedures needed"
+                        ],
+                        correct: 1
+                    },
+                    {
+                        question: "What is the proper way to handle an oil change?",
+                        options: [
+                            "Drain oil while engine is running",
+                            "Allow engine to cool, drain safely into proper container",
+                            "Drain onto shop floor",
+                            "Change oil only when cold"
+                        ],
+                        correct: 1
+                    },
+                    {
+                        question: "When should incident reports be completed?",
+                        options: [
+                            "Only for major injuries",
+                            "For all incidents, near misses, and injuries",
+                            "Never",
+                            "Only if insurance requires it"
+                        ],
+                        correct: 1
+                    },
+                    {
+                        question: "What should be done with material safety data sheets (MSDS)?",
+                        options: [
+                            "File them away",
+                            "Keep accessible to all workers using chemicals",
+                            "Only give to supervisors",
+                            "Post on bulletin board"
+                        ],
+                        correct: 1
+                    }
+                ];
+                
+                this.init();
+            }
+
+            init() {
+                // Check access code from session storage
+                const accessCodeProvided = sessionStorage.getItem('workshopSafetyAccess');
+                if (!accessCodeProvided) {
+                    this.showAccessDenied();
+                    return;
+                }
+
+                // Validate the stored access code is still valid
+                const storedCode = sessionStorage.getItem('validatedAccessCode');
+                if (!storedCode || !this.accessCodeSystem.validateCode(storedCode)) {
+                    sessionStorage.removeItem('workshopSafetyAccess');
+                    sessionStorage.removeItem('validatedAccessCode');
+                    this.showAccessDenied();
+                    return;
+                }
+
+                this.startQuiz();
+            }
+
+            showAccessDenied() {
+                document.getElementById('accessDenied').style.display = 'block';
+                document.getElementById('quizContent').style.display = 'none';
+            }
+
+            startQuiz() {
+                document.getElementById('accessDenied').style.display = 'none';
+                document.getElementById('quizContent').style.display = 'block';
+
+                // Initialize quiz data
+                this.userAnswers = new Array(this.questions.length).fill(null);
+                this.currentQuestionIndex = 0;
+
+                // Set quiz header information
+                document.getElementById('totalQuestions').textContent = this.questions.length;
+
+                this.displayQuestion();
+            }
+
+            displayQuestion() {
+                const question = this.questions[this.currentQuestionIndex];
+                
+                // Update question info
+                document.getElementById('currentQuestion').textContent = this.currentQuestionIndex + 1;
+                document.getElementById('questionNumber').textContent = `Question ${this.currentQuestionIndex + 1}`;
+                document.getElementById('questionText').textContent = question.question;
+
+                // Update progress bar
+                const progress = ((this.currentQuestionIndex + 1) / this.questions.length) * 100;
+                document.getElementById('progressBar').style.width = `${progress}%`;
+
+                // Display answer options
+                const optionsContainer = document.getElementById('answerOptions');
+                optionsContainer.innerHTML = '';
+
+                question.options.forEach((option, index) => {
+                    const li = document.createElement('li');
+                    li.className = 'answer-option';
+                    
+                    const input = document.createElement('input');
+                    input.type = 'radio';
+                    input.name = 'answer';
+                    input.value = index;
+                    input.id = `option-${index}`;
+                    
+                    // Check if this option was previously selected
+                    if (this.userAnswers[this.currentQuestionIndex] === index) {
+                        input.checked = true;
+                    }
+
+                    const label = document.createElement('label');
+                    label.htmlFor = `option-${index}`;
+                    label.textContent = option;
+
+                    input.addEventListener('change', () => {
+                        this.userAnswers[this.currentQuestionIndex] = parseInt(input.value);
+                        this.updateNavigationButtons();
+                    });
+
+                    li.appendChild(input);
+                    li.appendChild(label);
+                    optionsContainer.appendChild(li);
+                });
+
+                this.updateNavigationButtons();
+            }
+
+            updateNavigationButtons() {
+                const prevButton = document.getElementById('prevButton');
+                const nextButton = document.getElementById('nextButton');
+                const submitButton = document.getElementById('submitButton');
+
+                // Update previous button
+                prevButton.disabled = this.currentQuestionIndex === 0;
+
+                // Update next/submit buttons
+                const isLastQuestion = this.currentQuestionIndex === this.questions.length - 1;
+                
+                if (isLastQuestion) {
+                    nextButton.style.display = 'none';
+                    submitButton.style.display = 'inline-block';
+                } else {
+                    nextButton.style.display = 'inline-block';
+                    submitButton.style.display = 'none';
+                }
+            }
+
+            previousQuestion() {
+                if (this.currentQuestionIndex > 0) {
+                    this.currentQuestionIndex--;
+                    this.displayQuestion();
+                }
+            }
+
+            nextQuestion() {
+                if (this.currentQuestionIndex < this.questions.length - 1) {
+                    this.currentQuestionIndex++;
+                    this.displayQuestion();
+                }
+            }
+
+            submitQuiz() {
+                // Calculate score
+                let correctAnswers = 0;
+                this.questions.forEach((question, index) => {
+                    if (this.userAnswers[index] === question.correct) {
+                        correctAnswers++;
+                    }
+                });
+
+                const totalQuestions = this.questions.length;
+                const percentage = Math.round((correctAnswers / totalQuestions) * 100);
+
+                // Display results
+                document.getElementById('resultsScore').textContent = `${correctAnswers}/${totalQuestions}`;
+                document.getElementById('resultsPercentage').textContent = `${percentage}%`;
+
+                let message = '';
+                if (percentage >= 90) {
+                    message = 'Excellent work! You have mastered this material.';
+                } else if (percentage >= 80) {
+                    message = 'Good job! You have a solid understanding of the material.';
+                } else if (percentage >= 70) {
+                    message = 'You passed, but consider reviewing the material.';
+                } else {
+                    message = 'Please review the material and retake the quiz.';
+                }
+                
+                document.getElementById('resultsMessage').textContent = message;
+
+                // Show results, hide quiz
+                document.getElementById('quizResults').style.display = 'block';
+                document.querySelector('.question-container').style.display = 'none';
+                document.querySelector('.quiz-navigation').style.display = 'none';
+
+                // Clear access permission
+                sessionStorage.removeItem('workshopSafetyAccess');
+                sessionStorage.removeItem('validatedAccessCode');
+            }
+
+            retakeQuiz() {
+                // Reset quiz state
+                this.userAnswers = new Array(this.questions.length).fill(null);
+                this.currentQuestionIndex = 0;
+
+                // Hide results, show quiz
+                document.getElementById('quizResults').style.display = 'none';
+                document.querySelector('.question-container').style.display = 'block';
+                document.querySelector('.quiz-navigation').style.display = 'flex';
+
+                this.displayQuestion();
+            }
+        }
+
+        // Global functions for navigation
+        let quizEngine;
+
+        function previousQuestion() {
+            if (quizEngine) {
+                quizEngine.previousQuestion();
+            }
+        }
+
+        function nextQuestion() {
+            if (quizEngine) {
+                quizEngine.nextQuestion();
+            }
+        }
+
+        function submitQuiz() {
+            if (quizEngine) {
+                quizEngine.submitQuiz();
+            }
+        }
+
+        function retakeQuiz() {
+            if (quizEngine) {
+                quizEngine.retakeQuiz();
+            }
+        }
+
+        // Initialize when DOM is loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            quizEngine = new WorkshopSafetyQuizEngine();
+        });
+    </script>
+</body>
+</html>
