@@ -449,11 +449,14 @@
         }
 
         // Function to launch quiz with access code validation
-        function launchQuiz(quizName) {
+        function launchQuiz(quizName, quizId) {
             showAccessCodeModal(quizName, function() {
-                // This is where the quiz would actually launch
-                // For now, we'll show a success message
-                alert(`Access granted! Launching quiz: ${quizName}\n\n(In a real implementation, this would redirect to the quiz platform)`);
+                // Store quiz access in session storage
+                sessionStorage.setItem('ppeQuizAccess', 'true');
+                sessionStorage.setItem('validatedAccessCode', document.getElementById('accessCodeInput').value);
+                
+                // Redirect to actual quiz page
+                window.location.href = `quiz-${quizId}.html`;
             });
         }
 
@@ -478,7 +481,20 @@
                         return;
                     }
                     
-                    launchQuiz(quizName);
+                    // Map quiz names to their IDs for URL
+                    const quizUrlMap = {
+                        'Personal Protective Equipment (PPE)': 'personal-protective-equipment',
+                        'Workshop Safety Procedures': 'workshop-safety-procedures',
+                        'Emergency Response Protocols': 'emergency-response-protocols',
+                        'Fire Safety and Prevention': 'fire-safety-and-prevention',
+                        'Hand Tool Safety': 'hand-tool-safety',
+                        'Power Tool Operation': 'power-tool-operation',
+                        'Lift and Jack Safety': 'lift-and-jack-safety',
+                        'Pneumatic Tool Safety': 'pneumatic-tool-safety'
+                    };
+                    
+                    const quizId = quizUrlMap[quizName] || quizName.toLowerCase().replace(/[^a-z0-9]/g, '-');
+                    launchQuiz(quizName, quizId);
                 };
             });
         });

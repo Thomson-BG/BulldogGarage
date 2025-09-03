@@ -1,0 +1,835 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz: Personal Protective Equipment (PPE) | Bulldog Garage</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/svg+xml" href="favicon.ico">
+    <script src="js/access-code-system.js"></script>
+    <script src="js/quiz-data.js"></script>
+    <style>
+        .quiz-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+        }
+        
+        .quiz-header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #e5e5e7;
+        }
+        
+        .quiz-title {
+            font-size: 28px;
+            font-weight: 700;
+            color: #1a1a1a;
+            margin: 0 0 10px 0;
+        }
+        
+        .quiz-chapter {
+            font-size: 16px;
+            color: #0071e3;
+            margin: 0;
+        }
+        
+        .quiz-progress {
+            background: #f5f5f7;
+            border-radius: 20px;
+            height: 8px;
+            margin: 20px 0;
+            overflow: hidden;
+        }
+        
+        .quiz-progress-bar {
+            background: #0071e3;
+            height: 100%;
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+        
+        .quiz-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            font-size: 14px;
+            color: #666;
+        }
+        
+        .question-container {
+            margin-bottom: 40px;
+        }
+        
+        .question-number {
+            font-size: 14px;
+            font-weight: 600;
+            color: #0071e3;
+            margin-bottom: 10px;
+        }
+        
+        .question-text {
+            font-size: 20px;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 24px;
+            line-height: 1.4;
+        }
+        
+        .answer-options {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .answer-option {
+            margin-bottom: 12px;
+        }
+        
+        .answer-option input[type="radio"] {
+            margin-right: 12px;
+            transform: scale(1.2);
+        }
+        
+        .answer-option label {
+            display: flex;
+            align-items: center;
+            padding: 16px;
+            background: #f5f5f7;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+            font-size: 16px;
+            line-height: 1.4;
+        }
+        
+        .answer-option label:hover {
+            background: #e5e5e7;
+        }
+        
+        .answer-option input[type="radio"]:checked + label {
+            background: #0071e3;
+            color: #fff;
+        }
+        
+        .quiz-navigation {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 2px solid #e5e5e7;
+        }
+        
+        .nav-button {
+            background: #0071e3;
+            color: #fff;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .nav-button:hover {
+            background: #0056b3;
+        }
+        
+        .nav-button:disabled {
+            background: #8e8e93;
+            cursor: not-allowed;
+        }
+        
+        .nav-button.secondary {
+            background: #8e8e93;
+        }
+        
+        .nav-button.secondary:hover {
+            background: #636366;
+        }
+        
+        .quiz-results {
+            text-align: center;
+            padding: 40px;
+            background: #f5f5f7;
+            border-radius: 12px;
+            margin-top: 40px;
+            display: none;
+        }
+        
+        .results-score {
+            font-size: 48px;
+            font-weight: 700;
+            color: #0071e3;
+            margin: 0 0 10px 0;
+        }
+        
+        .results-percentage {
+            font-size: 24px;
+            color: #1a1a1a;
+            margin: 0 0 20px 0;
+        }
+        
+        .results-message {
+            font-size: 18px;
+            color: #666;
+            margin: 0 0 30px 0;
+        }
+        
+        .results-actions {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+        }
+        
+        .access-denied {
+            text-align: center;
+            padding: 60px 20px;
+        }
+        
+        .access-denied h1 {
+            color: #ff3b30;
+            margin-bottom: 20px;
+        }
+        
+        .access-denied p {
+            color: #666;
+            font-size: 18px;
+            margin-bottom: 30px;
+        }
+        
+        .quiz-locked {
+            text-align: center;
+            padding: 60px 20px;
+        }
+        
+        .quiz-locked h1 {
+            color: #ff9500;
+            margin-bottom: 20px;
+        }
+        
+        .quiz-locked p {
+            color: #666;
+            font-size: 18px;
+            margin-bottom: 30px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Apple-style Navigation -->
+    <nav class="globalnav">
+        <div class="globalnav-content">
+            <ul class="globalnav-list">
+                <li class="globalnav-item globalnav-item-apple">
+                    <a class="globalnav-link" href="index.html" aria-label="Bulldog Garage" style="display:flex;align-items:center;justify-content:center;padding:0;">
+                        <img src="bulldog.svg" alt="Bulldog Head Logo" style="height:55px;width:55px;display:block;object-fit:contain;" />
+                    </a>
+                </li>
+                <li class="globalnav-item"><a class="globalnav-link" href="cte-program.html">CTE Programs</a></li>
+                <li class="globalnav-item"><a class="globalnav-link" href="google-classroom.html">Google Classroom</a></li>
+                <li class="globalnav-item"><a class="globalnav-link" href="ford-ace.html">Ford ACE</a></li>
+                <li class="globalnav-item"><a class="globalnav-link" href="mitchell-ondemand.html">Mitchell OnDemand</a></li>
+                <li class="globalnav-item"><a class="globalnav-link" href="shop-vehicles.html">Shop Vehicles</a></li>
+                <li class="globalnav-item"><a class="globalnav-link" href="forms.html">Forms</a></li>
+                <li class="globalnav-item"><a class="globalnav-link" href="tests.html">Tests</a></li>
+                <li class="globalnav-item"><a class="globalnav-link" href="support.html">Support</a></li>
+                <li class="globalnav-item">
+                    <a class="globalnav-link" href="news.html">News</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="page-main" style="background: #f5f5f7; min-height: 100vh; padding: 40px 0;">
+        
+        <!-- Access Denied Content -->
+        <div id="accessDenied" class="access-denied" style="display: none;">
+            <h1>Access Code Required</h1>
+            <p>You need a valid access code to take this quiz. Please obtain the current access code from your instructor.</p>
+            <a href="chapter-quizzes.html" class="nav-button">← Back to Chapter Quizzes</a>
+        </div>
+
+        <!-- Quiz Locked Content -->
+        <div id="quizLocked" class="quiz-locked" style="display: none;">
+            <h1>Quiz Currently Locked</h1>
+            <p>This quiz has been temporarily locked by the administrator. Please check back later or contact your instructor.</p>
+            <a href="chapter-quizzes.html" class="nav-button">← Back to Chapter Quizzes</a>
+        </div>
+
+        <!-- Quiz Content -->
+        <div id="quizContent" class="quiz-container">
+            <div class="quiz-header">
+                <h1 class="quiz-title">Personal Protective Equipment (PPE)</h1>
+                <p class="quiz-chapter">Chapter 1: Automotive Safety Fundamentals</p>
+                <div class="quiz-progress">
+                    <div class="quiz-progress-bar" id="progressBar"></div>
+                </div>
+                <div class="quiz-info">
+                    <span>Question <span id="currentQuestion">1</span> of <span id="totalQuestions">30</span></span>
+                    <span id="timeRemaining">Time: Unlimited</span>
+                </div>
+            </div>
+
+            <div class="question-container">
+                <div class="question-number" id="questionNumber">Question 1</div>
+                <div class="question-text" id="questionText">Question text will appear here</div>
+                <ul class="answer-options" id="answerOptions">
+                    <!-- Answer options will be populated by JavaScript -->
+                </ul>
+            </div>
+
+            <div class="quiz-navigation">
+                <button class="nav-button secondary" id="prevButton" onclick="previousQuestion()" disabled>← Previous</button>
+                <div>
+                    <button class="nav-button" id="nextButton" onclick="nextQuestion()">Next →</button>
+                    <button class="nav-button" id="submitButton" onclick="submitQuiz()" style="display: none;">Submit Quiz</button>
+                </div>
+            </div>
+
+            <!-- Quiz Results -->
+            <div class="quiz-results" id="quizResults">
+                <div class="results-score" id="resultsScore">0/30</div>
+                <div class="results-percentage" id="resultsPercentage">0%</div>
+                <div class="results-message" id="resultsMessage">Quiz completed!</div>
+                <div class="results-actions">
+                    <button class="nav-button" onclick="retakeQuiz()">Retake Quiz</button>
+                    <a href="chapter-quizzes.html" class="nav-button secondary">Back to Quizzes</a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="script.js"></script>
+    <script>
+        // Quiz Engine Implementation for PPE Quiz
+        class PPEQuizEngine {
+            constructor() {
+                this.accessCodeSystem = new AccessCodeSystem();
+                this.currentQuestionIndex = 0;
+                this.userAnswers = [];
+                this.quizId = 'personal-protective-equipment';
+                
+                // PPE Quiz Questions (30 questions)
+                this.questions = [
+                    {
+                        question: "What is the primary purpose of safety glasses in an automotive shop?",
+                        options: [
+                            "To look professional",
+                            "To protect eyes from debris and chemicals",
+                            "To reduce glare from lighting",
+                            "To improve vision while working"
+                        ],
+                        correct: 1
+                    },
+                    {
+                        question: "Which type of gloves should NOT be worn when working with rotating machinery?",
+                        options: [
+                            "Nitrile gloves",
+                            "Cut-resistant gloves",
+                            "Loose-fitting gloves",
+                            "Chemical-resistant gloves"
+                        ],
+                        correct: 2
+                    },
+                    {
+                        question: "When should hearing protection be used in an automotive shop?",
+                        options: [
+                            "Only when using power tools",
+                            "When noise levels exceed 85 decibels",
+                            "Only during engine testing",
+                            "When working alone"
+                        ],
+                        correct: 1
+                    },
+                    {
+                        question: "What type of footwear is most appropriate for automotive shop work?",
+                        options: [
+                            "Sandals with good grip",
+                            "Steel-toed boots",
+                            "Running shoes",
+                            "High-heel shoes"
+                        ],
+                        correct: 1
+                    },
+                    {
+                        question: "Which of the following is NOT a required component of proper shop attire?",
+                        options: [
+                            "Close-fitting clothing",
+                            "Tie or loose jewelry",
+                            "Safety glasses",
+                            "Non-slip footwear"
+                        ],
+                        correct: 1
+                    },
+                    {
+                        question: "When working under a vehicle, what additional PPE should be worn?",
+                        options: [
+                            "Knee pads only",
+                            "Hard hat or bump cap",
+                            "Extra thick gloves",
+                            "Reflective vest"
+                        ],
+                        correct: 1
+                    },
+                    {
+                        question: "What is the maximum recommended duration for wearing disposable nitrile gloves?",
+                        options: [
+                            "30 minutes",
+                            "2 hours",
+                            "4 hours",
+                            "8 hours"
+                        ],
+                        correct: 2
+                    },
+                    {
+                        question: "Which type of respirator is appropriate for spray painting operations?",
+                        options: [
+                            "Dust mask",
+                            "Half-face respirator with organic vapor cartridges",
+                            "Simple cloth mask",
+                            "Full-face diving mask"
+                        ],
+                        correct: 1
+                    },
+                    {
+                        question: "When should safety glasses be replaced?",
+                        options: [
+                            "Every month",
+                            "When scratched or damaged",
+                            "Every year",
+                            "Only when broken"
+                        ],
+                        correct: 1
+                    },
+                    {
+                        question: "What is the proper way to remove contaminated gloves?",
+                        options: [
+                            "Pull from the fingertips",
+                            "Peel from the wrist, turning inside out",
+                            "Cut them off with scissors",
+                            "Wash them first, then remove"
+                        ],
+                        correct: 1
+                    },
+                    {
+                        question: "Which PPE is required when working with battery acid?",
+                        options: [
+                            "Safety glasses only",
+                            "Safety glasses and acid-resistant gloves",
+                            "Just gloves",
+                            "No special PPE needed"
+                        ],
+                        correct: 1
+                    },
+                    {
+                        question: "What is the minimum eye protection standard for automotive shop work?",
+                        options: [
+                            "ANSI Z87.1",
+                            "DOT approved",
+                            "ISO 9001",
+                            "OSHA 1910"
+                        ],
+                        correct: 0
+                    },
+                    {
+                        question: "When working with compressed air, what additional precaution should be taken?",
+                        options: [
+                            "Use higher pressure settings",
+                            "Never exceed 30 PSI for cleaning",
+                            "Always wear headphones",
+                            "Work in enclosed spaces"
+                        ],
+                        correct: 1
+                    },
+                    {
+                        question: "Which type of cut-resistant gloves should be used when handling sharp metal?",
+                        options: [
+                            "Level 1 cut resistance",
+                            "Level 3 or higher cut resistance",
+                            "Regular work gloves",
+                            "Disposable latex gloves"
+                        ],
+                        correct: 1
+                    },
+                    {
+                        question: "What should you do if your safety glasses fog up during work?",
+                        options: [
+                            "Remove them temporarily",
+                            "Use anti-fog coating or switch to clear alternatives",
+                            "Work without them until they clear",
+                            "Wipe them with a dirty cloth"
+                        ],
+                        correct: 1
+                    },
+                    {
+                        question: "When is face shield protection required in addition to safety glasses?",
+                        options: [
+                            "When grinding or working with flying particles",
+                            "Only when welding",
+                            "Never required in automotive work",
+                            "Only when working outdoors"
+                        ],
+                        correct: 0
+                    },
+                    {
+                        question: "What type of clothing should be avoided in an automotive shop?",
+                        options: [
+                            "Cotton work shirts",
+                            "Loose sleeves and baggy clothing",
+                            "Denim jeans",
+                            "Work boots"
+                        ],
+                        correct: 1
+                    },
+                    {
+                        question: "How often should safety equipment be inspected?",
+                        options: [
+                            "Once a year",
+                            "Before each use",
+                            "Once a month",
+                            "Only when damaged"
+                        ],
+                        correct: 1
+                    },
+                    {
+                        question: "What is the proper storage method for safety glasses?",
+                        options: [
+                            "In a toolbox with other tools",
+                            "In a clean, protected case",
+                            "Hanging on a hook",
+                            "In a pants pocket"
+                        ],
+                        correct: 1
+                    },
+                    {
+                        question: "Which of the following requires the highest level of eye protection?",
+                        options: [
+                            "Changing oil",
+                            "Welding operations",
+                            "Tire rotation",
+                            "Brake inspection"
+                        ],
+                        correct: 1
+                    },
+                    {
+                        question: "When working with hydraulic systems, what PPE is essential?",
+                        options: [
+                            "Just safety glasses",
+                            "Safety glasses and chemical-resistant gloves",
+                            "Hard hat only",
+                            "Steel-toed boots only"
+                        ],
+                        correct: 1
+                    },
+                    {
+                        question: "What should you do if PPE becomes damaged during work?",
+                        options: [
+                            "Continue working and replace later",
+                            "Stop work immediately and replace PPE",
+                            "Tape it temporarily",
+                            "Only replace if severely damaged"
+                        ],
+                        correct: 1
+                    },
+                    {
+                        question: "Which factor determines the type of respiratory protection needed?",
+                        options: [
+                            "Time of day",
+                            "Type and concentration of contaminants",
+                            "Size of the workspace",
+                            "Number of people working"
+                        ],
+                        correct: 1
+                    },
+                    {
+                        question: "What is the primary reason for wearing long pants in an automotive shop?",
+                        options: [
+                            "Professional appearance",
+                            "Protection from burns, cuts, and chemical splashes",
+                            "Warmth",
+                            "Company dress code"
+                        ],
+                        correct: 1
+                    },
+                    {
+                        question: "When should prescription safety glasses be considered?",
+                        options: [
+                            "Never necessary",
+                            "When workers need vision correction",
+                            "Only for supervisors",
+                            "Only when regular glasses are broken"
+                        ],
+                        correct: 1
+                    },
+                    {
+                        question: "What type of protection is needed when working with coolant systems?",
+                        options: [
+                            "No special protection",
+                            "Chemical-resistant gloves and eye protection",
+                            "Just eye protection",
+                            "Only when system is hot"
+                        ],
+                        correct: 1
+                    },
+                    {
+                        question: "Which of the following is a sign that hearing protection is needed?",
+                        options: [
+                            "You can hear clearly",
+                            "You must raise your voice to be heard 3 feet away",
+                            "The work area is quiet",
+                            "You're working alone"
+                        ],
+                        correct: 1
+                    },
+                    {
+                        question: "What should be done with PPE after exposure to chemicals?",
+                        options: [
+                            "Store it normally",
+                            "Clean or dispose of according to safety procedures",
+                            "Let it air dry",
+                            "Use it until visibly dirty"
+                        ],
+                        correct: 1
+                    },
+                    {
+                        question: "When working with air tools, what additional PPE consideration is important?",
+                        options: [
+                            "Extra thick gloves",
+                            "Hearing protection due to noise levels",
+                            "Special clothing",
+                            "Reflective vest"
+                        ],
+                        correct: 1
+                    },
+                    {
+                        question: "What is the most important factor in PPE effectiveness?",
+                        options: [
+                            "Cost of the equipment",
+                            "Proper fit and consistent use",
+                            "Brand name",
+                            "Color of the equipment"
+                        ],
+                        correct: 1
+                    }
+                ];
+                
+                this.init();
+            }
+
+            init() {
+                // Check access code from session storage
+                const accessCodeProvided = sessionStorage.getItem('ppeQuizAccess');
+                if (!accessCodeProvided) {
+                    this.showAccessDenied();
+                    return;
+                }
+
+                // Validate the stored access code is still valid
+                const storedCode = sessionStorage.getItem('validatedAccessCode');
+                if (!storedCode || !this.accessCodeSystem.validateCode(storedCode)) {
+                    sessionStorage.removeItem('ppeQuizAccess');
+                    sessionStorage.removeItem('validatedAccessCode');
+                    this.showAccessDenied();
+                    return;
+                }
+
+                this.startQuiz();
+            }
+
+            showAccessDenied() {
+                document.getElementById('accessDenied').style.display = 'block';
+                document.getElementById('quizContent').style.display = 'none';
+            }
+
+            startQuiz() {
+                document.getElementById('accessDenied').style.display = 'none';
+                document.getElementById('quizContent').style.display = 'block';
+
+                // Initialize quiz data
+                this.userAnswers = new Array(this.questions.length).fill(null);
+                this.currentQuestionIndex = 0;
+
+                // Set quiz header information
+                document.getElementById('totalQuestions').textContent = this.questions.length;
+
+                this.displayQuestion();
+            }
+
+            displayQuestion() {
+                const question = this.questions[this.currentQuestionIndex];
+                
+                // Update question info
+                document.getElementById('currentQuestion').textContent = this.currentQuestionIndex + 1;
+                document.getElementById('questionNumber').textContent = `Question ${this.currentQuestionIndex + 1}`;
+                document.getElementById('questionText').textContent = question.question;
+
+                // Update progress bar
+                const progress = ((this.currentQuestionIndex + 1) / this.questions.length) * 100;
+                document.getElementById('progressBar').style.width = `${progress}%`;
+
+                // Display answer options
+                const optionsContainer = document.getElementById('answerOptions');
+                optionsContainer.innerHTML = '';
+
+                question.options.forEach((option, index) => {
+                    const li = document.createElement('li');
+                    li.className = 'answer-option';
+                    
+                    const input = document.createElement('input');
+                    input.type = 'radio';
+                    input.name = 'answer';
+                    input.value = index;
+                    input.id = `option-${index}`;
+                    
+                    // Check if this option was previously selected
+                    if (this.userAnswers[this.currentQuestionIndex] === index) {
+                        input.checked = true;
+                    }
+
+                    const label = document.createElement('label');
+                    label.htmlFor = `option-${index}`;
+                    label.textContent = option;
+
+                    input.addEventListener('change', () => {
+                        this.userAnswers[this.currentQuestionIndex] = parseInt(input.value);
+                        this.updateNavigationButtons();
+                    });
+
+                    li.appendChild(input);
+                    li.appendChild(label);
+                    optionsContainer.appendChild(li);
+                });
+
+                this.updateNavigationButtons();
+            }
+
+            updateNavigationButtons() {
+                const prevButton = document.getElementById('prevButton');
+                const nextButton = document.getElementById('nextButton');
+                const submitButton = document.getElementById('submitButton');
+
+                // Update previous button
+                prevButton.disabled = this.currentQuestionIndex === 0;
+
+                // Update next/submit buttons
+                const isLastQuestion = this.currentQuestionIndex === this.questions.length - 1;
+                
+                if (isLastQuestion) {
+                    nextButton.style.display = 'none';
+                    submitButton.style.display = 'inline-block';
+                } else {
+                    nextButton.style.display = 'inline-block';
+                    submitButton.style.display = 'none';
+                }
+            }
+
+            previousQuestion() {
+                if (this.currentQuestionIndex > 0) {
+                    this.currentQuestionIndex--;
+                    this.displayQuestion();
+                }
+            }
+
+            nextQuestion() {
+                if (this.currentQuestionIndex < this.questions.length - 1) {
+                    this.currentQuestionIndex++;
+                    this.displayQuestion();
+                }
+            }
+
+            submitQuiz() {
+                // Calculate score
+                let correctAnswers = 0;
+                this.questions.forEach((question, index) => {
+                    if (this.userAnswers[index] === question.correct) {
+                        correctAnswers++;
+                    }
+                });
+
+                const totalQuestions = this.questions.length;
+                const percentage = Math.round((correctAnswers / totalQuestions) * 100);
+
+                // Display results
+                document.getElementById('resultsScore').textContent = `${correctAnswers}/${totalQuestions}`;
+                document.getElementById('resultsPercentage').textContent = `${percentage}%`;
+
+                let message = '';
+                if (percentage >= 90) {
+                    message = 'Excellent work! You have mastered this material.';
+                } else if (percentage >= 80) {
+                    message = 'Good job! You have a solid understanding of the material.';
+                } else if (percentage >= 70) {
+                    message = 'You passed, but consider reviewing the material.';
+                } else {
+                    message = 'Please review the material and retake the quiz.';
+                }
+                
+                document.getElementById('resultsMessage').textContent = message;
+
+                // Show results, hide quiz
+                document.getElementById('quizResults').style.display = 'block';
+                document.querySelector('.question-container').style.display = 'none';
+                document.querySelector('.quiz-navigation').style.display = 'none';
+
+                // Clear access permission
+                sessionStorage.removeItem('ppeQuizAccess');
+                sessionStorage.removeItem('validatedAccessCode');
+            }
+
+            retakeQuiz() {
+                // Reset quiz state
+                this.userAnswers = new Array(this.questions.length).fill(null);
+                this.currentQuestionIndex = 0;
+
+                // Hide results, show quiz
+                document.getElementById('quizResults').style.display = 'none';
+                document.querySelector('.question-container').style.display = 'block';
+                document.querySelector('.quiz-navigation').style.display = 'flex';
+
+                this.displayQuestion();
+            }
+        }
+
+        // Global functions for navigation
+        let quizEngine;
+
+        function previousQuestion() {
+            if (quizEngine) {
+                quizEngine.previousQuestion();
+            }
+        }
+
+        function nextQuestion() {
+            if (quizEngine) {
+                quizEngine.nextQuestion();
+            }
+        }
+
+        function submitQuiz() {
+            if (quizEngine) {
+                quizEngine.submitQuiz();
+            }
+        }
+
+        function retakeQuiz() {
+            if (quizEngine) {
+                quizEngine.retakeQuiz();
+            }
+        }
+
+        // Initialize when DOM is loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            quizEngine = new PPEQuizEngine();
+        });
+    </script>
+</body>
+</html>
