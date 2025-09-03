@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter Quizzes | Bulldog Garage</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/svg+xml" href="favicon.ico">
+    <script src="js/access-code-system.js"></script>
+    <script src="js/access-code-modal.js"></script>
+    <style>
+        .modules-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        
+        .module-item {
+            background: #f5f5f7;
+            border-radius: 12px;
+            margin-bottom: 16px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .module-header {
+            background: #1a1a1a;
+            color: #fff;
+            padding: 20px 24px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background 0.3s ease;
+        }
+        
+        .module-header:hover {
+            background: #0071e3;
+        }
+        
+        .module-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin: 0;
+        }
+        
+        .module-toggle {
+            font-size: 24px;
+            transition: transform 0.3s ease;
+        }
+        
+        .module-content {
+            padding: 0;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+        
+        .module-content.active {
+            max-height: 1000px;
+            padding: 24px;
+        }
+        
+        .test-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .test-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 0;
+            border-bottom: 1px solid #e5e5e7;
+        }
+        
+        .test-item:last-child {
+            border-bottom: none;
+        }
+        
+        .test-name {
+            font-weight: 500;
+            color: #1a1a1a;
+        }
+        
+        .test-button {
+            background: #0071e3;
+            color: #fff;
+            padding: 8px 16px;
+            border-radius: 20px;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            transition: background 0.3s ease;
+        }
+        
+        .test-button:hover {
+            background: #0056b3;
+            color: #fff;
+        }
+        
+        .quiz-locked {
+            opacity: 0.6;
+            pointer-events: none;
+        }
+        
+        .quiz-locked .test-button {
+            background: #8e8e93;
+        }
+        
+        .lock-status {
+            font-size: 12px;
+            color: #8e8e93;
+            margin-left: 8px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Apple-style Navigation -->
+    <nav class="globalnav">
+        <div class="globalnav-content">
+            <ul class="globalnav-list">
+                <li class="globalnav-item globalnav-item-apple">
+                    <a class="globalnav-link" href="index.html" aria-label="Bulldog Garage" style="display:flex;align-items:center;justify-content:center;padding:0;">
+                        <img src="bulldog.svg" alt="Bulldog Head Logo" style="height:55px;width:55px;display:block;object-fit:contain;" />
+                    </a>
+                </li>
+                <li class="globalnav-item"><a class="globalnav-link" href="cte-program.html">CTE Programs</a></li>
+                <li class="globalnav-item"><a class="globalnav-link" href="google-classroom.html">Google Classroom</a></li>
+                <li class="globalnav-item"><a class="globalnav-link" href="ford-ace.html">Ford ACE</a></li>
+                <li class="globalnav-item"><a class="globalnav-link" href="mitchell-ondemand.html">Mitchell OnDemand</a></li>
+                <li class="globalnav-item"><a class="globalnav-link" href="shop-vehicles.html">Shop Vehicles</a></li>
+                <li class="globalnav-item"><a class="globalnav-link" href="forms.html">Forms</a></li>
+                <li class="globalnav-item"><a class="globalnav-link" href="tests.html">Tests</a></li>
+                <li class="globalnav-item"><a class="globalnav-link" href="support.html">Support</a></li>
+                <li class="globalnav-item">
+                    <a class="globalnav-link" href="news.html">News</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="page-main">
+        <!-- Hero Section -->
+        <section class="section-hero" style="background: #000; color: #fff;">
+            <div class="section-content">
+                <div class="hero-eyebrow" style="color: #0071e3;">Chapter Quizzes</div>
+                <h1 class="hero-headline">Comprehensive Chapter Assessments</h1>
+                <p class="hero-copy">Access chapter-based quizzes covering automotive safety topics, procedures, and regulations.</p>
+                <div class="cta-links" style="margin-top: 20px;">
+                    <a href="tests.html" class="button button-elevated" style="background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.3);">← Back to Tests</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Modules Section -->
+        <section class="modules-container">
+            <!-- Chapter 1 -->
+            <div class="module-item">
+                <div class="module-header" onclick="toggleModule(1)">
+                    <h3 class="module-title">Chapter 1: Automotive Safety Fundamentals</h3>
+                    <span class="module-toggle">+</span>
+                </div>
+                <div class="module-content" id="module-1">
+                    <ul class="test-list">
+                        <li class="test-item">
+                            <span class="test-name">Personal Protective Equipment (PPE)</span>
+                            <a href="#" class="test-button">Take Quiz</a>
+                        </li>
+                        <li class="test-item">
+                            <span class="test-name">Workshop Safety Procedures</span>
+                            <a href="#" class="test-button">Take Quiz</a>
+                        </li>
+                        <li class="test-item">
+                            <span class="test-name">Emergency Response Protocols</span>
+                            <a href="#" class="test-button">Take Quiz</a>
+                        </li>
+                        <li class="test-item">
+                            <span class="test-name">Fire Safety and Prevention</span>
+                            <a href="#" class="test-button">Take Quiz</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Chapter 2 -->
+            <div class="module-item">
+                <div class="module-header" onclick="toggleModule(2)">
+                    <h3 class="module-title">Chapter 2: Tool and Equipment Safety</h3>
+                    <span class="module-toggle">+</span>
+                </div>
+                <div class="module-content" id="module-2">
+                    <ul class="test-list">
+                        <li class="test-item">
+                            <span class="test-name">Hand Tool Safety</span>
+                            <a href="#" class="test-button">Take Quiz</a>
+                        </li>
+                        <li class="test-item">
+                            <span class="test-name">Power Tool Operation</span>
+                            <a href="#" class="test-button">Take Quiz</a>
+                        </li>
+                        <li class="test-item">
+                            <span class="test-name">Lift and Jack Safety</span>
+                            <a href="#" class="test-button">Take Quiz</a>
+                        </li>
+                        <li class="test-item">
+                            <span class="test-name">Pneumatic Tool Safety</span>
+                            <a href="#" class="test-button">Take Quiz</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Chapter 3 -->
+            <div class="module-item">
+                <div class="module-header" onclick="toggleModule(3)">
+                    <h3 class="module-title">Chapter 3: Chemical and Hazardous Material Safety</h3>
+                    <span class="module-toggle">+</span>
+                </div>
+                <div class="module-content" id="module-3">
+                    <ul class="test-list">
+                        <li class="test-item">
+                            <span class="test-name">MSDS and Safety Data Sheets</span>
+                            <a href="#" class="test-button">Take Quiz</a>
+                        </li>
+                        <li class="test-item">
+                            <span class="test-name">Chemical Storage and Handling</span>
+                            <a href="#" class="test-button">Take Quiz</a>
+                        </li>
+                        <li class="test-item">
+                            <span class="test-name">Waste Disposal Procedures</span>
+                            <a href="#" class="test-button">Take Quiz</a>
+                        </li>
+                        <li class="test-item">
+                            <span class="test-name">Spill Response and Cleanup</span>
+                            <a href="#" class="test-button">Take Quiz</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Chapter 4 -->
+            <div class="module-item">
+                <div class="module-header" onclick="toggleModule(4)">
+                    <h3 class="module-title">Chapter 4: Electrical Safety</h3>
+                    <span class="module-toggle">+</span>
+                </div>
+                <div class="module-content" id="module-4">
+                    <ul class="test-list">
+                        <li class="test-item">
+                            <span class="test-name">Electrical Hazard Recognition</span>
+                            <a href="#" class="test-button">Take Quiz</a>
+                        </li>
+                        <li class="test-item">
+                            <span class="test-name">Lockout/Tagout Procedures</span>
+                            <a href="#" class="test-button">Take Quiz</a>
+                        </li>
+                        <li class="test-item">
+                            <span class="test-name">High Voltage System Safety</span>
+                            <a href="#" class="test-button">Take Quiz</a>
+                        </li>
+                        <li class="test-item">
+                            <span class="test-name">Electrical Testing Safety</span>
+                            <a href="#" class="test-button">Take Quiz</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Chapter 5 -->
+            <div class="module-item">
+                <div class="module-header" onclick="toggleModule(5)">
+                    <h3 class="module-title">Chapter 5: Environmental and Health Safety</h3>
+                    <span class="module-toggle">+</span>
+                </div>
+                <div class="module-content" id="module-5">
+                    <ul class="test-list">
+                        <li class="test-item">
+                            <span class="test-name">Respiratory Protection</span>
+                            <a href="#" class="test-button">Take Quiz</a>
+                        </li>
+                        <li class="test-item">
+                            <span class="test-name">Noise and Hearing Protection</span>
+                            <a href="#" class="test-button">Take Quiz</a>
+                        </li>
+                        <li class="test-item">
+                            <span class="test-name">Ergonomics and Injury Prevention</span>
+                            <a href="#" class="test-button">Take Quiz</a>
+                        </li>
+                        <li class="test-item">
+                            <span class="test-name">Indoor Air Quality</span>
+                            <a href="#" class="test-button">Take Quiz</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Chapter 6 -->
+            <div class="module-item">
+                <div class="module-header" onclick="toggleModule(6)">
+                    <h3 class="module-title">Chapter 6: Regulatory Compliance</h3>
+                    <span class="module-toggle">+</span>
+                </div>
+                <div class="module-content" id="module-6">
+                    <ul class="test-list">
+                        <li class="test-item">
+                            <span class="test-name">OSHA Standards and Regulations</span>
+                            <a href="#" class="test-button">Take Quiz</a>
+                        </li>
+                        <li class="test-item">
+                            <span class="test-name">EPA Environmental Regulations</span>
+                            <a href="#" class="test-button">Take Quiz</a>
+                        </li>
+                        <li class="test-item">
+                            <span class="test-name">DOT Transportation Requirements</span>
+                            <a href="#" class="test-button">Take Quiz</a>
+                        </li>
+                        <li class="test-item">
+                            <span class="test-name">Industry Safety Standards</span>
+                            <a href="#" class="test-button">Take Quiz</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Chapter 7 -->
+            <div class="module-item">
+                <div class="module-header" onclick="toggleModule(7)">
+                    <h3 class="module-title">Chapter 7: Advanced Safety Systems</h3>
+                    <span class="module-toggle">+</span>
+                </div>
+                <div class="module-content" id="module-7">
+                    <ul class="test-list">
+                        <li class="test-item">
+                            <span class="test-name">Vehicle Safety Systems</span>
+                            <a href="#" class="test-button">Take Quiz</a>
+                        </li>
+                        <li class="test-item">
+                            <span class="test-name">Airbag System Safety</span>
+                            <a href="#" class="test-button">Take Quiz</a>
+                        </li>
+                        <li class="test-item">
+                            <span class="test-name">Alternative Fuel Safety</span>
+                            <a href="#" class="test-button">Take Quiz</a>
+                        </li>
+                        <li class="test-item">
+                            <span class="test-name">Hybrid and Electric Vehicle Safety</span>
+                            <a href="#" class="test-button">Take Quiz</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Apple-style Footer -->
+    <footer class="as-globalfooter">
+        <div class="as-globalfooter-content">
+            <div class="as-globalfooter-directory">
+                <div class="as-globalfooter-directory-column">
+                    <input class="as-globalfooter-directory-column-section-state" type="checkbox" id="as-globalfooter-directory-column-section-state-products">
+                    <div class="as-globalfooter-directory-column-section">
+                        <label class="as-globalfooter-directory-column-section-label" for="as-globalfooter-directory-column-section-state-products">
+                            <h3 class="as-globalfooter-directory-column-section-title">Site Map</h3>
+                        </label>
+                        <div class="as-globalfooter-directory-column-section-list">
+                            <ul>
+                                <li><a href="index.html">Home</a></li>
+                                <li><a href="cte-program.html">CTE Programs</a></li>
+                                <li><a href="google-classroom.html">Google Classroom</a></li>
+                                <li><a href="ford-ace.html">Ford ACE</a></li>
+                                <li><a href="mitchell-ondemand.html">Mitchell OnDemand</a></li>
+                                <li><a href="shop-vehicles.html">Shop Vehicles</a></li>
+                                <li><a href="forms.html">Forms</a></li>
+                                <li><a href="support.html">Support</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="as-globalfooter-directory-column">
+                    <input class="as-globalfooter-directory-column-section-state" type="checkbox" id="as-globalfooter-directory-column-section-state-services">
+                    <div class="as-globalfooter-directory-column-section">
+                        <label class="as-globalfooter-directory-column-section-label" for="as-globalfooter-directory-column-section-state-services">
+                            <h3 class="as-globalfooter-directory-column-section-title">Services</h3>
+                        </label>
+                        <div class="as-globalfooter-directory-column-section-list">
+                            <ul>
+                                <li><a href="google-classroom.html">Google Classroom</a></li>
+                                <li><a href="ford-ace.html">Ford ACE Training</a></li>
+                                <li><a href="mitchell-ondemand.html">Mitchell OnDemand</a></li>
+                                <li><a href="shop-vehicles.html">Shop Vehicle Management</a></li>
+                                <li><a href="forms.html">Administrative Forms</a></li>
+                                <li><a href="tests.html">Student Testing</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="as-globalfooter-directory-column">
+                    <input class="as-globalfooter-directory-column-section-state" type="checkbox" id="as-globalfooter-directory-column-section-state-account">
+                    <div class="as-globalfooter-directory-column-section">
+                        <label class="as-globalfooter-directory-column-section-label" for="as-globalfooter-directory-column-section-state-account">
+                            <h3 class="as-globalfooter-directory-column-section-title">Support</h3>
+                        </label>
+                        <div class="as-globalfooter-directory-column-section-list">
+                            <ul>
+                                <li><a href="support.html">Technical Support</a></li>
+                                <li><a href="legal.html">Legal Information</a></li>
+                                <li><a href="privacypolicy.html">Privacy Policy</a></li>
+                                <li><a href="terms-of-service.html">Terms of Service</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="as-globalfooter-mini">
+                <div class="as-globalfooter-mini-locale">
+                    <a href="#" class="as-globalfooter-mini-locale-link">United States</a>
+                </div>
+                <div class="as-globalfooter-mini-legal">
+                    <div class="as-globalfooter-mini-legal-copyright"><b>Copyright © 2025 Bulldog Garage Inc. All rights reserved.</b></div>
+                    <div class="as-globalfooter-mini-legal-links">
+                        <a href="privacypolicy.html">Privacy Policy</a>
+                        <a href="terms-of-service.html">Terms of Use</a>
+                        <a href="https://www.hemetusd.org">HUSD</a>
+                        <a href="legal.html">Legal</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        function toggleModule(moduleNum) {
+            const content = document.getElementById(`module-${moduleNum}`);
+            const toggle = content.previousElementSibling.querySelector('.module-toggle');
+            
+            if (content.classList.contains('active')) {
+                content.classList.remove('active');
+                toggle.textContent = '+';
+            } else {
+                content.classList.add('active');
+                toggle.textContent = '−';
+            }
+        }
+
+        // Function to launch quiz with access code validation
+        function launchQuiz(quizName) {
+            showAccessCodeModal(quizName, function() {
+                // This is where the quiz would actually launch
+                // For now, we'll show a success message
+                alert(`Access granted! Launching quiz: ${quizName}\n\n(In a real implementation, this would redirect to the quiz platform)`);
+            });
+        }
+
+        // Function to check if a quiz is locked
+        function isQuizLocked(quizElement) {
+            return quizElement.classList.contains('quiz-locked');
+        }
+
+        // Update all quiz buttons to use access code validation
+        document.addEventListener('DOMContentLoaded', function() {
+            const testButtons = document.querySelectorAll('.test-button');
+            testButtons.forEach(button => {
+                const testItem = button.closest('.test-item');
+                const quizName = testItem.querySelector('.test-name').textContent;
+                
+                button.onclick = function(e) {
+                    e.preventDefault();
+                    
+                    // Check if quiz is locked
+                    if (isQuizLocked(testItem)) {
+                        alert('This quiz is currently locked by the administrator.');
+                        return;
+                    }
+                    
+                    launchQuiz(quizName);
+                };
+            });
+        });
+    </script>
+</body>
+</html>

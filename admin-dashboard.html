@@ -480,6 +480,18 @@
 
                 <div class="page-item">
                     <div class="page-info">
+                        <h3>Chapter Quizzes (chapter-quizzes.html)</h3>
+                        <p>Comprehensive chapter assessments covering automotive safety topics</p>
+                    </div>
+                    <div class="page-actions">
+                        <button class="action-button" onclick="viewPage('chapter-quizzes.html')">View</button>
+                        <button class="action-button edit" onclick="editPage('chapter-quizzes.html')">Edit</button>
+                        <button class="action-button" onclick="manageQuizzes()">Manage Quizzes</button>
+                    </div>
+                </div>
+
+                <div class="page-item">
+                    <div class="page-info">
                         <h3>CTE Programs (cte-program.html)</h3>
                         <p>Career and Technical Education program information</p>
                     </div>
@@ -547,6 +559,128 @@
             </form>
         </div>
     </div>
+
+    <!-- Quiz Management Modal -->
+    <div id="quizModal" class="modal">
+        <div class="modal-content" style="max-width: 800px;">
+            <div class="modal-header">
+                <h3 class="modal-title">Manage Chapter Quizzes</h3>
+                <button class="close-button" onclick="closeQuizModal()">&times;</button>
+            </div>
+            <div style="margin-bottom: 24px;">
+                <h4>Quiz Status Management</h4>
+                <p style="color: #666; font-size: 14px;">Lock or unlock individual quizzes to control student access. Locked quizzes will be disabled for students.</p>
+            </div>
+            
+            <div id="quizList" class="quiz-management-list">
+                <!-- Quiz items will be populated here -->
+            </div>
+
+            <div style="margin-top: 24px; padding-top: 24px; border-top: 1px solid #e5e5e7;">
+                <h4>Quick Actions</h4>
+                <div class="button-group">
+                    <button type="button" class="button button-secondary" onclick="lockAllQuizzes()">Lock All Quizzes</button>
+                    <button type="button" class="button button-secondary" onclick="unlockAllQuizzes()">Unlock All Quizzes</button>
+                    <button type="button" class="button button-primary" onclick="addNewQuiz()">Add New Quiz</button>
+                </div>
+            </div>
+            
+            <div class="button-group" style="margin-top: 24px;">
+                <button type="button" class="button button-secondary" onclick="closeQuizModal()">Close</button>
+                <button type="button" class="button button-primary" onclick="saveQuizSettings()">Save Changes</button>
+            </div>
+        </div>
+    </div>
+
+    <style>
+        .quiz-management-list {
+            max-height: 400px;
+            overflow-y: auto;
+            border: 1px solid #e5e5e7;
+            border-radius: 8px;
+        }
+        
+        .quiz-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px;
+            border-bottom: 1px solid #e5e5e7;
+            background: #fff;
+        }
+        
+        .quiz-item:last-child {
+            border-bottom: none;
+        }
+        
+        .quiz-item:hover {
+            background: #f5f5f7;
+        }
+        
+        .quiz-info {
+            flex: 1;
+        }
+        
+        .quiz-name {
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+        
+        .quiz-chapter {
+            font-size: 14px;
+            color: #666;
+        }
+        
+        .quiz-controls {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
+        
+        .quiz-status {
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+        
+        .quiz-status.unlocked {
+            background: #d1f2eb;
+            color: #00695c;
+        }
+        
+        .quiz-status.locked {
+            background: #ffebee;
+            color: #c62828;
+        }
+        
+        .quiz-toggle {
+            background: none;
+            border: 1px solid #0071e3;
+            color: #0071e3;
+            padding: 6px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 12px;
+            transition: all 0.3s ease;
+        }
+        
+        .quiz-toggle:hover {
+            background: #0071e3;
+            color: #fff;
+        }
+        
+        .quiz-toggle.locked {
+            border-color: #ff3b30;
+            color: #ff3b30;
+        }
+        
+        .quiz-toggle.locked:hover {
+            background: #ff3b30;
+            color: #fff;
+        }
+    </style>
 
     <script>
         // Check admin authentication
@@ -720,7 +854,186 @@
             updateAccessCodeDisplay();
             
             // Show confirmation
-            alert(`New access code generated: ${newCode}\nThis code will be valid for 1 hour.`);
+            alert(`New access code generated: ${newCode}\nThis code will be valid for 90 minutes.`);
+        }
+
+        // Quiz Management Functions
+        let quizData = [];
+
+        function initQuizData() {
+            // Sample quiz data - in a real implementation, this would come from a database
+            quizData = [
+                { id: 1, name: "Personal Protective Equipment (PPE)", chapter: "Chapter 1: Automotive Safety Fundamentals", locked: false },
+                { id: 2, name: "Workshop Safety Procedures", chapter: "Chapter 1: Automotive Safety Fundamentals", locked: false },
+                { id: 3, name: "Emergency Response Protocols", chapter: "Chapter 1: Automotive Safety Fundamentals", locked: false },
+                { id: 4, name: "Fire Safety and Prevention", chapter: "Chapter 1: Automotive Safety Fundamentals", locked: false },
+                { id: 5, name: "Hand Tool Safety", chapter: "Chapter 2: Tool and Equipment Safety", locked: false },
+                { id: 6, name: "Power Tool Operation", chapter: "Chapter 2: Tool and Equipment Safety", locked: false },
+                { id: 7, name: "Lift and Jack Safety", chapter: "Chapter 2: Tool and Equipment Safety", locked: false },
+                { id: 8, name: "Pneumatic Tool Safety", chapter: "Chapter 2: Tool and Equipment Safety", locked: false },
+                { id: 9, name: "MSDS and Safety Data Sheets", chapter: "Chapter 3: Chemical and Hazardous Material Safety", locked: false },
+                { id: 10, name: "Chemical Storage and Handling", chapter: "Chapter 3: Chemical and Hazardous Material Safety", locked: false },
+                { id: 11, name: "Waste Disposal Procedures", chapter: "Chapter 3: Chemical and Hazardous Material Safety", locked: false },
+                { id: 12, name: "Spill Response and Cleanup", chapter: "Chapter 3: Chemical and Hazardous Material Safety", locked: false },
+                { id: 13, name: "Electrical Hazard Recognition", chapter: "Chapter 4: Electrical Safety", locked: false },
+                { id: 14, name: "Lockout/Tagout Procedures", chapter: "Chapter 4: Electrical Safety", locked: false },
+                { id: 15, name: "High Voltage System Safety", chapter: "Chapter 4: Electrical Safety", locked: false },
+                { id: 16, name: "Electrical Testing Safety", chapter: "Chapter 4: Electrical Safety", locked: false },
+                { id: 17, name: "Respiratory Protection", chapter: "Chapter 5: Environmental and Health Safety", locked: false },
+                { id: 18, name: "Noise and Hearing Protection", chapter: "Chapter 5: Environmental and Health Safety", locked: false },
+                { id: 19, name: "Ergonomics and Injury Prevention", chapter: "Chapter 5: Environmental and Health Safety", locked: false },
+                { id: 20, name: "Indoor Air Quality", chapter: "Chapter 5: Environmental and Health Safety", locked: false },
+                { id: 21, name: "OSHA Standards and Regulations", chapter: "Chapter 6: Regulatory Compliance", locked: false },
+                { id: 22, name: "EPA Environmental Regulations", chapter: "Chapter 6: Regulatory Compliance", locked: false },
+                { id: 23, name: "DOT Transportation Requirements", chapter: "Chapter 6: Regulatory Compliance", locked: false },
+                { id: 24, name: "Industry Safety Standards", chapter: "Chapter 6: Regulatory Compliance", locked: false },
+                { id: 25, name: "Vehicle Safety Systems", chapter: "Chapter 7: Advanced Safety Systems", locked: false },
+                { id: 26, name: "Airbag System Safety", chapter: "Chapter 7: Advanced Safety Systems", locked: false },
+                { id: 27, name: "Alternative Fuel Safety", chapter: "Chapter 7: Advanced Safety Systems", locked: false },
+                { id: 28, name: "Hybrid and Electric Vehicle Safety", chapter: "Chapter 7: Advanced Safety Systems", locked: false }
+            ];
+        }
+
+        function manageQuizzes() {
+            initQuizData();
+            populateQuizList();
+            document.getElementById('quizModal').style.display = 'block';
+        }
+
+        function populateQuizList() {
+            const quizList = document.getElementById('quizList');
+            quizList.innerHTML = '';
+
+            quizData.forEach(quiz => {
+                const quizItem = document.createElement('div');
+                quizItem.className = 'quiz-item';
+                quizItem.innerHTML = `
+                    <div class="quiz-info">
+                        <div class="quiz-name">${quiz.name}</div>
+                        <div class="quiz-chapter">${quiz.chapter}</div>
+                    </div>
+                    <div class="quiz-controls">
+                        <span class="quiz-status ${quiz.locked ? 'locked' : 'unlocked'}">
+                            ${quiz.locked ? 'Locked' : 'Unlocked'}
+                        </span>
+                        <button class="quiz-toggle ${quiz.locked ? 'locked' : ''}" onclick="toggleQuiz(${quiz.id})">
+                            ${quiz.locked ? 'Unlock' : 'Lock'}
+                        </button>
+                        <button class="button button-secondary" onclick="editQuiz(${quiz.id})" style="font-size: 12px; padding: 6px 12px;">Edit</button>
+                        <button class="button" onclick="removeQuiz(${quiz.id})" style="background: #ff3b30; color: white; font-size: 12px; padding: 6px 12px;">Remove</button>
+                    </div>
+                `;
+                quizList.appendChild(quizItem);
+            });
+        }
+
+        function toggleQuiz(quizId) {
+            const quiz = quizData.find(q => q.id === quizId);
+            if (quiz) {
+                quiz.locked = !quiz.locked;
+                populateQuizList();
+                updateQuizPageStatus(quiz);
+            }
+        }
+
+        function updateQuizPageStatus(quiz) {
+            // In a real implementation, this would update the actual HTML file
+            console.log(`Quiz "${quiz.name}" ${quiz.locked ? 'locked' : 'unlocked'}`);
+        }
+
+        function editQuiz(quizId) {
+            const quiz = quizData.find(q => q.id === quizId);
+            if (quiz) {
+                const newName = prompt('Enter new quiz name:', quiz.name);
+                if (newName && newName.trim()) {
+                    quiz.name = newName.trim();
+                    populateQuizList();
+                    alert('Quiz updated successfully!');
+                }
+            }
+        }
+
+        function removeQuiz(quizId) {
+            const quiz = quizData.find(q => q.id === quizId);
+            if (quiz && confirm(`Are you sure you want to remove "${quiz.name}"? This action cannot be undone.`)) {
+                quizData = quizData.filter(q => q.id !== quizId);
+                populateQuizList();
+                alert('Quiz removed successfully!');
+            }
+        }
+
+        function lockAllQuizzes() {
+            if (confirm('Are you sure you want to lock all quizzes? Students will not be able to access any quizzes until unlocked.')) {
+                quizData.forEach(quiz => quiz.locked = true);
+                populateQuizList();
+                alert('All quizzes have been locked.');
+            }
+        }
+
+        function unlockAllQuizzes() {
+            if (confirm('Are you sure you want to unlock all quizzes?')) {
+                quizData.forEach(quiz => quiz.locked = false);
+                populateQuizList();
+                alert('All quizzes have been unlocked.');
+            }
+        }
+
+        function addNewQuiz() {
+            const name = prompt('Enter quiz name:');
+            if (!name || !name.trim()) return;
+
+            const chapter = prompt('Enter chapter (e.g., "Chapter 1: Automotive Safety Fundamentals"):');
+            if (!chapter || !chapter.trim()) return;
+
+            const newQuiz = {
+                id: Math.max(...quizData.map(q => q.id)) + 1,
+                name: name.trim(),
+                chapter: chapter.trim(),
+                locked: false
+            };
+
+            quizData.push(newQuiz);
+            populateQuizList();
+            alert('New quiz added successfully!');
+        }
+
+        function saveQuizSettings() {
+            // In a real implementation, this would save to a database
+            alert('Quiz settings saved successfully!\n\n(In a real implementation, this would update the chapter-quizzes.html file and save settings to a database)');
+            closeQuizModal();
+        }
+
+        function closeQuizModal() {
+            document.getElementById('quizModal').style.display = 'none';
+        }
+
+        // Update the page descriptions to include chapter quizzes
+        function getPageDescription(filename) {
+            const descriptions = {
+                'index.html': 'Main landing page with hero section and navigation',
+                'tests.html': 'Student testing portal with year-based options',
+                'tests-year1.html': 'Foundation level tests with 11 collapsible modules',
+                'tests-year2.html': 'Intermediate level tests with advanced diagnostics',
+                'tests-year3-4.html': 'Advanced level tests with certification preparation',
+                'chapter-quizzes.html': 'Comprehensive chapter assessments covering automotive safety topics',
+                'cte-program.html': 'Career and Technical Education program information',
+                'forms.html': 'Student and parent resources and forms',
+                'support.html': 'Support and help resources for students'
+            };
+            return descriptions[filename] || 'Page description';
+        }
+
+        // Close modals when clicking outside
+        window.onclick = function(event) {
+            const editModal = document.getElementById('editModal');
+            const quizModal = document.getElementById('quizModal');
+            
+            if (event.target === editModal) {
+                closeModal();
+            }
+            if (event.target === quizModal) {
+                closeQuizModal();
+            }
         }
     </script>
 </body>
