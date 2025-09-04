@@ -2668,7 +2668,6 @@ class QuizDataSystem {
             }
         ];
     }
-    }
 
     loadQuizStates() {
         // Load quiz lock states from localStorage
